@@ -132,7 +132,7 @@
       "name": "Audience",
       "slug": "audience",
       "category": "Art",
-      "path": "Mental_Models/Mental_Model_Art/m60_audience.md",
+      "path": "models/Mental_Model_Art/m60_audience.md",
       "keywords": [
         "Public speaking",
         "product design",
@@ -148,7 +148,7 @@
       "name": "Genre",
       "slug": "genre",
       "category": "Art",
-      "path": "Mental_Models/Mental_Model_Art/m61_genre.md",
+      "path": "models/Mental_Model_Art/m61_genre.md",
       "keywords": [
         "Storytelling",
         "music composition",
@@ -164,7 +164,7 @@
       "name": "Contrast",
       "slug": "contrast",
       "category": "Art",
-      "path": "Mental_Models/Mental_Model_Art/m62_contrast.md",
+      "path": "models/Mental_Model_Art/m62_contrast.md",
       "keywords": [
         "Visual design",
         "music composition",
@@ -180,7 +180,7 @@
       "name": "Framing",
       "slug": "framing",
       "category": "Art",
-      "path": "Mental_Models/Mental_Model_Art/m63_framing.md",
+      "path": "models/Mental_Model_Art/m63_framing.md",
       "keywords": [
         "Marketing",
         "political communication",
@@ -196,7 +196,7 @@
       "name": "Rhythm",
       "slug": "rhythm",
       "category": "Art",
-      "path": "Mental_Models/Mental_Model_Art/m64_rhythm.md",
+      "path": "models/Mental_Model_Art/m64_rhythm.md",
       "keywords": [
         "Music composition",
         "public speaking",
@@ -212,7 +212,7 @@
       "name": "Melody",
       "slug": "melody",
       "category": "Art",
-      "path": "Mental_Models/Mental_Model_Art/m65_melody.md",
+      "path": "models/Mental_Model_Art/m65_melody.md",
       "keywords": [
         "Songwriting",
         "film scoring",
@@ -227,7 +227,7 @@
       "name": "Representation",
       "slug": "representation",
       "category": "Art",
-      "path": "Mental_Models/Mental_Model_Art/m66_representation.md",
+      "path": "models/Mental_Model_Art/m66_representation.md",
       "keywords": [
         "Data visualization",
         "brand identity",
@@ -243,7 +243,7 @@
       "name": "Plot",
       "slug": "plot",
       "category": "Art",
-      "path": "Mental_Models/Mental_Model_Art/m67_plot.md",
+      "path": "models/Mental_Model_Art/m67_plot.md",
       "keywords": [
         "Screenwriting",
         "novel writing",
@@ -259,7 +259,7 @@
       "name": "Character",
       "slug": "character",
       "category": "Art",
-      "path": "Mental_Models/Mental_Model_Art/m68_character.md",
+      "path": "models/Mental_Model_Art/m68_character.md",
       "keywords": [
         "Leadership",
         "team building",
@@ -275,7 +275,7 @@
       "name": "Setting",
       "slug": "setting",
       "category": "Art",
-      "path": "Mental_Models/Mental_Model_Art/m69_setting.md",
+      "path": "models/Mental_Model_Art/m69_setting.md",
       "keywords": [
         "World-building",
         "event planning",
@@ -291,7 +291,7 @@
       "name": "Performance",
       "slug": "performance",
       "category": "Art",
-      "path": "Mental_Models/Mental_Model_Art/m70_performance.md",
+      "path": "models/Mental_Model_Art/m70_performance.md",
       "keywords": [
         "Public speaking",
         "surgery",
@@ -307,7 +307,7 @@
       "name": "Scarcity",
       "slug": "scarcity",
       "category": "Economics",
-      "path": "Mental_Models/Mental_Model_Economics/m48_scarcity.md",
+      "path": "models/Mental_Model_Economics/m48_scarcity.md",
       "keywords": [
         "Resource allocation",
         "negotiation",
@@ -324,7 +324,7 @@
       "name": "Supply and Demand",
       "slug": "supply_and_demand",
       "category": "Economics",
-      "path": "Mental_Models/Mental_Model_Economics/m49_supply_and_demand.md",
+      "path": "models/Mental_Model_Economics/m49_supply_and_demand.md",
       "keywords": [
         "Pricing strategy",
         "market analysis",
@@ -341,7 +341,7 @@
       "name": "Optimization",
       "slug": "optimization",
       "category": "Economics",
-      "path": "Mental_Models/Mental_Model_Economics/m50_optimization.md",
+      "path": "models/Mental_Model_Economics/m50_optimization.md",
       "keywords": [
         "Process improvement",
         "resource management",
@@ -357,7 +357,7 @@
       "name": "Trade-offs & Opportunity Cost",
       "slug": "trade-offs",
       "category": "Economics",
-      "path": "Mental_Models/Mental_Model_Economics/m51_trade-offs.md",
+      "path": "models/Mental_Model_Economics/m51_trade-offs.md",
       "keywords": [
         "Decision making",
         "strategic planning",
@@ -373,7 +373,7 @@
       "name": "Specialization",
       "slug": "specialization",
       "category": "Economics",
-      "path": "Mental_Models/Mental_Model_Economics/m52_specialization.md",
+      "path": "models/Mental_Model_Economics/m52_specialization.md",
       "keywords": [
         "Career planning",
         "competitive advantage",
@@ -389,7 +389,7 @@
       "name": "Interdependence",
       "slug": "interdependence",
       "category": "Economics",
-      "path": "Mental_Models/Mental_Model_Economics/m53_interdependence.md",
+      "path": "models/Mental_Model_Economics/m53_interdependence.md",
       "keywords": [
         "Strategic alliances",
         "supply chain management",
@@ -405,7 +405,7 @@
       "name": "Efficiency",
       "slug": "efficiency",
       "category": "Economics",
-      "path": "Mental_Models/Mental_Model_Economics/m54_efficiency.md",
+      "path": "models/Mental_Model_Economics/m54_efficiency.md",
       "keywords": [
         "Productivity",
         "process improvement",
@@ -421,7 +421,7 @@
       "name": "Debt",
       "slug": "debt",
       "category": "Economics",
-      "path": "Mental_Models/Mental_Model_Economics/m55_debt.md",
+      "path": "models/Mental_Model_Economics/m55_debt.md",
       "keywords": [
         "Leverage",
         "risk management",
@@ -437,7 +437,7 @@
       "name": "Monopoly and Competition",
       "slug": "monopoly_and_competition",
       "category": "Economics",
-      "path": "Mental_Models/Mental_Model_Economics/m56_monopoly_and_competition.md",
+      "path": "models/Mental_Model_Economics/m56_monopoly_and_competition.md",
       "keywords": [
         "Business strategy",
         "competitive analysis",
@@ -453,7 +453,7 @@
       "name": "Creative Destruction",
       "slug": "creative_destruction",
       "category": "Economics",
-      "path": "Mental_Models/Mental_Model_Economics/m57_creative_destruction.md",
+      "path": "models/Mental_Model_Economics/m57_creative_destruction.md",
       "keywords": [
         "Disruption",
         "innovation",
@@ -470,7 +470,7 @@
       "name": "Gresham's Law",
       "slug": "greshams_law",
       "category": "Economics",
-      "path": "Mental_Models/Mental_Model_Economics/m58_greshams_law.md",
+      "path": "models/Mental_Model_Economics/m58_greshams_law.md",
       "keywords": [
         "Quality control",
         "culture",
@@ -487,7 +487,7 @@
       "name": "Bubbles",
       "slug": "bubbles",
       "category": "Economics",
-      "path": "Mental_Models/Mental_Model_Economics/m59_bubbles.md",
+      "path": "models/Mental_Model_Economics/m59_bubbles.md",
       "keywords": [
         "Speculation",
         "asset valuation",
@@ -504,7 +504,7 @@
       "name": "The Map Is Not the Territory",
       "slug": "the_map_is_not_the_territory",
       "category": "General Thinking Tools",
-      "path": "Mental_Models/Mental_Model_General/m01_the_map_is_not_the_territory.md",
+      "path": "models/Mental_Model_General/m01_the_map_is_not_the_territory.md",
       "keywords": [
         "Strategic planning",
         "data analysis",
@@ -520,7 +520,7 @@
       "name": "Circle of Competence",
       "slug": "circle_of_competence",
       "category": "General Thinking Tools",
-      "path": "Mental_Models/Mental_Model_General/m02_circle_of_competence.md",
+      "path": "models/Mental_Model_General/m02_circle_of_competence.md",
       "keywords": [
         "Investing",
         "career choices",
@@ -535,7 +535,7 @@
       "name": "First-Principle Thinking",
       "slug": "first-principle_thinking",
       "category": "General Thinking Tools",
-      "path": "Mental_Models/Mental_Model_General/m03_first-principle_thinking.md",
+      "path": "models/Mental_Model_General/m03_first-principle_thinking.md",
       "keywords": [
         "Innovation",
         "problem-solving",
@@ -550,7 +550,7 @@
       "name": "Thought Experiment",
       "slug": "thought_experiment",
       "category": "General Thinking Tools",
-      "path": "Mental_Models/Mental_Model_General/m04_thought_experiment.md",
+      "path": "models/Mental_Model_General/m04_thought_experiment.md",
       "keywords": [
         "Major life decisions",
         "strategic planning",
@@ -565,7 +565,7 @@
       "name": "Second-Order Thinking",
       "slug": "second-order_thinking",
       "category": "General Thinking Tools",
-      "path": "Mental_Models/Mental_Model_General/m05_second-order_thinking.md",
+      "path": "models/Mental_Model_General/m05_second-order_thinking.md",
       "keywords": [
         "Policy making",
         "business strategy",
@@ -580,7 +580,7 @@
       "name": "Probabilistic Thinking",
       "slug": "probabilistic_thinking",
       "category": "General Thinking Tools",
-      "path": "Mental_Models/Mental_Model_General/m06_probabilistic_thinking.md",
+      "path": "models/Mental_Model_General/m06_probabilistic_thinking.md",
       "keywords": [
         "Investing",
         "medical diagnoses",
@@ -596,7 +596,7 @@
       "name": "Inversion",
       "slug": "inversion",
       "category": "General Thinking Tools",
-      "path": "Mental_Models/Mental_Model_General/m07_inversion.md",
+      "path": "models/Mental_Model_General/m07_inversion.md",
       "keywords": [
         "Goal setting",
         "project planning",
@@ -611,7 +611,7 @@
       "name": "Hanlon's Razor",
       "slug": "hanlon's_razor",
       "category": "General Thinking Tools",
-      "path": "Mental_Models/Mental_Model_General/m08_hanlon's_razor.md",
+      "path": "models/Mental_Model_General/m08_hanlon's_razor.md",
       "keywords": [
         "Interpersonal conflicts",
         "workplace communication",
@@ -625,7 +625,7 @@
       "name": "Occam's Razor",
       "slug": "occam's_razor",
       "category": "General Thinking Tools",
-      "path": "Mental_Models/Mental_Model_General/m09_occam's_razor.md",
+      "path": "models/Mental_Model_General/m09_occam's_razor.md",
       "keywords": [
         "Troubleshooting",
         "scientific theorizing",
@@ -640,7 +640,7 @@
       "name": "Trust",
       "slug": "trust",
       "category": "Human Nature & Judgment",
-      "path": "Mental_Models/Mental_Model_HumanNature/m76_trust.md",
+      "path": "models/Mental_Model_HumanNature/m76_trust.md",
       "keywords": [
         "Delegation",
         "teamwork",
@@ -657,7 +657,7 @@
       "name": "Bias from Incentives",
       "slug": "bias_from_incentives",
       "category": "Human Nature & Judgment",
-      "path": "Mental_Models/Mental_Model_HumanNature/m77_bias_from_incentives.md",
+      "path": "models/Mental_Model_HumanNature/m77_bias_from_incentives.md",
       "keywords": [
         "Sales pitches",
         "negotiations",
@@ -674,7 +674,7 @@
       "name": "Pavlovian Association",
       "slug": "pavlovian_association",
       "category": "Human Nature & Judgment",
-      "path": "Mental_Models/Mental_Model_HumanNature/m78_pavlovian_association.md",
+      "path": "models/Mental_Model_HumanNature/m78_pavlovian_association.md",
       "keywords": [
         "Marketing",
         "branding",
@@ -691,7 +691,7 @@
       "name": "Tendency to Feel Envy & Jealousy",
       "slug": "tendency_to_feel_envy_and_jealousy",
       "category": "Human Nature & Judgment",
-      "path": "Mental_Models/Mental_Model_HumanNature/m79_tendency_to_feel_envy_and_jealousy.md",
+      "path": "models/Mental_Model_HumanNature/m79_tendency_to_feel_envy_and_jealousy.md",
       "keywords": [
         "Salary negotiations",
         "team management",
@@ -708,7 +708,7 @@
       "name": "Liking/Disliking Tendency",
       "slug": "tendency_to_distort_due_to_liking_or_loving_or_disliking_or_hating",
       "category": "Human Nature & Judgment",
-      "path": "Mental_Models/Mental_Model_HumanNature/m80_tendency_to_distort_due_to_liking_or_loving_or_disliking_or_hating.md",
+      "path": "models/Mental_Model_HumanNature/m80_tendency_to_distort_due_to_liking_or_loving_or_disliking_or_hating.md",
       "keywords": [
         "Hiring",
         "performance reviews",
@@ -725,7 +725,7 @@
       "name": "Denial",
       "slug": "denial",
       "category": "Human Nature & Judgment",
-      "path": "Mental_Models/Mental_Model_HumanNature/m81_denial.md",
+      "path": "models/Mental_Model_HumanNature/m81_denial.md",
       "keywords": [
         "Addiction",
         "grief",
@@ -742,7 +742,7 @@
       "name": "Availability Heuristic",
       "slug": "availability_heuristic",
       "category": "Human Nature & Judgment",
-      "path": "Mental_Models/Mental_Model_HumanNature/m82_availability_heuristic.md",
+      "path": "models/Mental_Model_HumanNature/m82_availability_heuristic.md",
       "keywords": [
         "Risk assessment",
         "strategic planning",
@@ -758,7 +758,7 @@
       "name": "Representativeness Heuristic",
       "slug": "representativeness_heuristic",
       "category": "Human Nature & Judgment",
-      "path": "Mental_Models/Mental_Model_HumanNature/m83_representativeness_heuristic.md",
+      "path": "models/Mental_Model_HumanNature/m83_representativeness_heuristic.md",
       "keywords": [
         "Stereotyping",
         "first impressions",
@@ -775,7 +775,7 @@
       "name": "Social Proof",
       "slug": "social_proof_safety_in_numbers",
       "category": "Human Nature & Judgment",
-      "path": "Mental_Models/Mental_Model_HumanNature/m84_social_proof_safety_in_numbers.md",
+      "path": "models/Mental_Model_HumanNature/m84_social_proof_safety_in_numbers.md",
       "keywords": [
         "Herd behavior",
         "groupthink",
@@ -792,7 +792,7 @@
       "name": "Narrative Instinct",
       "slug": "narrative_instinct",
       "category": "Human Nature & Judgment",
-      "path": "Mental_Models/Mental_Model_HumanNature/m85_narrative_instinct.md",
+      "path": "models/Mental_Model_HumanNature/m85_narrative_instinct.md",
       "keywords": [
         "Story stocks",
         "business strategy",
@@ -808,7 +808,7 @@
       "name": "Curiosity Instinct",
       "slug": "curiosity_instinct",
       "category": "Human Nature & Judgment",
-      "path": "Mental_Models/Mental_Model_HumanNature/m86_curiosity_instinct.md",
+      "path": "models/Mental_Model_HumanNature/m86_curiosity_instinct.md",
       "keywords": [
         "Research",
         "innovation",
@@ -825,7 +825,7 @@
       "name": "Language Instinct",
       "slug": "language_instinct",
       "category": "Human Nature & Judgment",
-      "path": "Mental_Models/Mental_Model_HumanNature/m87_language_instinct.md",
+      "path": "models/Mental_Model_HumanNature/m87_language_instinct.md",
       "keywords": [
         "Communication",
         "negotiation",
@@ -842,7 +842,7 @@
       "name": "First-Conclusion Bias",
       "slug": "first-conclusion_bias",
       "category": "Human Nature & Judgment",
-      "path": "Mental_Models/Mental_Model_HumanNature/m88_first-conclusion_bias.md",
+      "path": "models/Mental_Model_HumanNature/m88_first-conclusion_bias.md",
       "keywords": [
         "Brainstorming",
         "debugging",
@@ -858,7 +858,7 @@
       "name": "Overgeneralizing from Small Samples",
       "slug": "tendency_to_overgeneralize_from_small_samples",
       "category": "Human Nature & Judgment",
-      "path": "Mental_Models/Mental_Model_HumanNature/m89_tendency_to_overgeneralize_from_small_samples.md",
+      "path": "models/Mental_Model_HumanNature/m89_tendency_to_overgeneralize_from_small_samples.md",
       "keywords": [
         "Statistics",
         "survey data",
@@ -874,7 +874,7 @@
       "name": "Relative Satisfaction",
       "slug": "relative_satisfaction_or_misery_tendencies",
       "category": "Human Nature & Judgment",
-      "path": "Mental_Models/Mental_Model_HumanNature/m90_relative_satisfaction_or_misery_tendencies.md",
+      "path": "models/Mental_Model_HumanNature/m90_relative_satisfaction_or_misery_tendencies.md",
       "keywords": [
         "Happiness",
         "goal setting",
@@ -890,7 +890,7 @@
       "name": "Commitment & Consistency Bias",
       "slug": "commitment_and_consistency_bias",
       "category": "Human Nature & Judgment",
-      "path": "Mental_Models/Mental_Model_HumanNature/m91_commitment_and_consistency_bias.md",
+      "path": "models/Mental_Model_HumanNature/m91_commitment_and_consistency_bias.md",
       "keywords": [
         "Sunk cost fallacy",
         "cognitive dissonance",
@@ -906,7 +906,7 @@
       "name": "Hindsight Bias",
       "slug": "hindsight_bias",
       "category": "Human Nature & Judgment",
-      "path": "Mental_Models/Mental_Model_HumanNature/m92_hindsight_bias.md",
+      "path": "models/Mental_Model_HumanNature/m92_hindsight_bias.md",
       "keywords": [
         "Post-mortems",
         "performance reviews",
@@ -922,7 +922,7 @@
       "name": "Sensitivity to Fairness",
       "slug": "sensitivity_to_fairness",
       "category": "Human Nature & Judgment",
-      "path": "Mental_Models/Mental_Model_HumanNature/m93_sensitivity_to_fairness.md",
+      "path": "models/Mental_Model_HumanNature/m93_sensitivity_to_fairness.md",
       "keywords": [
         "Negotiation",
         "social justice",
@@ -939,7 +939,7 @@
       "name": "Fundamental Attribution Error",
       "slug": "tendency_to_overestimate_consistency_of_behavior_fundamental_attribution_error",
       "category": "Human Nature & Judgment",
-      "path": "Mental_Models/Mental_Model_HumanNature/m94_tendency_to_overestimate_consistency_of_behavior_fundamental_attribution_error.md",
+      "path": "models/Mental_Model_HumanNature/m94_tendency_to_overestimate_consistency_of_behavior_fundamental_attribution_error.md",
       "keywords": [
         "Performance reviews",
         "character judgments",
@@ -954,7 +954,7 @@
       "name": "Influence of Stress",
       "slug": "influence_of_stress_including_breaking_points",
       "category": "Human Nature & Judgment",
-      "path": "Mental_Models/Mental_Model_HumanNature/m95_influence_of_stress_including_breaking_points.md",
+      "path": "models/Mental_Model_HumanNature/m95_influence_of_stress_including_breaking_points.md",
       "keywords": [
         "Crisis management",
         "high-stakes negotiation",
@@ -970,7 +970,7 @@
       "name": "Survivorship Bias",
       "slug": "survivorship_bias",
       "category": "Human Nature & Judgment",
-      "path": "Mental_Models/Mental_Model_HumanNature/m96_survivorship_bias.md",
+      "path": "models/Mental_Model_HumanNature/m96_survivorship_bias.md",
       "keywords": [
         "Business strategy",
         "historical analysis",
@@ -986,7 +986,7 @@
       "name": "Do-Something Tendency",
       "slug": "tendency_to_want_to_do_something_fight_or_flight_intervention_demonstration_of_value_etc",
       "category": "Human Nature & Judgment",
-      "path": "Mental_Models/Mental_Model_HumanNature/m97_tendency_to_want_to_do_something_fight_or_flight_intervention_demonstration_of_value_etc.md",
+      "path": "models/Mental_Model_HumanNature/m97_tendency_to_want_to_do_something_fight_or_flight_intervention_demonstration_of_value_etc.md",
       "keywords": [
         "Action bias",
         "intervention bias",
@@ -1004,7 +1004,7 @@
       "name": "Confirmation Bias & Falsification",
       "slug": "falsification_or_confirmation_bias",
       "category": "Human Nature & Judgment",
-      "path": "Mental_Models/Mental_Model_HumanNature/m98_falsification_or_confirmation_bias.md",
+      "path": "models/Mental_Model_HumanNature/m98_falsification_or_confirmation_bias.md",
       "keywords": [
         "Research",
         "debate",
@@ -1020,7 +1020,7 @@
       "name": "Sampling",
       "slug": "sampling",
       "category": "Mathematics",
-      "path": "Mental_Models/Mental_Model_Math/m41_sampling.md",
+      "path": "models/Mental_Model_Math/m41_sampling.md",
       "keywords": [
         "Data analysis",
         "statistics",
@@ -1039,7 +1039,7 @@
       "name": "Randomness",
       "slug": "randomness",
       "category": "Mathematics",
-      "path": "Mental_Models/Mental_Model_Math/m42_randomness.md",
+      "path": "models/Mental_Model_Math/m42_randomness.md",
       "keywords": [
         "Probability",
         "forecasting",
@@ -1058,7 +1058,7 @@
       "name": "Regression to the Mean",
       "slug": "regression_to_the_mean",
       "category": "Mathematics",
-      "path": "Mental_Models/Mental_Model_Math/m43_regression_to_the_mean.md",
+      "path": "models/Mental_Model_Math/m43_regression_to_the_mean.md",
       "keywords": [
         "Performance reviews",
         "sports analytics",
@@ -1075,7 +1075,7 @@
       "name": "Multiply by Zero",
       "slug": "multiply_by_zero",
       "category": "Mathematics",
-      "path": "Mental_Models/Mental_Model_Math/m44_multiply_by_zero.md",
+      "path": "models/Mental_Model_Math/m44_multiply_by_zero.md",
       "keywords": [
         "Risk assessment",
         "project management",
@@ -1093,7 +1093,7 @@
       "name": "Equivalence",
       "slug": "equivalence",
       "category": "Mathematics",
-      "path": "Mental_Models/Mental_Model_Math/m45_equivalence.md",
+      "path": "models/Mental_Model_Math/m45_equivalence.md",
       "keywords": [
         "Problem-solving",
         "system design",
@@ -1111,7 +1111,7 @@
       "name": "Surface Area",
       "slug": "surface_area",
       "category": "Mathematics",
-      "path": "Mental_Models/Mental_Model_Math/m46_surface_area.md",
+      "path": "models/Mental_Model_Math/m46_surface_area.md",
       "keywords": [
         "Innovation",
         "risk management",
@@ -1129,7 +1129,7 @@
       "name": "Global and Local Maxima",
       "slug": "global_and_local_maxima",
       "category": "Mathematics",
-      "path": "Mental_Models/Mental_Model_Math/m47_global_and_local_maxima.md",
+      "path": "models/Mental_Model_Math/m47_global_and_local_maxima.md",
       "keywords": [
         "Strategy",
         "optimization",
@@ -1147,7 +1147,7 @@
       "name": "Activation Energy",
       "slug": "activation-energy",
       "category": "Physics, Chemistry, and Biology",
-      "path": "Mental_Models/Mental_Model_Science/m10_activation-energy.md",
+      "path": "models/Mental_Model_Science/m10_activation-energy.md",
       "keywords": [
         "Procrastination",
         "habit formation",
@@ -1163,7 +1163,7 @@
       "name": "Alloying",
       "slug": "alloying",
       "category": "Physics, Chemistry, and Biology",
-      "path": "Mental_Models/Mental_Model_Science/m11_alloying.md",
+      "path": "models/Mental_Model_Science/m11_alloying.md",
       "keywords": [
         "Team building",
         "skill development",
@@ -1179,7 +1179,7 @@
       "name": "Catalysts",
       "slug": "catalysts",
       "category": "Physics, Chemistry, and Biology",
-      "path": "Mental_Models/Mental_Model_Science/m12_catalysts.md",
+      "path": "models/Mental_Model_Science/m12_catalysts.md",
       "keywords": [
         "Leadership",
         "innovation",
@@ -1195,7 +1195,7 @@
       "name": "Cooperation",
       "slug": "cooperation",
       "category": "Physics, Chemistry, and Biology",
-      "path": "Mental_Models/Mental_Model_Science/m13_cooperation.md",
+      "path": "models/Mental_Model_Science/m13_cooperation.md",
       "keywords": [
         "Teamwork",
         "negotiation",
@@ -1211,7 +1211,7 @@
       "name": "Ecosystems",
       "slug": "ecosystems",
       "category": "Physics, Chemistry, and Biology",
-      "path": "Mental_Models/Mental_Model_Science/m14_ecosystems.md",
+      "path": "models/Mental_Model_Science/m14_ecosystems.md",
       "keywords": [
         "Business strategy",
         "market analysis",
@@ -1227,7 +1227,7 @@
       "name": "Evolution (Natural Selection and Extinction)",
       "slug": "evolution-part-one-natural-selection-and-extinction",
       "category": "Physics, Chemistry, and Biology",
-      "path": "Mental_Models/Mental_Model_Science/m15_evolution-part-one-natural-selection-and-extinction.md",
+      "path": "models/Mental_Model_Science/m15_evolution-part-one-natural-selection-and-extinction.md",
       "keywords": [
         "Business strategy",
         "market competition",
@@ -1243,7 +1243,7 @@
       "name": "Evolution (Adaptation and The Red Queen Effect)",
       "slug": "evolution-part-two-adaptation-and-the-red-queen-effect",
       "category": "Physics, Chemistry, and Biology",
-      "path": "Mental_Models/Mental_Model_Science/m16_evolution-part-two-adaptation-and-the-red-queen-effect.md",
+      "path": "models/Mental_Model_Science/m16_evolution-part-two-adaptation-and-the-red-queen-effect.md",
       "keywords": [
         "Competitive strategy",
         "arms races",
@@ -1260,7 +1260,7 @@
       "name": "Friction and Viscosity",
       "slug": "friction-and-viscosity",
       "category": "Physics, Chemistry, and Biology",
-      "path": "Mental_Models/Mental_Model_Science/m17_friction-and-viscosity.md",
+      "path": "models/Mental_Model_Science/m17_friction-and-viscosity.md",
       "keywords": [
         "Process improvement",
         "user experience (UX) design",
@@ -1276,7 +1276,7 @@
       "name": "Hierarchical Organization",
       "slug": "hierarchical-organization",
       "category": "Physics, Chemistry, and Biology",
-      "path": "Mental_Models/Mental_Model_Science/m18_hierarchical-organization.md",
+      "path": "models/Mental_Model_Science/m18_hierarchical-organization.md",
       "keywords": [
         "Organizational design",
         "team structure",
@@ -1295,7 +1295,7 @@
       "name": "Incentives",
       "slug": "incentives",
       "category": "Physics, Chemistry, and Biology",
-      "path": "Mental_Models/Mental_Model_Science/m19_incentives.md",
+      "path": "models/Mental_Model_Science/m19_incentives.md",
       "keywords": [
         "Performance management",
         "motivation",
@@ -1314,7 +1314,7 @@
       "name": "Inertia",
       "slug": "inertia",
       "category": "Physics, Chemistry, and Biology",
-      "path": "Mental_Models/Mental_Model_Science/m20_inertia.md",
+      "path": "models/Mental_Model_Science/m20_inertia.md",
       "keywords": [
         "Habit formation",
         "change management",
@@ -1333,7 +1333,7 @@
       "name": "Leverage",
       "slug": "leverage",
       "category": "Physics, Chemistry, and Biology",
-      "path": "Mental_Models/Mental_Model_Science/m21_leverage.md",
+      "path": "models/Mental_Model_Science/m21_leverage.md",
       "keywords": [
         "Force multiplier",
         "productivity",
@@ -1353,7 +1353,7 @@
       "name": "Niches",
       "slug": "niches",
       "category": "Physics, Chemistry, and Biology",
-      "path": "Mental_Models/Mental_Model_Science/m22_niches.md",
+      "path": "models/Mental_Model_Science/m22_niches.md",
       "keywords": [
         "Specialization",
         "market positioning",
@@ -1370,7 +1370,7 @@
       "name": "Reciprocity",
       "slug": "reciprocity",
       "category": "Physics, Chemistry, and Biology",
-      "path": "Mental_Models/Mental_Model_Science/m23_reciprocity.md",
+      "path": "models/Mental_Model_Science/m23_reciprocity.md",
       "keywords": [
         "Influence",
         "negotiation",
@@ -1388,7 +1388,7 @@
       "name": "Relativity",
       "slug": "relativity",
       "category": "Physics, Chemistry, and Biology",
-      "path": "Mental_Models/Mental_Model_Science/m24_relativity.md",
+      "path": "models/Mental_Model_Science/m24_relativity.md",
       "keywords": [
         "Perspective taking",
         "empathy",
@@ -1406,7 +1406,7 @@
       "name": "Replication",
       "slug": "replication",
       "category": "Physics, Chemistry, and Biology",
-      "path": "Mental_Models/Mental_Model_Science/m25_replication.md",
+      "path": "models/Mental_Model_Science/m25_replication.md",
       "keywords": [
         "Scaling",
         "growth",
@@ -1425,7 +1425,7 @@
       "name": "Self-Preservation",
       "slug": "self-preservation",
       "category": "Physics, Chemistry, and Biology",
-      "path": "Mental_Models/Mental_Model_Science/m26_self-preservation.md",
+      "path": "models/Mental_Model_Science/m26_self-preservation.md",
       "keywords": [
         "Risk assessment",
         "fear response",
@@ -1442,7 +1442,7 @@
       "name": "Minimize Energy Output",
       "slug": "tendency-to-minimize-energy-output",
       "category": "Physics, Chemistry, and Biology",
-      "path": "Mental_Models/Mental_Model_Science/m27_tendency-to-minimize-energy-output.md",
+      "path": "models/Mental_Model_Science/m27_tendency-to-minimize-energy-output.md",
       "keywords": [
         "Efficiency",
         "productivity",
@@ -1461,7 +1461,7 @@
       "name": "Thermodynamics",
       "slug": "thermodynamics",
       "category": "Physics, Chemistry, and Biology",
-      "path": "Mental_Models/Mental_Model_Science/m28_thermodynamics.md",
+      "path": "models/Mental_Model_Science/m28_thermodynamics.md",
       "keywords": [
         "Systems thinking",
         "energy management",
@@ -1479,7 +1479,7 @@
       "name": "Velocity",
       "slug": "velocity",
       "category": "Physics, Chemistry, and Biology",
-      "path": "Mental_Models/Mental_Model_Science/m29_velocity.md",
+      "path": "models/Mental_Model_Science/m29_velocity.md",
       "keywords": [
         "Strategy",
         "goal setting",
@@ -1496,7 +1496,7 @@
       "name": "Feedback Loops",
       "slug": "feedback_loops",
       "category": "Systems Thinking",
-      "path": "Mental_Models/Mental_Model_SysThinking/m30_feedback_loops.md",
+      "path": "models/Mental_Model_SysThinking/m30_feedback_loops.md",
       "keywords": [
         "Habit formation",
         "product development",
@@ -1513,7 +1513,7 @@
       "name": "Equilibrium",
       "slug": "equilibrium",
       "category": "Systems Thinking",
-      "path": "Mental_Models/Mental_Model_SysThinking/m31_equilibrium.md",
+      "path": "models/Mental_Model_SysThinking/m31_equilibrium.md",
       "keywords": [
         "Market dynamics",
         "supply and demand",
@@ -1530,7 +1530,7 @@
       "name": "Bottlenecks",
       "slug": "bottlenecks",
       "category": "Systems Thinking",
-      "path": "Mental_Models/Mental_Model_SysThinking/m32_bottlenecks.md",
+      "path": "models/Mental_Model_SysThinking/m32_bottlenecks.md",
       "keywords": [
         "Theory of constraints",
         "process optimization",
@@ -1547,7 +1547,7 @@
       "name": "Scale",
       "slug": "scale",
       "category": "Systems Thinking",
-      "path": "Mental_Models/Mental_Model_SysThinking/m33_scale.md",
+      "path": "models/Mental_Model_SysThinking/m33_scale.md",
       "keywords": [
         "Business growth",
         "organizational design",
@@ -1564,7 +1564,7 @@
       "name": "Margin of Safety",
       "slug": "margin_of_safety",
       "category": "Systems Thinking",
-      "path": "Mental_Models/Mental_Model_SysThinking/m34_margin_of_safety.md",
+      "path": "models/Mental_Model_SysThinking/m34_margin_of_safety.md",
       "keywords": [
         "Value investing",
         "engineering",
@@ -1581,7 +1581,7 @@
       "name": "Churn",
       "slug": "churn",
       "category": "Systems Thinking",
-      "path": "Mental_Models/Mental_Model_SysThinking/m35_churn.md",
+      "path": "models/Mental_Model_SysThinking/m35_churn.md",
       "keywords": [
         "Customer retention",
         "employee turnover",
@@ -1598,7 +1598,7 @@
       "name": "Algorithms",
       "slug": "algorithms",
       "category": "Systems Thinking",
-      "path": "Mental_Models/Mental_Model_SysThinking/m36_algorithms.md",
+      "path": "models/Mental_Model_SysThinking/m36_algorithms.md",
       "keywords": [
         "Process design",
         "standard operating procedures (SOPs)",
@@ -1615,7 +1615,7 @@
       "name": "Critical Mass",
       "slug": "critical_mass",
       "category": "Systems Thinking",
-      "path": "Mental_Models/Mental_Model_SysThinking/m37_critical_mass.md",
+      "path": "models/Mental_Model_SysThinking/m37_critical_mass.md",
       "keywords": [
         "Network effects",
         "viral marketing",
@@ -1632,7 +1632,7 @@
       "name": "Emergence",
       "slug": "emergence",
       "category": "Systems Thinking",
-      "path": "Mental_Models/Mental_Model_SysThinking/m38_emergence.md",
+      "path": "models/Mental_Model_SysThinking/m38_emergence.md",
       "keywords": [
         "Complex adaptive systems",
         "swarm intelligence",
@@ -1650,7 +1650,7 @@
       "name": "Irreducibility",
       "slug": "irreducibility",
       "category": "Systems Thinking",
-      "path": "Mental_Models/Mental_Model_SysThinking/m39_irreducibility.md",
+      "path": "models/Mental_Model_SysThinking/m39_irreducibility.md",
       "keywords": [
         "Holism",
         "systems thinking",
@@ -1667,7 +1667,7 @@
       "name": "Law of Diminishing Returns",
       "slug": "law_of_diminishing_returns",
       "category": "Systems Thinking",
-      "path": "Mental_Models/Mental_Model_SysThinking/m40_law_of_diminishing_returns.md",
+      "path": "models/Mental_Model_SysThinking/m40_law_of_diminishing_returns.md",
       "keywords": [
         "Economics",
         "resource allocation",
@@ -1684,7 +1684,7 @@
       "name": "Seeing the Front",
       "slug": "seeing_the_front",
       "category": "Warfare & Management",
-      "path": "Mental_Models/Mental_Model_War/m71_seeing_the_front.md",
+      "path": "models/Mental_Model_War/m71_seeing_the_front.md",
       "keywords": [
         "Leadership",
         "operational issues",
@@ -1701,7 +1701,7 @@
       "name": "Asymmetric Warfare",
       "slug": "asymmetric_warfare",
       "category": "Warfare & Business Strategy",
-      "path": "Mental_Models/Mental_Model_War/m72_asymmetric_warfare.md",
+      "path": "models/Mental_Model_War/m72_asymmetric_warfare.md",
       "keywords": [
         "Startup competition",
         "disruptive innovation",
@@ -1718,7 +1718,7 @@
       "name": "Two-Front War",
       "slug": "two_front_war",
       "category": "Warfare & Strategy",
-      "path": "Mental_Models/Mental_Model_War/m73_two_front_war.md",
+      "path": "models/Mental_Model_War/m73_two_front_war.md",
       "keywords": [
         "Resource allocation",
         "strategic planning",
@@ -1734,7 +1734,7 @@
       "name": "Counterinsurgency",
       "slug": "counterinsurgency",
       "category": "Warfare & Social Influence",
-      "path": "Mental_Models/Mental_Model_War/m74_counterinsurgency.md",
+      "path": "models/Mental_Model_War/m74_counterinsurgency.md",
       "keywords": [
         "Change management",
         "corporate turnarounds",
@@ -1750,7 +1750,7 @@
       "name": "Mutually Assured Destruction",
       "slug": "mutually_assured_destruction",
       "category": "Warfare & Game Theory",
-      "path": "Mental_Models/Mental_Model_War/m75_mutually_assured_destruction.md",
+      "path": "models/Mental_Model_War/m75_mutually_assured_destruction.md",
       "keywords": [
         "Deterrence",
         "price wars",
