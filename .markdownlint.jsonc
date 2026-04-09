@@ -3,5 +3,21 @@
   "default": true,
   "MD013": false, // line length
   "MD033": false, // inline HTML
-  "MD041": false  // first line does not need to be H1
+  "MD041": false, // first line does not need to be H1
+  "MD036": false, // emphasis as heading — model files use **Label:** convention
+  "MD032": false, // blanks around lists — model files pack lists tightly
+  "MD009": false, // trailing spaces — tolerated in legacy model files
+  "MD047": false, // trailing newline — tolerated in legacy model files
+  "MD029": false, // ordered list prefix
+  "MD024": false, // duplicate headings (examples reuse section names)
+  "MD031": false, // blanks around fences
+  "MD040": false, // fenced code language
+  "MD022": false, // blanks around headings
+  "MD025": false, // single top-level heading
+  "MD034": false, // bare URLs
+  "MD026": false, // trailing punctuation in heading
+  "MD012": false, // multiple blank lines
+  "MD004": false, // unordered list style
+  "MD007": false, // unordered list indentation
+  "MD030": false  // spaces after list markers
 }
