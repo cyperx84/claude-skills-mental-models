@@ -20,7 +20,18 @@ _TOKEN_RE = re.compile(r"[a-zA-Z][a-zA-Z0-9\-]+")
 
 
 def _tokenize(text: str) -> list[str]:
-    return [t.lower() for t in _TOKEN_RE.findall(text or "") if t.lower() not in _STOPWORDS and len(t) > 1]
+    """Tokenize text. For hyphenated tokens, also emit the bare subwords,
+    so 'first-principle' matches 'first principles' and vice versa."""
+    out: list[str] = []
+    for raw in _TOKEN_RE.findall(text or ""):
+        t = raw.lower()
+        if len(t) > 1 and t not in _STOPWORDS:
+            out.append(t)
+        if "-" in t:
+            for part in t.split("-"):
+                if len(part) > 1 and part not in _STOPWORDS:
+                    out.append(part)
+    return out
 
 
 def _score(model: Model, query_tokens: list[str], query_lower: str) -> float:

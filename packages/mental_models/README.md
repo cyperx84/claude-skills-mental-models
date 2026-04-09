@@ -32,10 +32,32 @@ print(list_categories())
 
 ## CLI
 
+The CLI is the canonical interface — the Claude Code skill, MCP server, and any third-party harness all shell out to it. Every command supports `--json`.
+
 ```bash
-mental-models "how do I decide between two jobs"
-mental-models -k 3 "our team keeps missing deadlines"
+# Discovery
+mental-models select "how do I decide between two jobs" -k 5
+mental-models select "scaling issues" --json
+mental-models categories
+mental-models list --category "Human Nature"
+
+# Lookup
+mental-models get inversion                  # full markdown
+mental-models get inversion --field keywords
+mental-models get inversion --json
+
+# Guided application (structured output for agents)
+mental-models apply inversion --problem "pricing strategy" --json
+
+# Meta
+mental-models doctor           # diagnose install, data path, model count
+mental-models which            # print resolved index path
+mental-models version
 ```
+
+**Exit codes**: 0 ok, 2 not found, 3 bad args.
+
+Run without install: `uvx mental-models select "your query"`.
 
 ## API
 

@@ -22,6 +22,8 @@ jobs:
         run: git diff --exit-code docs/latticework.json docs/latticework.mmd docs/latticework_core.mmd
       - name: Check package data in sync
         run: python scripts/sync_package_data.py --check
+      - name: Run selector evals (deterministic, no API)
+        run: python evals/run_selector_evals.py
 
   python-package:
     runs-on: ubuntu-latest

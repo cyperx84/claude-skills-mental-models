@@ -1,0 +1,20 @@
+{"id": "sel-001", "query": "inversion", "expect_in_top": ["inversion"], "top_k": 5}
+{"id": "sel-002", "query": "bottleneck", "expect_in_top": ["bottlenecks"], "top_k": 5}
+{"id": "sel-003", "query": "second-order thinking", "expect_in_top": ["second-order_thinking"], "top_k": 5}
+{"id": "sel-004", "query": "margin of safety", "expect_in_top": ["margin_of_safety"], "top_k": 5}
+{"id": "sel-005", "query": "circle of competence", "expect_in_top": ["circle_of_competence"], "top_k": 5}
+{"id": "sel-006", "query": "probabilistic thinking", "expect_in_top": ["probabilistic_thinking"], "top_k": 5}
+{"id": "sel-007", "query": "first principles", "expect_in_top": ["first-principle_thinking"], "top_k": 5}
+{"id": "sel-008", "query": "trade-offs", "expect_in_top": ["trade-offs"], "top_k": 5}
+{"id": "sel-009", "query": "scarcity", "expect_in_top": ["scarcity"], "top_k": 5}
+{"id": "sel-010", "query": "incentives", "expect_in_top": ["bias_from_incentives"], "top_k": 10}
+{"id": "sel-011", "query": "hanlon razor", "expect_in_top": ["hanlon's_razor"], "top_k": 5}
+{"id": "sel-012", "query": "feedback loops", "expect_in_top": ["feedback_loops"], "top_k": 5}
+{"id": "sel-013", "query": "framing", "expect_in_top": ["framing"], "top_k": 5}
+{"id": "sel-014", "query": "regression to the mean", "expect_in_top": ["regression_to_the_mean"], "top_k": 5}
+{"id": "sel-015", "query": "survivorship bias", "expect_in_top": ["survivorship_bias"], "top_k": 5}
+{"id": "sel-016", "query": "asymmetric warfare", "expect_in_top": ["asymmetric_warfare"], "top_k": 5}
+{"id": "sel-017", "query": "the map is not the territory", "expect_in_top": ["the_map_is_not_the_territory"], "top_k": 5}
+{"id": "sel-018", "query": "two-front war", "expect_in_top": ["two_front_war"], "top_k": 5}
+{"id": "sel-019", "query": "leverage", "expect_in_top": ["leverage"], "top_k": 5}
+{"id": "sel-020", "query": "debt", "expect_in_top": ["debt"], "top_k": 5}
