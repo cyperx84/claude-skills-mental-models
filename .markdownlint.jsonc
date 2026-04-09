@@ -1,0 +1,7 @@
+{
+  // Permissive markdown lint config for claude-skills-mental-models
+  "default": true,
+  "MD013": false, // line length
+  "MD033": false, // inline HTML
+  "MD041": false  // first line does not need to be H1
+}

@@ -1,0 +1,49 @@
+name: Propose a New Mental Model
+description: Suggest a new mental model to add to the skill
+title: "[model] <model name>"
+labels: ["new-model"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Model name
+      description: The canonical name of the mental model
+      placeholder: e.g. Second-Order Thinking
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - General Thinking
+        - Science
+        - Systems
+        - Math
+        - Economics
+        - Art
+        - Strategy
+        - Human Nature
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: One or two paragraphs explaining the model
+    validations:
+      required: true
+  - type: textarea
+    id: keywords
+    attributes:
+      label: Keywords / situations
+      description: Comma-separated keywords or typical situations where this model applies
+    validations:
+      required: true
+  - type: textarea
+    id: rationale
+    attributes:
+      label: Rationale
+      description: Why should this model be included? What gap does it fill? Any sources?
+    validations:
+      required: true
