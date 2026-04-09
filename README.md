@@ -9,9 +9,7 @@ Turn Claude Code into a thinking partner with 98 Munger-style mental models bund
 
 > A latticework for better decisions, one prompt away.
 
-<!-- Demo GIF placeholder — recording coming soon.
-![demo](docs/demo.gif)
--->
+![mental-models demo](./docs/demo.gif)
 
 ## What It Does
 
@@ -115,6 +113,10 @@ Full catalog in [docs/categories.md](./docs/categories.md).
 
 ## The Latticework in Action
 
+![Latticework of 98 mental models](./docs/latticework.svg)
+
+<details><summary>Mermaid source</summary>
+
 ```mermaid
 %% Latticework core (top 15 hubs)
 graph LR
@@ -190,6 +192,8 @@ graph LR
     classDef c_Physics__Chemistry__ fill:#1f2937,stroke:#34d399,color:#fff
     classDef c_Systems_Thinking fill:#1f2937,stroke:#f472b6,color:#fff
 ```
+
+</details>
 
 _Auto-generated from shared-keyword analysis. Full graph: [docs/latticework.json](./docs/latticework.json)._
 
