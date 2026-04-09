@@ -21,10 +21,14 @@ A CLI, Claude Code skill, MCP server, and Python library — all powered by the 
 
 | Interface | Install | Use |
 |---|---|---|
-| Claude Code skill | symlink/copy to `~/.claude/skills/` | auto-activates on trigger phrases |
-| CLI | `pip install mental-models` (or `uvx mental-models`) | `mental-models select "..."` |
-| MCP server | `pip install mental-models-mcp` | add to Claude Desktop / Cursor / Zed / Continue / OpenCode config |
-| Python library | `pip install mental-models` | `from mental_models import select_models` |
+| **Claude Code skill** *(primary)* | symlink/copy `.claude/skills/mental-models/` to `~/.claude/skills/` | auto-activates on trigger phrases |
+| **Portable skill** for OpenClaw & AgentSkills harnesses | symlink/copy `skills/mental-models/` into the harness's skills dir | CLI-first, same content |
+| **CLI** | `pip install mental-models` or `uvx mental-models` | `mental-models select "..."` |
+| **MCP server** | `pip install mental-models-mcp` or `uvx mental-models-mcp` | add to Claude Desktop / Cursor / Zed / Continue / OpenCode / OpenClaw config |
+| **Python library** | `pip install mental-models` | `from mental_models import select_models` |
+
+All five routes share the same latticework logic — the CLI is the single
+source of truth, and every other surface delegates to it.
 
 ## Why Munger?
 
@@ -54,13 +58,23 @@ ln -s "$(pwd)/claude-skills-mental-models/.claude/skills/mental-models" ~/.claud
 
 Then in Claude Code: *"Apply inversion to my pricing strategy."* The skill auto-activates on phrases like *help me think*, *apply mental model*, or any model name (inversion, bottlenecks, second-order thinking, margin of safety...).
 
-**MCP server** (new in v0.2.0) — for Claude Desktop, Cursor, Zed, Continue, OpenCode, or any MCP-capable harness:
+**Portable skill for OpenClaw & other AgentSkills harnesses:**
+
+```bash
+# drop into your harness workspace
+ln -s "$(pwd)/claude-skills-mental-models/skills/mental-models" <workspace>/skills/mental-models
+```
+
+Details and per-harness instructions: [`docs/openclaw/README.md`](./docs/openclaw/README.md).
+
+**MCP server** (new in v0.2.0) — for Claude Desktop, Cursor, Zed, Continue, OpenCode, OpenClaw, or any MCP-capable harness:
 
 ```bash
 pip install mental-models-mcp
+# or: uvx mental-models-mcp
 ```
 
-Then add `mental-models-mcp` to your client's MCP server config. See [`packages/mental_models_mcp/`](./packages/mental_models_mcp/).
+Then drop the matching config snippet from [`docs/mcp/`](./docs/mcp/) into your client.
 
 **Python library:**
 
