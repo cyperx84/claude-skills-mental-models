@@ -1,10 +1,20 @@
-"""Keyword-based selector for mental models, with optional Claude enrichment."""
+"""Keyword-based selector for mental models, with optional Claude enrichment.
+
+The selector tokenizes the query, scores each model against its name, keywords,
+and description, and returns the top-k. Tokenization is ASCII-only by design
+(see ``_TOKEN_RE``); non-ASCII letters are stripped. This keeps the scorer
+simple and deterministic across platforms.
+"""
 from __future__ import annotations
 
 import re
 from typing import Optional
 
 from .index import Model, load_index
+
+# Max query length we will tokenize. Anything beyond this is truncated so
+# pathological inputs (e.g. pasted 10KB blob) don't thrash the scorer.
+_MAX_QUERY_CHARS = 4096
 
 _STOPWORDS = {
     "the", "a", "an", "and", "or", "but", "if", "then", "else", "is", "are",
@@ -20,10 +30,20 @@ _TOKEN_RE = re.compile(r"[a-zA-Z][a-zA-Z0-9\-]+")
 
 
 def _tokenize(text: str) -> list[str]:
-    """Tokenize text. For hyphenated tokens, also emit the bare subwords,
-    so 'first-principle' matches 'first principles' and vice versa."""
+    """Tokenize text into lowercase ASCII word tokens, dropping stopwords.
+
+    For hyphenated tokens we also emit the bare subwords, so ``first-principle``
+    matches ``first principles`` and vice versa. Non-ASCII characters are
+    dropped silently (the regex only matches ``[a-zA-Z]``). Empty, ``None``, or
+    whitespace-only input returns ``[]``. Inputs longer than ``_MAX_QUERY_CHARS``
+    are truncated to bound work.
+    """
+    if not text:
+        return []
+    if len(text) > _MAX_QUERY_CHARS:
+        text = text[:_MAX_QUERY_CHARS]
     out: list[str] = []
-    for raw in _TOKEN_RE.findall(text or ""):
+    for raw in _TOKEN_RE.findall(text):
         t = raw.lower()
         if len(t) > 1 and t not in _STOPWORDS:
             out.append(t)
@@ -62,10 +82,19 @@ def _score(model: Model, query_tokens: list[str], query_lower: str) -> float:
 
 
 def select_models(query: str, top_k: int = 5) -> list[Model]:
-    """Return the top_k models most relevant to ``query`` by keyword scoring."""
+    """Return the top_k models most relevant to ``query`` by keyword scoring.
+
+    Returns an empty list if ``query`` is empty, whitespace-only, or contains
+    only stopwords. ``top_k`` is clamped to ``>= 0``; negative values yield an
+    empty list.
+    """
+    if top_k <= 0:
+        return []
     models = load_index()
     q_tokens = _tokenize(query)
-    q_lower = (query or "").lower()
+    if not q_tokens:
+        return []
+    q_lower = (query or "")[:_MAX_QUERY_CHARS].lower()
     scored = [(m, _score(m, q_tokens, q_lower)) for m in models]
     scored = [pair for pair in scored if pair[1] > 0]
     scored.sort(key=lambda p: (-p[1], p[0].slug))

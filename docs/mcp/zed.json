@@ -1,0 +1,10 @@
+{
+  "context_servers": {
+    "mental-models": {
+      "command": {
+        "path": "uvx",
+        "args": ["mental-models-mcp"]
+      }
+    }
+  }
+}

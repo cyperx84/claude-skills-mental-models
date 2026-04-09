@@ -15,7 +15,16 @@ Turn Claude Code into a thinking partner with 98 Munger-style mental models bund
 
 ## What It Does
 
-Loads 98 cognitive frameworks into Claude Code as an auto-activating skill. Ask Claude to "apply inversion," "find the bottleneck," or "help me think through X" and it selects the right models, walks their Thinking Steps, and returns actionable insight.
+A CLI, Claude Code skill, MCP server, and Python library — all powered by the same 98 Munger-style mental models. Ask for "inversion," "find the bottleneck," or "help me think through X" from any harness, and the same deterministic selector picks the right models, walks their Thinking Steps, and returns actionable insight.
+
+## Works Everywhere
+
+| Interface | Install | Use |
+|---|---|---|
+| Claude Code skill | symlink/copy to `~/.claude/skills/` | auto-activates on trigger phrases |
+| CLI | `pip install mental-models` (or `uvx mental-models`) | `mental-models select "..."` |
+| MCP server | `pip install mental-models-mcp` | add to Claude Desktop / Cursor / Zed / Continue config |
+| Python library | `pip install mental-models` | `from mental_models import select_models` |
 
 ## Why Munger?
 
@@ -23,26 +32,43 @@ Charlie Munger argued that worldly wisdom comes from building a **latticework of
 
 ## Quick Start
 
-Install with copy:
+**CLI (fastest on-ramp — no install):**
+
+```bash
+uvx mental-models select "how do I decide between two jobs" -k 5
+```
+
+Or install it:
+
+```bash
+pip install mental-models
+mental-models select "our team keeps missing deadlines" --json
+```
+
+**Claude Code skill** — symlink (stays in sync) or copy:
 
 ```bash
 git clone https://github.com/cyperx84/claude-skills-mental-models.git
-cp -r claude-skills-mental-models/.claude/skills/mental-models ~/.claude/skills/
-```
-
-Or symlink (stays in sync with updates):
-
-```bash
 ln -s "$(pwd)/claude-skills-mental-models/.claude/skills/mental-models" ~/.claude/skills/mental-models
 ```
 
-Then in Claude Code:
+Then in Claude Code: *"Apply inversion to my pricing strategy."* The skill auto-activates on phrases like *help me think*, *apply mental model*, or any model name (inversion, bottlenecks, second-order thinking, margin of safety...).
 
-```
-Apply inversion to my pricing strategy.
+**MCP server** (new in v0.2.0) — for Claude Desktop, Cursor, Zed, Continue, or any MCP-capable harness:
+
+```bash
+pip install mental-models-mcp
 ```
 
-The skill auto-activates on phrases like *help me think*, *apply mental model*, or any model name (inversion, bottlenecks, second-order thinking, margin of safety...).
+Then add `mental-models-mcp` to your client's MCP server config. See [`packages/mental_models_mcp/`](./packages/mental_models_mcp/).
+
+**Python library:**
+
+```python
+from mental_models import select_models, get_model
+for m in select_models("scaling issues", top_k=5):
+    print(m.slug, "-", m.name)
+```
 
 ## Usage Examples
 
@@ -157,10 +183,14 @@ One problem, many lenses—that's the point.
 
 ## Use Outside Claude Code
 
-A small Python wrapper lives in [`packages/mental_models/`](./packages/mental_models/) so you can select and look up models programmatically — no Claude Code required.
+Two sibling packages ship the latticework to any harness — no Claude Code required:
+
+- **[`packages/mental_models/`](./packages/mental_models/)** — the CLI and Python library. This is the single source of truth: `mental-models select | get | list | categories | apply | which | doctor | version`, all with `--json`. The Claude Code skill and MCP server both shell out to it.
+- **[`packages/mental_models_mcp/`](./packages/mental_models_mcp/)** — a Model Context Protocol server (new in v0.2.0) that exposes the same selector to Claude Desktop, Cursor, Zed, Continue, and any other MCP client.
 
 ```bash
-pip install -e packages/mental_models
+pip install mental-models          # CLI + library
+pip install mental-models-mcp      # MCP server
 ```
 
 ```python
@@ -171,8 +201,6 @@ for m in select_models("how do I decide between two jobs", top_k=5):
 
 print(get_model("inversion").description)
 ```
-
-Or via the CLI: `mental-models "our team keeps missing deadlines"`.
 
 See [`packages/mental_models/README.md`](./packages/mental_models/README.md) for the full API.
 
