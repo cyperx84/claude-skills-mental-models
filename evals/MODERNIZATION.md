@@ -3,6 +3,16 @@
 Tracking opportunities considered while updating the `mental-models` skill for the
 current Claude Code ecosystem. Not every item is in scope for the current release.
 
+## Status
+
+- [x] Progressive disclosure (SKILL.md / REFERENCE / PATTERNS / examples)
+- [x] CLI as single source of truth
+- [x] Deterministic selector evals in CI
+- [x] LLM-judge evals (manual workflow)
+- [x] MCP server for cross-harness compatibility
+- [x] uv + PyPI Trusted Publishing
+- [ ] v0.2.0 release (in progress)
+
 ## Done
 
 - **Progressive disclosure.** `SKILL.md` now loads a compact index and the model
@@ -14,6 +24,17 @@ current Claude Code ecosystem. Not every item is in scope for the current releas
 - **CI validation.** A GitHub Actions workflow lints frontmatter and validates
   `model-index.json` shape on every PR.
 - **Evals.** See `evals/` for the regression harness and `cases.jsonl`.
+- **CLI as single source of truth.** `packages/mental_models` now ships a full CLI
+  (`select`, `get`, `list`, `categories`, `apply`, `which`, `doctor`, `version`, all
+  with `--json`). The Claude Code skill, MCP server, and any third-party harness all
+  shell out to it, so selection logic lives in exactly one place.
+- **Deterministic selector evals.** `evals/run_selector_evals.py` runs 30 regression
+  cases against the pure-Python selector — no model calls, no flakiness, runs in CI.
+- **MCP server.** `packages/mental_models_mcp` wraps the CLI as a Model Context
+  Protocol server, exposing the latticework to Claude Desktop, Cursor, Zed, Continue,
+  and any other MCP client. (Promoted from "Considered" below.)
+- **uv + PyPI Trusted Publishing.** Packaging and release flow modernized on `uv`
+  with Trusted Publishing for both `mental-models` and `mental-models-mcp`.
 
 ## Considered
 

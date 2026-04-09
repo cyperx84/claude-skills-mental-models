@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "mental-models": {
+      "command": "uvx",
+      "args": ["mental-models-mcp"]
+    }
+  }
+}

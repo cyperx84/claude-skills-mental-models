@@ -32,3 +32,5 @@ summaries in `resources/`, start here.
   disclosure, resources folder) this repository targets.
 - **Claude Code Overview** - https://docs.claude.com/en/docs/claude-code/overview.
   Context on how model-invoked skills fit into the broader Claude Code harness.
+- **Model Context Protocol** - https://modelcontextprotocol.io. The MCP spec the
+  `mental-models-mcp` server implements, enabling the latticework in any MCP client.

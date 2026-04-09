@@ -32,6 +32,7 @@ from .selector import select_models
 
 
 def _model_to_dict(m: Model) -> dict[str, Any]:
+    """Serialize a ``Model`` to a plain dict suitable for JSON output."""
     return {
         "slug": m.slug,
         "name": m.name,
@@ -60,19 +61,50 @@ def _read_model_markdown(m: Model) -> str:
 
 
 def _print_json(obj: Any) -> None:
+    """Write ``obj`` as pretty JSON to stdout followed by a newline."""
     json.dump(obj, sys.stdout, indent=2, ensure_ascii=False)
     sys.stdout.write("\n")
+
+
+def _info(msg: str, *, json_mode: bool) -> None:
+    """Print a human-readable message. In ``--json`` mode it goes to stderr so
+    stdout remains valid JSON."""
+    stream = sys.stderr if json_mode else sys.stdout
+    print(msg, file=stream)
 
 
 # ---------- subcommand handlers ----------
 
 
 def cmd_select(args: argparse.Namespace) -> int:
+    """Handle ``mental-models select``: keyword-score models against a query."""
     query = " ".join(args.query).strip()
     if not query:
         print("error: empty query", file=sys.stderr)
         return 3
+    if args.top is not None and args.top <= 0:
+        print("error: --top must be a positive integer", file=sys.stderr)
+        return 3
+    # Guard: extremely long inputs are truncated by the selector, but surface
+    # a note on stderr so callers know.
+    if len(query) > 4096:
+        print(
+            f"warning: query is {len(query)} chars; truncated to 4096 for scoring",
+            file=sys.stderr,
+        )
     results = select_models(query, top_k=args.top)
+    # If the query reduced to zero tokens (all stopwords / punctuation), be
+    # explicit about it on stderr rather than silently returning nothing.
+    if not results:
+        from .selector import _tokenize  # local import to avoid cycles in docs
+        if not _tokenize(query):
+            print(
+                "error: query contains no searchable tokens (stopwords/punctuation only)",
+                file=sys.stderr,
+            )
+            if args.json:
+                _print_json({"query": query, "count": 0, "models": []})
+            return 2
     if args.json:
         _print_json({
             "query": query,
@@ -83,7 +115,7 @@ def cmd_select(args: argparse.Namespace) -> int:
     if not results:
         print("No matching models found.", file=sys.stderr)
         return 2
-    print(f"Top {len(results)} mental models for: {query!r}\n")
+    _info(f"Top {len(results)} mental models for: {query!r}\n", json_mode=args.json)
     for i, m in enumerate(results, 1):
         desc = (m.description or "").strip().replace("\n", " ")
         if len(desc) > 140:
@@ -96,10 +128,15 @@ def cmd_select(args: argparse.Namespace) -> int:
 
 
 def cmd_get(args: argparse.Namespace) -> int:
+    """Handle ``mental-models get``: print a model by slug (markdown or JSON)."""
+    slug = (args.slug or "").strip()
+    if not slug:
+        print("error: empty slug", file=sys.stderr)
+        return 3
     try:
-        m = get_model(args.slug)
+        m = get_model(slug)
     except KeyError:
-        print(f"error: no model with slug {args.slug!r}", file=sys.stderr)
+        print(f"error: no model with slug {slug!r}", file=sys.stderr)
         return 2
     if args.field:
         data = _model_to_dict(m)
@@ -133,9 +170,16 @@ def cmd_get(args: argparse.Namespace) -> int:
 
 
 def cmd_list(args: argparse.Namespace) -> int:
+    """Handle ``mental-models list``: list all models, optional category filter.
+
+    ``--category`` is an exact, case-insensitive match against the category
+    name. A category that does not exist yields an empty result set with
+    exit code 0 (not an error).
+    """
     models = load_index()
     if args.category:
-        models = [m for m in models if m.category.lower() == args.category.lower()]
+        cat_norm = args.category.strip().lower()
+        models = [m for m in models if m.category.lower() == cat_norm]
     if args.json:
         _print_json({
             "count": len(models),
@@ -148,6 +192,7 @@ def cmd_list(args: argparse.Namespace) -> int:
 
 
 def cmd_categories(args: argparse.Namespace) -> int:
+    """Handle ``mental-models categories``: print sorted unique categories."""
     cats = list_categories()
     if args.json:
         _print_json(cats)
@@ -158,10 +203,18 @@ def cmd_categories(args: argparse.Namespace) -> int:
 
 
 def cmd_apply(args: argparse.Namespace) -> int:
+    """Handle ``mental-models apply``: return a structured application of a
+    model to a user problem. Sections are parsed from the model's markdown
+    file; missing sections default to empty strings so the output schema is
+    stable."""
+    slug = (args.slug or "").strip()
+    if not slug:
+        print("error: empty slug", file=sys.stderr)
+        return 3
     try:
-        m = get_model(args.slug)
+        m = get_model(slug)
     except KeyError:
-        print(f"error: no model with slug {args.slug!r}", file=sys.stderr)
+        print(f"error: no model with slug {slug!r}", file=sys.stderr)
         return 2
     problem = " ".join(args.problem).strip() if args.problem else ""
     md = _read_model_markdown(m)
@@ -221,6 +274,7 @@ def _extract_sections(md: str) -> dict[str, str]:
 
 
 def cmd_which(args: argparse.Namespace) -> int:
+    """Handle ``mental-models which``: print the resolved index file path."""
     try:
         p = _resolve_index_path()
     except FileNotFoundError as e:
@@ -234,6 +288,11 @@ def cmd_which(args: argparse.Namespace) -> int:
 
 
 def cmd_doctor(args: argparse.Namespace) -> int:
+    """Handle ``mental-models doctor``: diagnose install and data resolution.
+
+    Never raises: any failure during resolution or load is captured into the
+    report and marks ``ok`` False.
+    """
     report: dict[str, Any] = {"version": __version__, "ok": True, "checks": {}}
     try:
         path = _resolve_index_path()
@@ -268,6 +327,7 @@ def cmd_doctor(args: argparse.Namespace) -> int:
 
 
 def cmd_version(args: argparse.Namespace) -> int:
+    """Handle ``mental-models version``: print the installed package version."""
     if args.json:
         _print_json({"version": __version__})
     else:
