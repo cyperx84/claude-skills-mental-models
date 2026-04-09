@@ -76,21 +76,82 @@ Full catalog in [docs/categories.md](./docs/categories.md).
 ## The Latticework in Action
 
 ```mermaid
+%% Latticework core (top 15 hubs)
 graph LR
-    INV[Inversion]:::think --- SOT[Second-Order Thinking]:::think
-    SOT --- PROB[Probabilistic Thinking]:::math
-    SOT --- OC[Opportunity Cost]:::econ
-    OC --- TO[Trade-offs]:::econ
-    TO --- BN[Bottlenecks]:::sys
-    BN --- MOS[Margin of Safety]:::sys
-    PROB --- MOS
-    INV --- BN
-
-    classDef think fill:#1f2937,stroke:#60a5fa,color:#fff
-    classDef math fill:#1f2937,stroke:#34d399,color:#fff
-    classDef econ fill:#1f2937,stroke:#fbbf24,color:#fff
-    classDef sys fill:#1f2937,stroke:#f472b6,color:#fff
+    m01["The Map Is Not the Territory"]:::c_General_Thinking_Too
+    m07["Inversion"]:::c_General_Thinking_Too
+    m14["Ecosystems"]:::c_Physics__Chemistry__
+    m15["Evolution (Natural Selection and Extinction)"]:::c_Physics__Chemistry__
+    m17["Friction and Viscosity"]:::c_Physics__Chemistry__
+    m20["Inertia"]:::c_Physics__Chemistry__
+    m21["Leverage"]:::c_Physics__Chemistry__
+    m31["Equilibrium"]:::c_Systems_Thinking
+    m34["Margin of Safety"]:::c_Systems_Thinking
+    m46["Surface Area"]:::c_Mathematics
+    m49["Supply and Demand"]:::c_Economics
+    m50["Optimization"]:::c_Economics
+    m52["Specialization"]:::c_Economics
+    m54["Efficiency"]:::c_Economics
+    m55["Debt"]:::c_Economics
+    m17 --- m20
+    m34 --- m55
+    m50 --- m54
+    m07 --- m34
+    m07 --- m50
+    m07 --- m54
+    m17 --- m50
+    m31 --- m46
+    m01 --- m07
+    m01 --- m31
+    m01 --- m34
+    m01 --- m55
+    m07 --- m17
+    m07 --- m31
+    m07 --- m46
+    m07 --- m55
+    m14 --- m31
+    m14 --- m49
+    m15 --- m49
+    m15 --- m52
+    m17 --- m21
+    m17 --- m54
+    m21 --- m31
+    m21 --- m34
+    m21 --- m55
+    m31 --- m34
+    m31 --- m55
+    m01 --- m21
+    m01 --- m49
+    m01 --- m50
+    m01 --- m52
+    m07 --- m21
+    m07 --- m52
+    m14 --- m15
+    m14 --- m20
+    m14 --- m46
+    m17 --- m46
+    m20 --- m21
+    m20 --- m46
+    m20 --- m50
+    m20 --- m52
+    m20 --- m54
+    m21 --- m50
+    m31 --- m52
+    m34 --- m46
+    m46 --- m52
+    m46 --- m54
+    m46 --- m55
+    m49 --- m55
+    m50 --- m55
+    m54 --- m55
+    classDef c_Economics fill:#1f2937,stroke:#fbbf24,color:#fff
+    classDef c_General_Thinking_Too fill:#1f2937,stroke:#60a5fa,color:#fff
+    classDef c_Mathematics fill:#1f2937,stroke:#a78bfa,color:#fff
+    classDef c_Physics__Chemistry__ fill:#1f2937,stroke:#34d399,color:#fff
+    classDef c_Systems_Thinking fill:#1f2937,stroke:#f472b6,color:#fff
 ```
+
+_Auto-generated from shared-keyword analysis. Full graph: [docs/latticework.json](./docs/latticework.json)._
 
 One problem, many lenses—that's the point.
 

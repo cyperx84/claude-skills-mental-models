@@ -16,6 +16,10 @@ jobs:
           python-version: "3.12"
       - name: Run model validator
         run: python scripts/validate_models.py
+      - name: Regenerate latticework graph
+        run: python scripts/build_latticework.py
+      - name: Check latticework is up to date
+        run: git diff --exit-code docs/latticework.json docs/latticework.mmd docs/latticework_core.mmd
 
   markdown-lint:
     runs-on: ubuntu-latest

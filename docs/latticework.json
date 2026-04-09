@@ -1,0 +1,2309 @@
+{
+  "version": 1,
+  "threshold_shared_keywords": 3,
+  "node_count": 98,
+  "edge_count": 303,
+  "nodes": [
+    {
+      "id": "m01",
+      "slug": "the_map_is_not_the_territory",
+      "name": "The Map Is Not the Territory",
+      "category": "General Thinking Tools",
+      "color": "#60a5fa",
+      "degree": 21
+    },
+    {
+      "id": "m02",
+      "slug": "circle_of_competence",
+      "name": "Circle of Competence",
+      "category": "General Thinking Tools",
+      "color": "#60a5fa",
+      "degree": 5
+    },
+    {
+      "id": "m03",
+      "slug": "first-principle_thinking",
+      "name": "First-Principle Thinking",
+      "category": "General Thinking Tools",
+      "color": "#60a5fa",
+      "degree": 7
+    },
+    {
+      "id": "m04",
+      "slug": "thought_experiment",
+      "name": "Thought Experiment",
+      "category": "General Thinking Tools",
+      "color": "#60a5fa",
+      "degree": 1
+    },
+    {
+      "id": "m05",
+      "slug": "second-order_thinking",
+      "name": "Second-Order Thinking",
+      "category": "General Thinking Tools",
+      "color": "#60a5fa",
+      "degree": 8
+    },
+    {
+      "id": "m06",
+      "slug": "probabilistic_thinking",
+      "name": "Probabilistic Thinking",
+      "category": "General Thinking Tools",
+      "color": "#60a5fa",
+      "degree": 8
+    },
+    {
+      "id": "m07",
+      "slug": "inversion",
+      "name": "Inversion",
+      "category": "General Thinking Tools",
+      "color": "#60a5fa",
+      "degree": 17
+    },
+    {
+      "id": "m08",
+      "slug": "hanlon's_razor",
+      "name": "Hanlon's Razor",
+      "category": "General Thinking Tools",
+      "color": "#60a5fa",
+      "degree": 0
+    },
+    {
+      "id": "m09",
+      "slug": "occam's_razor",
+      "name": "Occam's Razor",
+      "category": "General Thinking Tools",
+      "color": "#60a5fa",
+      "degree": 0
+    },
+    {
+      "id": "m10",
+      "slug": "activation-energy",
+      "name": "Activation Energy",
+      "category": "Physics, Chemistry, and Biology",
+      "color": "#34d399",
+      "degree": 6
+    },
+    {
+      "id": "m11",
+      "slug": "alloying",
+      "name": "Alloying",
+      "category": "Physics, Chemistry, and Biology",
+      "color": "#34d399",
+      "degree": 12
+    },
+    {
+      "id": "m12",
+      "slug": "catalysts",
+      "name": "Catalysts",
+      "category": "Physics, Chemistry, and Biology",
+      "color": "#34d399",
+      "degree": 8
+    },
+    {
+      "id": "m13",
+      "slug": "cooperation",
+      "name": "Cooperation",
+      "category": "Physics, Chemistry, and Biology",
+      "color": "#34d399",
+      "degree": 3
+    },
+    {
+      "id": "m14",
+      "slug": "ecosystems",
+      "name": "Ecosystems",
+      "category": "Physics, Chemistry, and Biology",
+      "color": "#34d399",
+      "degree": 15
+    },
+    {
+      "id": "m15",
+      "slug": "evolution-part-one-natural-selection-and-extinction",
+      "name": "Evolution (Natural Selection and Extinction)",
+      "category": "Physics, Chemistry, and Biology",
+      "color": "#34d399",
+      "degree": 14
+    },
+    {
+      "id": "m16",
+      "slug": "evolution-part-two-adaptation-and-the-red-queen-effect",
+      "name": "Evolution (Adaptation and The Red Queen Effect)",
+      "category": "Physics, Chemistry, and Biology",
+      "color": "#34d399",
+      "degree": 12
+    },
+    {
+      "id": "m17",
+      "slug": "friction-and-viscosity",
+      "name": "Friction and Viscosity",
+      "category": "Physics, Chemistry, and Biology",
+      "color": "#34d399",
+      "degree": 14
+    },
+    {
+      "id": "m18",
+      "slug": "hierarchical-organization",
+      "name": "Hierarchical Organization",
+      "category": "Physics, Chemistry, and Biology",
+      "color": "#34d399",
+      "degree": 12
+    },
+    {
+      "id": "m19",
+      "slug": "incentives",
+      "name": "Incentives",
+      "category": "Physics, Chemistry, and Biology",
+      "color": "#34d399",
+      "degree": 12
+    },
+    {
+      "id": "m20",
+      "slug": "inertia",
+      "name": "Inertia",
+      "category": "Physics, Chemistry, and Biology",
+      "color": "#34d399",
+      "degree": 21
+    },
+    {
+      "id": "m21",
+      "slug": "leverage",
+      "name": "Leverage",
+      "category": "Physics, Chemistry, and Biology",
+      "color": "#34d399",
+      "degree": 17
+    },
+    {
+      "id": "m22",
+      "slug": "niches",
+      "name": "Niches",
+      "category": "Physics, Chemistry, and Biology",
+      "color": "#34d399",
+      "degree": 9
+    },
+    {
+      "id": "m23",
+      "slug": "reciprocity",
+      "name": "Reciprocity",
+      "category": "Physics, Chemistry, and Biology",
+      "color": "#34d399",
+      "degree": 4
+    },
+    {
+      "id": "m24",
+      "slug": "relativity",
+      "name": "Relativity",
+      "category": "Physics, Chemistry, and Biology",
+      "color": "#34d399",
+      "degree": 1
+    },
+    {
+      "id": "m25",
+      "slug": "replication",
+      "name": "Replication",
+      "category": "Physics, Chemistry, and Biology",
+      "color": "#34d399",
+      "degree": 5
+    },
+    {
+      "id": "m26",
+      "slug": "self-preservation",
+      "name": "Self-Preservation",
+      "category": "Physics, Chemistry, and Biology",
+      "color": "#34d399",
+      "degree": 5
+    },
+    {
+      "id": "m27",
+      "slug": "tendency-to-minimize-energy-output",
+      "name": "Minimize Energy Output",
+      "category": "Physics, Chemistry, and Biology",
+      "color": "#34d399",
+      "degree": 6
+    },
+    {
+      "id": "m28",
+      "slug": "thermodynamics",
+      "name": "Thermodynamics",
+      "category": "Physics, Chemistry, and Biology",
+      "color": "#34d399",
+      "degree": 4
+    },
+    {
+      "id": "m29",
+      "slug": "velocity",
+      "name": "Velocity",
+      "category": "Physics, Chemistry, and Biology",
+      "color": "#34d399",
+      "degree": 0
+    },
+    {
+      "id": "m30",
+      "slug": "feedback_loops",
+      "name": "Feedback Loops",
+      "category": "Systems Thinking",
+      "color": "#f472b6",
+      "degree": 5
+    },
+    {
+      "id": "m31",
+      "slug": "equilibrium",
+      "name": "Equilibrium",
+      "category": "Systems Thinking",
+      "color": "#f472b6",
+      "degree": 14
+    },
+    {
+      "id": "m32",
+      "slug": "bottlenecks",
+      "name": "Bottlenecks",
+      "category": "Systems Thinking",
+      "color": "#f472b6",
+      "degree": 13
+    },
+    {
+      "id": "m33",
+      "slug": "scale",
+      "name": "Scale",
+      "category": "Systems Thinking",
+      "color": "#f472b6",
+      "degree": 2
+    },
+    {
+      "id": "m34",
+      "slug": "margin_of_safety",
+      "name": "Margin of Safety",
+      "category": "Systems Thinking",
+      "color": "#f472b6",
+      "degree": 16
+    },
+    {
+      "id": "m35",
+      "slug": "churn",
+      "name": "Churn",
+      "category": "Systems Thinking",
+      "color": "#f472b6",
+      "degree": 0
+    },
+    {
+      "id": "m36",
+      "slug": "algorithms",
+      "name": "Algorithms",
+      "category": "Systems Thinking",
+      "color": "#f472b6",
+      "degree": 1
+    },
+    {
+      "id": "m37",
+      "slug": "critical_mass",
+      "name": "Critical Mass",
+      "category": "Systems Thinking",
+      "color": "#f472b6",
+      "degree": 6
+    },
+    {
+      "id": "m38",
+      "slug": "emergence",
+      "name": "Emergence",
+      "category": "Systems Thinking",
+      "color": "#f472b6",
+      "degree": 2
+    },
+    {
+      "id": "m39",
+      "slug": "irreducibility",
+      "name": "Irreducibility",
+      "category": "Systems Thinking",
+      "color": "#f472b6",
+      "degree": 2
+    },
+    {
+      "id": "m40",
+      "slug": "law_of_diminishing_returns",
+      "name": "Law of Diminishing Returns",
+      "category": "Systems Thinking",
+      "color": "#f472b6",
+      "degree": 7
+    },
+    {
+      "id": "m41",
+      "slug": "sampling",
+      "name": "Sampling",
+      "category": "Mathematics",
+      "color": "#a78bfa",
+      "degree": 6
+    },
+    {
+      "id": "m42",
+      "slug": "randomness",
+      "name": "Randomness",
+      "category": "Mathematics",
+      "color": "#a78bfa",
+      "degree": 6
+    },
+    {
+      "id": "m43",
+      "slug": "regression_to_the_mean",
+      "name": "Regression to the Mean",
+      "category": "Mathematics",
+      "color": "#a78bfa",
+      "degree": 7
+    },
+    {
+      "id": "m44",
+      "slug": "multiply_by_zero",
+      "name": "Multiply by Zero",
+      "category": "Mathematics",
+      "color": "#a78bfa",
+      "degree": 10
+    },
+    {
+      "id": "m45",
+      "slug": "equivalence",
+      "name": "Equivalence",
+      "category": "Mathematics",
+      "color": "#a78bfa",
+      "degree": 3
+    },
+    {
+      "id": "m46",
+      "slug": "surface_area",
+      "name": "Surface Area",
+      "category": "Mathematics",
+      "color": "#a78bfa",
+      "degree": 16
+    },
+    {
+      "id": "m47",
+      "slug": "global_and_local_maxima",
+      "name": "Global and Local Maxima",
+      "category": "Mathematics",
+      "color": "#a78bfa",
+      "degree": 8
+    },
+    {
+      "id": "m48",
+      "slug": "scarcity",
+      "name": "Scarcity",
+      "category": "Economics",
+      "color": "#fbbf24",
+      "degree": 8
+    },
+    {
+      "id": "m49",
+      "slug": "supply_and_demand",
+      "name": "Supply and Demand",
+      "category": "Economics",
+      "color": "#fbbf24",
+      "degree": 14
+    },
+    {
+      "id": "m50",
+      "slug": "optimization",
+      "name": "Optimization",
+      "category": "Economics",
+      "color": "#fbbf24",
+      "degree": 16
+    },
+    {
+      "id": "m51",
+      "slug": "trade-offs",
+      "name": "Trade-offs & Opportunity Cost",
+      "category": "Economics",
+      "color": "#fbbf24",
+      "degree": 12
+    },
+    {
+      "id": "m52",
+      "slug": "specialization",
+      "name": "Specialization",
+      "category": "Economics",
+      "color": "#fbbf24",
+      "degree": 14
+    },
+    {
+      "id": "m53",
+      "slug": "interdependence",
+      "name": "Interdependence",
+      "category": "Economics",
+      "color": "#fbbf24",
+      "degree": 5
+    },
+    {
+      "id": "m54",
+      "slug": "efficiency",
+      "name": "Efficiency",
+      "category": "Economics",
+      "color": "#fbbf24",
+      "degree": 15
+    },
+    {
+      "id": "m55",
+      "slug": "debt",
+      "name": "Debt",
+      "category": "Economics",
+      "color": "#fbbf24",
+      "degree": 16
+    },
+    {
+      "id": "m56",
+      "slug": "monopoly_and_competition",
+      "name": "Monopoly and Competition",
+      "category": "Economics",
+      "color": "#fbbf24",
+      "degree": 9
+    },
+    {
+      "id": "m57",
+      "slug": "creative_destruction",
+      "name": "Creative Destruction",
+      "category": "Economics",
+      "color": "#fbbf24",
+      "degree": 6
+    },
+    {
+      "id": "m58",
+      "slug": "greshams_law",
+      "name": "Gresham's Law",
+      "category": "Economics",
+      "color": "#fbbf24",
+      "degree": 1
+    },
+    {
+      "id": "m59",
+      "slug": "bubbles",
+      "name": "Bubbles",
+      "category": "Economics",
+      "color": "#fbbf24",
+      "degree": 5
+    },
+    {
+      "id": "m60",
+      "slug": "audience",
+      "name": "Audience",
+      "category": "Art",
+      "color": "#fb923c",
+      "degree": 8
+    },
+    {
+      "id": "m61",
+      "slug": "genre",
+      "name": "Genre",
+      "category": "Art",
+      "color": "#fb923c",
+      "degree": 5
+    },
+    {
+      "id": "m62",
+      "slug": "contrast",
+      "name": "Contrast",
+      "category": "Art",
+      "color": "#fb923c",
+      "degree": 5
+    },
+    {
+      "id": "m63",
+      "slug": "framing",
+      "name": "Framing",
+      "category": "Art",
+      "color": "#fb923c",
+      "degree": 7
+    },
+    {
+      "id": "m64",
+      "slug": "rhythm",
+      "name": "Rhythm",
+      "category": "Art",
+      "color": "#fb923c",
+      "degree": 4
+    },
+    {
+      "id": "m65",
+      "slug": "melody",
+      "name": "Melody",
+      "category": "Art",
+      "color": "#fb923c",
+      "degree": 4
+    },
+    {
+      "id": "m66",
+      "slug": "representation",
+      "name": "Representation",
+      "category": "Art",
+      "color": "#fb923c",
+      "degree": 3
+    },
+    {
+      "id": "m67",
+      "slug": "plot",
+      "name": "Plot",
+      "category": "Art",
+      "color": "#fb923c",
+      "degree": 6
+    },
+    {
+      "id": "m68",
+      "slug": "character",
+      "name": "Character",
+      "category": "Art",
+      "color": "#fb923c",
+      "degree": 9
+    },
+    {
+      "id": "m69",
+      "slug": "setting",
+      "name": "Setting",
+      "category": "Art",
+      "color": "#fb923c",
+      "degree": 0
+    },
+    {
+      "id": "m70",
+      "slug": "performance",
+      "name": "Performance",
+      "category": "Art",
+      "color": "#fb923c",
+      "degree": 0
+    },
+    {
+      "id": "m71",
+      "slug": "seeing_the_front",
+      "name": "Seeing the Front",
+      "category": "Warfare & Management",
+      "color": "#f87171",
+      "degree": 8
+    },
+    {
+      "id": "m72",
+      "slug": "asymmetric_warfare",
+      "name": "Asymmetric Warfare",
+      "category": "Warfare & Business Strategy",
+      "color": "#f87171",
+      "degree": 2
+    },
+    {
+      "id": "m73",
+      "slug": "two_front_war",
+      "name": "Two-Front War",
+      "category": "Warfare & Strategy",
+      "color": "#f87171",
+      "degree": 4
+    },
+    {
+      "id": "m74",
+      "slug": "counterinsurgency",
+      "name": "Counterinsurgency",
+      "category": "Warfare & Social Influence",
+      "color": "#f87171",
+      "degree": 0
+    },
+    {
+      "id": "m75",
+      "slug": "mutually_assured_destruction",
+      "name": "Mutually Assured Destruction",
+      "category": "Warfare & Game Theory",
+      "color": "#f87171",
+      "degree": 0
+    },
+    {
+      "id": "m76",
+      "slug": "trust",
+      "name": "Trust",
+      "category": "Human Nature & Judgment",
+      "color": "#22d3ee",
+      "degree": 1
+    },
+    {
+      "id": "m77",
+      "slug": "bias_from_incentives",
+      "name": "Bias from Incentives",
+      "category": "Human Nature & Judgment",
+      "color": "#22d3ee",
+      "degree": 0
+    },
+    {
+      "id": "m78",
+      "slug": "pavlovian_association",
+      "name": "Pavlovian Association",
+      "category": "Human Nature & Judgment",
+      "color": "#22d3ee",
+      "degree": 5
+    },
+    {
+      "id": "m79",
+      "slug": "tendency_to_feel_envy_and_jealousy",
+      "name": "Tendency to Feel Envy & Jealousy",
+      "category": "Human Nature & Judgment",
+      "color": "#22d3ee",
+      "degree": 3
+    },
+    {
+      "id": "m80",
+      "slug": "tendency_to_distort_due_to_liking_or_loving_or_disliking_or_hating",
+      "name": "Liking/Disliking Tendency",
+      "category": "Human Nature & Judgment",
+      "color": "#22d3ee",
+      "degree": 3
+    },
+    {
+      "id": "m81",
+      "slug": "denial",
+      "name": "Denial",
+      "category": "Human Nature & Judgment",
+      "color": "#22d3ee",
+      "degree": 4
+    },
+    {
+      "id": "m82",
+      "slug": "availability_heuristic",
+      "name": "Availability Heuristic",
+      "category": "Human Nature & Judgment",
+      "color": "#22d3ee",
+      "degree": 6
+    },
+    {
+      "id": "m83",
+      "slug": "representativeness_heuristic",
+      "name": "Representativeness Heuristic",
+      "category": "Human Nature & Judgment",
+      "color": "#22d3ee",
+      "degree": 0
+    },
+    {
+      "id": "m84",
+      "slug": "social_proof_safety_in_numbers",
+      "name": "Social Proof",
+      "category": "Human Nature & Judgment",
+      "color": "#22d3ee",
+      "degree": 1
+    },
+    {
+      "id": "m85",
+      "slug": "narrative_instinct",
+      "name": "Narrative Instinct",
+      "category": "Human Nature & Judgment",
+      "color": "#22d3ee",
+      "degree": 4
+    },
+    {
+      "id": "m86",
+      "slug": "curiosity_instinct",
+      "name": "Curiosity Instinct",
+      "category": "Human Nature & Judgment",
+      "color": "#22d3ee",
+      "degree": 1
+    },
+    {
+      "id": "m87",
+      "slug": "language_instinct",
+      "name": "Language Instinct",
+      "category": "Human Nature & Judgment",
+      "color": "#22d3ee",
+      "degree": 3
+    },
+    {
+      "id": "m88",
+      "slug": "first-conclusion_bias",
+      "name": "First-Conclusion Bias",
+      "category": "Human Nature & Judgment",
+      "color": "#22d3ee",
+      "degree": 0
+    },
+    {
+      "id": "m89",
+      "slug": "tendency_to_overgeneralize_from_small_samples",
+      "name": "Overgeneralizing from Small Samples",
+      "category": "Human Nature & Judgment",
+      "color": "#22d3ee",
+      "degree": 1
+    },
+    {
+      "id": "m90",
+      "slug": "relative_satisfaction_or_misery_tendencies",
+      "name": "Relative Satisfaction",
+      "category": "Human Nature & Judgment",
+      "color": "#22d3ee",
+      "degree": 0
+    },
+    {
+      "id": "m91",
+      "slug": "commitment_and_consistency_bias",
+      "name": "Commitment & Consistency Bias",
+      "category": "Human Nature & Judgment",
+      "color": "#22d3ee",
+      "degree": 0
+    },
+    {
+      "id": "m92",
+      "slug": "hindsight_bias",
+      "name": "Hindsight Bias",
+      "category": "Human Nature & Judgment",
+      "color": "#22d3ee",
+      "degree": 3
+    },
+    {
+      "id": "m93",
+      "slug": "sensitivity_to_fairness",
+      "name": "Sensitivity to Fairness",
+      "category": "Human Nature & Judgment",
+      "color": "#22d3ee",
+      "degree": 3
+    },
+    {
+      "id": "m94",
+      "slug": "tendency_to_overestimate_consistency_of_behavior_fundamental_attribution_error",
+      "name": "Fundamental Attribution Error",
+      "category": "Human Nature & Judgment",
+      "color": "#22d3ee",
+      "degree": 3
+    },
+    {
+      "id": "m95",
+      "slug": "influence_of_stress_including_breaking_points",
+      "name": "Influence of Stress",
+      "category": "Human Nature & Judgment",
+      "color": "#22d3ee",
+      "degree": 0
+    },
+    {
+      "id": "m96",
+      "slug": "survivorship_bias",
+      "name": "Survivorship Bias",
+      "category": "Human Nature & Judgment",
+      "color": "#22d3ee",
+      "degree": 5
+    },
+    {
+      "id": "m97",
+      "slug": "tendency_to_want_to_do_something_fight_or_flight_intervention_demonstration_of_value_etc",
+      "name": "Do-Something Tendency",
+      "category": "Human Nature & Judgment",
+      "color": "#22d3ee",
+      "degree": 0
+    },
+    {
+      "id": "m98",
+      "slug": "falsification_or_confirmation_bias",
+      "name": "Confirmation Bias & Falsification",
+      "category": "Human Nature & Judgment",
+      "color": "#22d3ee",
+      "degree": 3
+    }
+  ],
+  "edges": [
+    {
+      "source": "m11",
+      "target": "m52",
+      "weight": 6
+    },
+    {
+      "source": "m11",
+      "target": "m68",
+      "weight": 6
+    },
+    {
+      "source": "m17",
+      "target": "m20",
+      "weight": 6
+    },
+    {
+      "source": "m34",
+      "target": "m55",
+      "weight": 6
+    },
+    {
+      "source": "m48",
+      "target": "m49",
+      "weight": 6
+    },
+    {
+      "source": "m50",
+      "target": "m54",
+      "weight": 6
+    },
+    {
+      "source": "m62",
+      "target": "m64",
+      "weight": 6
+    },
+    {
+      "source": "m01",
+      "target": "m51",
+      "weight": 5
+    },
+    {
+      "source": "m05",
+      "target": "m14",
+      "weight": 5
+    },
+    {
+      "source": "m06",
+      "target": "m82",
+      "weight": 5
+    },
+    {
+      "source": "m07",
+      "target": "m34",
+      "weight": 5
+    },
+    {
+      "source": "m07",
+      "target": "m44",
+      "weight": 5
+    },
+    {
+      "source": "m07",
+      "target": "m50",
+      "weight": 5
+    },
+    {
+      "source": "m07",
+      "target": "m54",
+      "weight": 5
+    },
+    {
+      "source": "m10",
+      "target": "m20",
+      "weight": 5
+    },
+    {
+      "source": "m15",
+      "target": "m16",
+      "weight": 5
+    },
+    {
+      "source": "m15",
+      "target": "m22",
+      "weight": 5
+    },
+    {
+      "source": "m17",
+      "target": "m19",
+      "weight": 5
+    },
+    {
+      "source": "m17",
+      "target": "m50",
+      "weight": 5
+    },
+    {
+      "source": "m31",
+      "target": "m46",
+      "weight": 5
+    },
+    {
+      "source": "m31",
+      "target": "m53",
+      "weight": 5
+    },
+    {
+      "source": "m34",
+      "target": "m51",
+      "weight": 5
+    },
+    {
+      "source": "m38",
+      "target": "m39",
+      "weight": 5
+    },
+    {
+      "source": "m49",
+      "target": "m56",
+      "weight": 5
+    },
+    {
+      "source": "m52",
+      "target": "m68",
+      "weight": 5
+    },
+    {
+      "source": "m01",
+      "target": "m07",
+      "weight": 4
+    },
+    {
+      "source": "m01",
+      "target": "m31",
+      "weight": 4
+    },
+    {
+      "source": "m01",
+      "target": "m34",
+      "weight": 4
+    },
+    {
+      "source": "m01",
+      "target": "m41",
+      "weight": 4
+    },
+    {
+      "source": "m01",
+      "target": "m43",
+      "weight": 4
+    },
+    {
+      "source": "m01",
+      "target": "m55",
+      "weight": 4
+    },
+    {
+      "source": "m03",
+      "target": "m12",
+      "weight": 4
+    },
+    {
+      "source": "m03",
+      "target": "m15",
+      "weight": 4
+    },
+    {
+      "source": "m03",
+      "target": "m16",
+      "weight": 4
+    },
+    {
+      "source": "m03",
+      "target": "m71",
+      "weight": 4
+    },
+    {
+      "source": "m05",
+      "target": "m51",
+      "weight": 4
+    },
+    {
+      "source": "m06",
+      "target": "m21",
+      "weight": 4
+    },
+    {
+      "source": "m06",
+      "target": "m42",
+      "weight": 4
+    },
+    {
+      "source": "m07",
+      "target": "m17",
+      "weight": 4
+    },
+    {
+      "source": "m07",
+      "target": "m31",
+      "weight": 4
+    },
+    {
+      "source": "m07",
+      "target": "m46",
+      "weight": 4
+    },
+    {
+      "source": "m07",
+      "target": "m51",
+      "weight": 4
+    },
+    {
+      "source": "m07",
+      "target": "m55",
+      "weight": 4
+    },
+    {
+      "source": "m07",
+      "target": "m67",
+      "weight": 4
+    },
+    {
+      "source": "m10",
+      "target": "m17",
+      "weight": 4
+    },
+    {
+      "source": "m11",
+      "target": "m15",
+      "weight": 4
+    },
+    {
+      "source": "m11",
+      "target": "m46",
+      "weight": 4
+    },
+    {
+      "source": "m12",
+      "target": "m16",
+      "weight": 4
+    },
+    {
+      "source": "m12",
+      "target": "m20",
+      "weight": 4
+    },
+    {
+      "source": "m12",
+      "target": "m71",
+      "weight": 4
+    },
+    {
+      "source": "m13",
+      "target": "m23",
+      "weight": 4
+    },
+    {
+      "source": "m14",
+      "target": "m31",
+      "weight": 4
+    },
+    {
+      "source": "m14",
+      "target": "m49",
+      "weight": 4
+    },
+    {
+      "source": "m14",
+      "target": "m56",
+      "weight": 4
+    },
+    {
+      "source": "m15",
+      "target": "m47",
+      "weight": 4
+    },
+    {
+      "source": "m15",
+      "target": "m49",
+      "weight": 4
+    },
+    {
+      "source": "m15",
+      "target": "m52",
+      "weight": 4
+    },
+    {
+      "source": "m15",
+      "target": "m56",
+      "weight": 4
+    },
+    {
+      "source": "m15",
+      "target": "m57",
+      "weight": 4
+    },
+    {
+      "source": "m16",
+      "target": "m22",
+      "weight": 4
+    },
+    {
+      "source": "m16",
+      "target": "m47",
+      "weight": 4
+    },
+    {
+      "source": "m16",
+      "target": "m52",
+      "weight": 4
+    },
+    {
+      "source": "m16",
+      "target": "m56",
+      "weight": 4
+    },
+    {
+      "source": "m16",
+      "target": "m57",
+      "weight": 4
+    },
+    {
+      "source": "m17",
+      "target": "m21",
+      "weight": 4
+    },
+    {
+      "source": "m17",
+      "target": "m27",
+      "weight": 4
+    },
+    {
+      "source": "m17",
+      "target": "m32",
+      "weight": 4
+    },
+    {
+      "source": "m17",
+      "target": "m54",
+      "weight": 4
+    },
+    {
+      "source": "m18",
+      "target": "m54",
+      "weight": 4
+    },
+    {
+      "source": "m19",
+      "target": "m50",
+      "weight": 4
+    },
+    {
+      "source": "m19",
+      "target": "m93",
+      "weight": 4
+    },
+    {
+      "source": "m20",
+      "target": "m27",
+      "weight": 4
+    },
+    {
+      "source": "m20",
+      "target": "m30",
+      "weight": 4
+    },
+    {
+      "source": "m21",
+      "target": "m31",
+      "weight": 4
+    },
+    {
+      "source": "m21",
+      "target": "m34",
+      "weight": 4
+    },
+    {
+      "source": "m21",
+      "target": "m55",
+      "weight": 4
+    },
+    {
+      "source": "m21",
+      "target": "m82",
+      "weight": 4
+    },
+    {
+      "source": "m22",
+      "target": "m56",
+      "weight": 4
+    },
+    {
+      "source": "m22",
+      "target": "m57",
+      "weight": 4
+    },
+    {
+      "source": "m23",
+      "target": "m53",
+      "weight": 4
+    },
+    {
+      "source": "m23",
+      "target": "m76",
+      "weight": 4
+    },
+    {
+      "source": "m28",
+      "target": "m50",
+      "weight": 4
+    },
+    {
+      "source": "m28",
+      "target": "m54",
+      "weight": 4
+    },
+    {
+      "source": "m31",
+      "target": "m34",
+      "weight": 4
+    },
+    {
+      "source": "m31",
+      "target": "m51",
+      "weight": 4
+    },
+    {
+      "source": "m31",
+      "target": "m55",
+      "weight": 4
+    },
+    {
+      "source": "m32",
+      "target": "m54",
+      "weight": 4
+    },
+    {
+      "source": "m34",
+      "target": "m42",
+      "weight": 4
+    },
+    {
+      "source": "m37",
+      "target": "m84",
+      "weight": 4
+    },
+    {
+      "source": "m40",
+      "target": "m49",
+      "weight": 4
+    },
+    {
+      "source": "m41",
+      "target": "m43",
+      "weight": 4
+    },
+    {
+      "source": "m41",
+      "target": "m89",
+      "weight": 4
+    },
+    {
+      "source": "m41",
+      "target": "m98",
+      "weight": 4
+    },
+    {
+      "source": "m49",
+      "target": "m73",
+      "weight": 4
+    },
+    {
+      "source": "m51",
+      "target": "m55",
+      "weight": 4
+    },
+    {
+      "source": "m55",
+      "target": "m82",
+      "weight": 4
+    },
+    {
+      "source": "m56",
+      "target": "m57",
+      "weight": 4
+    },
+    {
+      "source": "m60",
+      "target": "m61",
+      "weight": 4
+    },
+    {
+      "source": "m60",
+      "target": "m65",
+      "weight": 4
+    },
+    {
+      "source": "m63",
+      "target": "m66",
+      "weight": 4
+    },
+    {
+      "source": "m85",
+      "target": "m96",
+      "weight": 4
+    },
+    {
+      "source": "m01",
+      "target": "m04",
+      "weight": 3
+    },
+    {
+      "source": "m01",
+      "target": "m06",
+      "weight": 3
+    },
+    {
+      "source": "m01",
+      "target": "m11",
+      "weight": 3
+    },
+    {
+      "source": "m01",
+      "target": "m21",
+      "weight": 3
+    },
+    {
+      "source": "m01",
+      "target": "m32",
+      "weight": 3
+    },
+    {
+      "source": "m01",
+      "target": "m40",
+      "weight": 3
+    },
+    {
+      "source": "m01",
+      "target": "m49",
+      "weight": 3
+    },
+    {
+      "source": "m01",
+      "target": "m50",
+      "weight": 3
+    },
+    {
+      "source": "m01",
+      "target": "m52",
+      "weight": 3
+    },
+    {
+      "source": "m01",
+      "target": "m67",
+      "weight": 3
+    },
+    {
+      "source": "m01",
+      "target": "m71",
+      "weight": 3
+    },
+    {
+      "source": "m01",
+      "target": "m73",
+      "weight": 3
+    },
+    {
+      "source": "m01",
+      "target": "m82",
+      "weight": 3
+    },
+    {
+      "source": "m01",
+      "target": "m98",
+      "weight": 3
+    },
+    {
+      "source": "m02",
+      "target": "m15",
+      "weight": 3
+    },
+    {
+      "source": "m02",
+      "target": "m16",
+      "weight": 3
+    },
+    {
+      "source": "m02",
+      "target": "m22",
+      "weight": 3
+    },
+    {
+      "source": "m02",
+      "target": "m47",
+      "weight": 3
+    },
+    {
+      "source": "m02",
+      "target": "m49",
+      "weight": 3
+    },
+    {
+      "source": "m03",
+      "target": "m11",
+      "weight": 3
+    },
+    {
+      "source": "m03",
+      "target": "m20",
+      "weight": 3
+    },
+    {
+      "source": "m03",
+      "target": "m47",
+      "weight": 3
+    },
+    {
+      "source": "m05",
+      "target": "m15",
+      "weight": 3
+    },
+    {
+      "source": "m05",
+      "target": "m16",
+      "weight": 3
+    },
+    {
+      "source": "m05",
+      "target": "m34",
+      "weight": 3
+    },
+    {
+      "source": "m05",
+      "target": "m49",
+      "weight": 3
+    },
+    {
+      "source": "m05",
+      "target": "m55",
+      "weight": 3
+    },
+    {
+      "source": "m05",
+      "target": "m81",
+      "weight": 3
+    },
+    {
+      "source": "m06",
+      "target": "m31",
+      "weight": 3
+    },
+    {
+      "source": "m06",
+      "target": "m34",
+      "weight": 3
+    },
+    {
+      "source": "m06",
+      "target": "m43",
+      "weight": 3
+    },
+    {
+      "source": "m06",
+      "target": "m55",
+      "weight": 3
+    },
+    {
+      "source": "m07",
+      "target": "m18",
+      "weight": 3
+    },
+    {
+      "source": "m07",
+      "target": "m19",
+      "weight": 3
+    },
+    {
+      "source": "m07",
+      "target": "m21",
+      "weight": 3
+    },
+    {
+      "source": "m07",
+      "target": "m32",
+      "weight": 3
+    },
+    {
+      "source": "m07",
+      "target": "m42",
+      "weight": 3
+    },
+    {
+      "source": "m07",
+      "target": "m52",
+      "weight": 3
+    },
+    {
+      "source": "m10",
+      "target": "m19",
+      "weight": 3
+    },
+    {
+      "source": "m10",
+      "target": "m21",
+      "weight": 3
+    },
+    {
+      "source": "m10",
+      "target": "m25",
+      "weight": 3
+    },
+    {
+      "source": "m10",
+      "target": "m30",
+      "weight": 3
+    },
+    {
+      "source": "m11",
+      "target": "m12",
+      "weight": 3
+    },
+    {
+      "source": "m11",
+      "target": "m13",
+      "weight": 3
+    },
+    {
+      "source": "m11",
+      "target": "m16",
+      "weight": 3
+    },
+    {
+      "source": "m11",
+      "target": "m38",
+      "weight": 3
+    },
+    {
+      "source": "m11",
+      "target": "m53",
+      "weight": 3
+    },
+    {
+      "source": "m11",
+      "target": "m71",
+      "weight": 3
+    },
+    {
+      "source": "m12",
+      "target": "m47",
+      "weight": 3
+    },
+    {
+      "source": "m12",
+      "target": "m54",
+      "weight": 3
+    },
+    {
+      "source": "m12",
+      "target": "m68",
+      "weight": 3
+    },
+    {
+      "source": "m13",
+      "target": "m52",
+      "weight": 3
+    },
+    {
+      "source": "m14",
+      "target": "m15",
+      "weight": 3
+    },
+    {
+      "source": "m14",
+      "target": "m20",
+      "weight": 3
+    },
+    {
+      "source": "m14",
+      "target": "m22",
+      "weight": 3
+    },
+    {
+      "source": "m14",
+      "target": "m26",
+      "weight": 3
+    },
+    {
+      "source": "m14",
+      "target": "m32",
+      "weight": 3
+    },
+    {
+      "source": "m14",
+      "target": "m33",
+      "weight": 3
+    },
+    {
+      "source": "m14",
+      "target": "m46",
+      "weight": 3
+    },
+    {
+      "source": "m14",
+      "target": "m53",
+      "weight": 3
+    },
+    {
+      "source": "m14",
+      "target": "m57",
+      "weight": 3
+    },
+    {
+      "source": "m14",
+      "target": "m85",
+      "weight": 3
+    },
+    {
+      "source": "m14",
+      "target": "m96",
+      "weight": 3
+    },
+    {
+      "source": "m15",
+      "target": "m71",
+      "weight": 3
+    },
+    {
+      "source": "m15",
+      "target": "m72",
+      "weight": 3
+    },
+    {
+      "source": "m16",
+      "target": "m20",
+      "weight": 3
+    },
+    {
+      "source": "m17",
+      "target": "m18",
+      "weight": 3
+    },
+    {
+      "source": "m17",
+      "target": "m30",
+      "weight": 3
+    },
+    {
+      "source": "m17",
+      "target": "m44",
+      "weight": 3
+    },
+    {
+      "source": "m17",
+      "target": "m46",
+      "weight": 3
+    },
+    {
+      "source": "m17",
+      "target": "m63",
+      "weight": 3
+    },
+    {
+      "source": "m18",
+      "target": "m19",
+      "weight": 3
+    },
+    {
+      "source": "m18",
+      "target": "m28",
+      "weight": 3
+    },
+    {
+      "source": "m18",
+      "target": "m39",
+      "weight": 3
+    },
+    {
+      "source": "m18",
+      "target": "m44",
+      "weight": 3
+    },
+    {
+      "source": "m18",
+      "target": "m46",
+      "weight": 3
+    },
+    {
+      "source": "m18",
+      "target": "m50",
+      "weight": 3
+    },
+    {
+      "source": "m18",
+      "target": "m52",
+      "weight": 3
+    },
+    {
+      "source": "m18",
+      "target": "m68",
+      "weight": 3
+    },
+    {
+      "source": "m18",
+      "target": "m79",
+      "weight": 3
+    },
+    {
+      "source": "m19",
+      "target": "m20",
+      "weight": 3
+    },
+    {
+      "source": "m19",
+      "target": "m21",
+      "weight": 3
+    },
+    {
+      "source": "m19",
+      "target": "m30",
+      "weight": 3
+    },
+    {
+      "source": "m19",
+      "target": "m44",
+      "weight": 3
+    },
+    {
+      "source": "m19",
+      "target": "m48",
+      "weight": 3
+    },
+    {
+      "source": "m19",
+      "target": "m54",
+      "weight": 3
+    },
+    {
+      "source": "m20",
+      "target": "m21",
+      "weight": 3
+    },
+    {
+      "source": "m20",
+      "target": "m25",
+      "weight": 3
+    },
+    {
+      "source": "m20",
+      "target": "m26",
+      "weight": 3
+    },
+    {
+      "source": "m20",
+      "target": "m37",
+      "weight": 3
+    },
+    {
+      "source": "m20",
+      "target": "m46",
+      "weight": 3
+    },
+    {
+      "source": "m20",
+      "target": "m47",
+      "weight": 3
+    },
+    {
+      "source": "m20",
+      "target": "m48",
+      "weight": 3
+    },
+    {
+      "source": "m20",
+      "target": "m50",
+      "weight": 3
+    },
+    {
+      "source": "m20",
+      "target": "m52",
+      "weight": 3
+    },
+    {
+      "source": "m20",
+      "target": "m54",
+      "weight": 3
+    },
+    {
+      "source": "m20",
+      "target": "m57",
+      "weight": 3
+    },
+    {
+      "source": "m20",
+      "target": "m79",
+      "weight": 3
+    },
+    {
+      "source": "m21",
+      "target": "m27",
+      "weight": 3
+    },
+    {
+      "source": "m21",
+      "target": "m32",
+      "weight": 3
+    },
+    {
+      "source": "m21",
+      "target": "m37",
+      "weight": 3
+    },
+    {
+      "source": "m21",
+      "target": "m42",
+      "weight": 3
+    },
+    {
+      "source": "m21",
+      "target": "m50",
+      "weight": 3
+    },
+    {
+      "source": "m21",
+      "target": "m51",
+      "weight": 3
+    },
+    {
+      "source": "m22",
+      "target": "m48",
+      "weight": 3
+    },
+    {
+      "source": "m22",
+      "target": "m49",
+      "weight": 3
+    },
+    {
+      "source": "m22",
+      "target": "m52",
+      "weight": 3
+    },
+    {
+      "source": "m23",
+      "target": "m68",
+      "weight": 3
+    },
+    {
+      "source": "m24",
+      "target": "m63",
+      "weight": 3
+    },
+    {
+      "source": "m25",
+      "target": "m30",
+      "weight": 3
+    },
+    {
+      "source": "m25",
+      "target": "m37",
+      "weight": 3
+    },
+    {
+      "source": "m25",
+      "target": "m46",
+      "weight": 3
+    },
+    {
+      "source": "m26",
+      "target": "m44",
+      "weight": 3
+    },
+    {
+      "source": "m26",
+      "target": "m51",
+      "weight": 3
+    },
+    {
+      "source": "m26",
+      "target": "m59",
+      "weight": 3
+    },
+    {
+      "source": "m27",
+      "target": "m32",
+      "weight": 3
+    },
+    {
+      "source": "m27",
+      "target": "m50",
+      "weight": 3
+    },
+    {
+      "source": "m27",
+      "target": "m54",
+      "weight": 3
+    },
+    {
+      "source": "m28",
+      "target": "m40",
+      "weight": 3
+    },
+    {
+      "source": "m31",
+      "target": "m32",
+      "weight": 3
+    },
+    {
+      "source": "m31",
+      "target": "m52",
+      "weight": 3
+    },
+    {
+      "source": "m31",
+      "target": "m59",
+      "weight": 3
+    },
+    {
+      "source": "m31",
+      "target": "m82",
+      "weight": 3
+    },
+    {
+      "source": "m32",
+      "target": "m34",
+      "weight": 3
+    },
+    {
+      "source": "m32",
+      "target": "m40",
+      "weight": 3
+    },
+    {
+      "source": "m32",
+      "target": "m50",
+      "weight": 3
+    },
+    {
+      "source": "m32",
+      "target": "m51",
+      "weight": 3
+    },
+    {
+      "source": "m32",
+      "target": "m53",
+      "weight": 3
+    },
+    {
+      "source": "m33",
+      "target": "m46",
+      "weight": 3
+    },
+    {
+      "source": "m34",
+      "target": "m44",
+      "weight": 3
+    },
+    {
+      "source": "m34",
+      "target": "m46",
+      "weight": 3
+    },
+    {
+      "source": "m34",
+      "target": "m59",
+      "weight": 3
+    },
+    {
+      "source": "m34",
+      "target": "m67",
+      "weight": 3
+    },
+    {
+      "source": "m34",
+      "target": "m81",
+      "weight": 3
+    },
+    {
+      "source": "m34",
+      "target": "m82",
+      "weight": 3
+    },
+    {
+      "source": "m36",
+      "target": "m45",
+      "weight": 3
+    },
+    {
+      "source": "m37",
+      "target": "m48",
+      "weight": 3
+    },
+    {
+      "source": "m37",
+      "target": "m72",
+      "weight": 3
+    },
+    {
+      "source": "m40",
+      "target": "m48",
+      "weight": 3
+    },
+    {
+      "source": "m40",
+      "target": "m54",
+      "weight": 3
+    },
+    {
+      "source": "m40",
+      "target": "m73",
+      "weight": 3
+    },
+    {
+      "source": "m41",
+      "target": "m58",
+      "weight": 3
+    },
+    {
+      "source": "m41",
+      "target": "m96",
+      "weight": 3
+    },
+    {
+      "source": "m42",
+      "target": "m44",
+      "weight": 3
+    },
+    {
+      "source": "m42",
+      "target": "m55",
+      "weight": 3
+    },
+    {
+      "source": "m43",
+      "target": "m49",
+      "weight": 3
+    },
+    {
+      "source": "m43",
+      "target": "m80",
+      "weight": 3
+    },
+    {
+      "source": "m43",
+      "target": "m92",
+      "weight": 3
+    },
+    {
+      "source": "m43",
+      "target": "m94",
+      "weight": 3
+    },
+    {
+      "source": "m44",
+      "target": "m46",
+      "weight": 3
+    },
+    {
+      "source": "m44",
+      "target": "m50",
+      "weight": 3
+    },
+    {
+      "source": "m44",
+      "target": "m54",
+      "weight": 3
+    },
+    {
+      "source": "m45",
+      "target": "m50",
+      "weight": 3
+    },
+    {
+      "source": "m45",
+      "target": "m54",
+      "weight": 3
+    },
+    {
+      "source": "m46",
+      "target": "m52",
+      "weight": 3
+    },
+    {
+      "source": "m46",
+      "target": "m54",
+      "weight": 3
+    },
+    {
+      "source": "m46",
+      "target": "m55",
+      "weight": 3
+    },
+    {
+      "source": "m46",
+      "target": "m59",
+      "weight": 3
+    },
+    {
+      "source": "m46",
+      "target": "m63",
+      "weight": 3
+    },
+    {
+      "source": "m47",
+      "target": "m50",
+      "weight": 3
+    },
+    {
+      "source": "m47",
+      "target": "m71",
+      "weight": 3
+    },
+    {
+      "source": "m48",
+      "target": "m56",
+      "weight": 3
+    },
+    {
+      "source": "m48",
+      "target": "m73",
+      "weight": 3
+    },
+    {
+      "source": "m49",
+      "target": "m55",
+      "weight": 3
+    },
+    {
+      "source": "m49",
+      "target": "m85",
+      "weight": 3
+    },
+    {
+      "source": "m49",
+      "target": "m96",
+      "weight": 3
+    },
+    {
+      "source": "m50",
+      "target": "m55",
+      "weight": 3
+    },
+    {
+      "source": "m50",
+      "target": "m71",
+      "weight": 3
+    },
+    {
+      "source": "m51",
+      "target": "m52",
+      "weight": 3
+    },
+    {
+      "source": "m51",
+      "target": "m67",
+      "weight": 3
+    },
+    {
+      "source": "m51",
+      "target": "m81",
+      "weight": 3
+    },
+    {
+      "source": "m52",
+      "target": "m67",
+      "weight": 3
+    },
+    {
+      "source": "m54",
+      "target": "m55",
+      "weight": 3
+    },
+    {
+      "source": "m55",
+      "target": "m59",
+      "weight": 3
+    },
+    {
+      "source": "m55",
+      "target": "m81",
+      "weight": 3
+    },
+    {
+      "source": "m56",
+      "target": "m85",
+      "weight": 3
+    },
+    {
+      "source": "m56",
+      "target": "m96",
+      "weight": 3
+    },
+    {
+      "source": "m60",
+      "target": "m62",
+      "weight": 3
+    },
+    {
+      "source": "m60",
+      "target": "m63",
+      "weight": 3
+    },
+    {
+      "source": "m60",
+      "target": "m64",
+      "weight": 3
+    },
+    {
+      "source": "m60",
+      "target": "m68",
+      "weight": 3
+    },
+    {
+      "source": "m60",
+      "target": "m78",
+      "weight": 3
+    },
+    {
+      "source": "m60",
+      "target": "m87",
+      "weight": 3
+    },
+    {
+      "source": "m61",
+      "target": "m62",
+      "weight": 3
+    },
+    {
+      "source": "m61",
+      "target": "m64",
+      "weight": 3
+    },
+    {
+      "source": "m61",
+      "target": "m68",
+      "weight": 3
+    },
+    {
+      "source": "m61",
+      "target": "m78",
+      "weight": 3
+    },
+    {
+      "source": "m62",
+      "target": "m65",
+      "weight": 3
+    },
+    {
+      "source": "m62",
+      "target": "m66",
+      "weight": 3
+    },
+    {
+      "source": "m63",
+      "target": "m78",
+      "weight": 3
+    },
+    {
+      "source": "m63",
+      "target": "m87",
+      "weight": 3
+    },
+    {
+      "source": "m64",
+      "target": "m65",
+      "weight": 3
+    },
+    {
+      "source": "m65",
+      "target": "m78",
+      "weight": 3
+    },
+    {
+      "source": "m66",
+      "target": "m78",
+      "weight": 3
+    },
+    {
+      "source": "m67",
+      "target": "m68",
+      "weight": 3
+    },
+    {
+      "source": "m68",
+      "target": "m71",
+      "weight": 3
+    },
+    {
+      "source": "m79",
+      "target": "m93",
+      "weight": 3
+    },
+    {
+      "source": "m80",
+      "target": "m92",
+      "weight": 3
+    },
+    {
+      "source": "m80",
+      "target": "m94",
+      "weight": 3
+    },
+    {
+      "source": "m86",
+      "target": "m98",
+      "weight": 3
+    },
+    {
+      "source": "m87",
+      "target": "m93",
+      "weight": 3
+    },
+    {
+      "source": "m92",
+      "target": "m94",
+      "weight": 3
+    }
+  ]
+}
