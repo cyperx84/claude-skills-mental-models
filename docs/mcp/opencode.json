@@ -1,0 +1,10 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "mental-models": {
+      "type": "local",
+      "command": ["uvx", "mental-models-mcp"],
+      "enabled": true
+    }
+  }
+}

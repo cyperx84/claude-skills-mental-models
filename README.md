@@ -23,7 +23,7 @@ A CLI, Claude Code skill, MCP server, and Python library — all powered by the 
 |---|---|---|
 | Claude Code skill | symlink/copy to `~/.claude/skills/` | auto-activates on trigger phrases |
 | CLI | `pip install mental-models` (or `uvx mental-models`) | `mental-models select "..."` |
-| MCP server | `pip install mental-models-mcp` | add to Claude Desktop / Cursor / Zed / Continue config |
+| MCP server | `pip install mental-models-mcp` | add to Claude Desktop / Cursor / Zed / Continue / OpenCode config |
 | Python library | `pip install mental-models` | `from mental_models import select_models` |
 
 ## Why Munger?
@@ -54,7 +54,7 @@ ln -s "$(pwd)/claude-skills-mental-models/.claude/skills/mental-models" ~/.claud
 
 Then in Claude Code: *"Apply inversion to my pricing strategy."* The skill auto-activates on phrases like *help me think*, *apply mental model*, or any model name (inversion, bottlenecks, second-order thinking, margin of safety...).
 
-**MCP server** (new in v0.2.0) — for Claude Desktop, Cursor, Zed, Continue, or any MCP-capable harness:
+**MCP server** (new in v0.2.0) — for Claude Desktop, Cursor, Zed, Continue, OpenCode, or any MCP-capable harness:
 
 ```bash
 pip install mental-models-mcp
@@ -186,7 +186,7 @@ One problem, many lenses—that's the point.
 Two sibling packages ship the latticework to any harness — no Claude Code required:
 
 - **[`packages/mental_models/`](./packages/mental_models/)** — the CLI and Python library. This is the single source of truth: `mental-models select | get | list | categories | apply | which | doctor | version`, all with `--json`. The Claude Code skill and MCP server both shell out to it.
-- **[`packages/mental_models_mcp/`](./packages/mental_models_mcp/)** — a Model Context Protocol server (new in v0.2.0) that exposes the same selector to Claude Desktop, Cursor, Zed, Continue, and any other MCP client.
+- **[`packages/mental_models_mcp/`](./packages/mental_models_mcp/)** — a Model Context Protocol server (new in v0.2.0) that exposes the same selector to Claude Desktop, Cursor, Zed, Continue, OpenCode, and any other MCP client.
 
 ```bash
 pip install mental-models          # CLI + library

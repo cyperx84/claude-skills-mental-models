@@ -10,6 +10,7 @@ on demand without a global install.
 | Cursor         | `cursor.json`         | `~/.cursor/mcp.json` (or project `.cursor/mcp.json`) |
 | Zed            | `zed.json`            | `~/.config/zed/settings.json` (merge into top-level) |
 | Continue       | `continue.json`       | `~/.continue/config.json` (merge into top-level) |
+| OpenCode       | `opencode.json`       | `~/.config/opencode/opencode.json` (or project `opencode.json`) |
 
 ## Verify
 
