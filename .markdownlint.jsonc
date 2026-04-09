@@ -19,5 +19,8 @@
   "MD012": false, // multiple blank lines
   "MD004": false, // unordered list style
   "MD007": false, // unordered list indentation
-  "MD030": false  // spaces after list markers
+  "MD030": false, // spaces after list markers
+  "MD010": false, // hard tabs (legacy model files)
+  "MD051": false, // link fragments (auto-generated headings)
+  "MD049": false  // emphasis style (mix of _ and *)
 }
