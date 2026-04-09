@@ -155,6 +155,27 @@ _Auto-generated from shared-keyword analysis. Full graph: [docs/latticework.json
 
 One problem, many lenses—that's the point.
 
+## Use Outside Claude Code
+
+A small Python wrapper lives in [`packages/mental_models/`](./packages/mental_models/) so you can select and look up models programmatically — no Claude Code required.
+
+```bash
+pip install -e packages/mental_models
+```
+
+```python
+from mental_models import select_models, get_model
+
+for m in select_models("how do I decide between two jobs", top_k=5):
+    print(m.slug, "-", m.name)
+
+print(get_model("inversion").description)
+```
+
+Or via the CLI: `mental-models "our team keeps missing deadlines"`.
+
+See [`packages/mental_models/README.md`](./packages/mental_models/README.md) for the full API.
+
 ## Contributing
 
 Model additions, fixes, and new examples welcome. See [CONTRIBUTING.md](./.github/CONTRIBUTING.md).

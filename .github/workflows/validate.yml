@@ -21,6 +21,19 @@ jobs:
       - name: Check latticework is up to date
         run: git diff --exit-code docs/latticework.json docs/latticework.mmd docs/latticework_core.mmd
 
+  python-package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install mental-models package
+        run: pip install -e packages/mental_models
+      - name: Run package tests
+        run: python -m unittest discover packages/mental_models/tests
+
   markdown-lint:
     runs-on: ubuntu-latest
     steps:
