@@ -58,6 +58,8 @@ class TestStdioIntegration(unittest.TestCase):
                 "mm_list",
                 "mm_categories",
                 "mm_apply",
+                "mm_compare",
+                "mm_random",
                 "mm_doctor",
             }
             self.assertTrue(

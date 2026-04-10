@@ -9,7 +9,6 @@ Transport: stdio (default). Run with ``mental-models-mcp`` or
 """
 from __future__ import annotations
 
-import re
 import sys
 from typing import Any
 
@@ -29,63 +28,21 @@ def _require_mental_models() -> None:
         raise SystemExit(1)
 
 
-# ---------- helpers (mirrors mental_models.cli — keep in sync until exposed publicly) ----------
+# ---------- helpers (now imported from the core package) ----------
 
 def _model_to_dict(m: Any) -> dict[str, Any]:
-    return {
-        "slug": m.slug,
-        "name": m.name,
-        "category": m.category,
-        "keywords": list(m.keywords),
-        "description": m.description,
-        "path": m.path,
-        "id": m.id,
-    }
+    from mental_models.utils import model_to_dict
+    return model_to_dict(m)
 
 
 def _read_model_markdown(m: Any) -> str:
-    """Best-effort read of the model's markdown file.
-
-    Mirrors mental_models.cli._read_model_markdown — keep in sync until
-    exposed publicly in a future version.
-    """
-    if not m.path:
-        return ""
-    try:
-        from mental_models.index import _resolve_index_path  # type: ignore
-        index_path = _resolve_index_path()
-        skill_dir = index_path.parent.parent
-        candidate = (skill_dir / m.path).resolve()
-        if candidate.is_file():
-            return candidate.read_text(encoding="utf-8")
-    except Exception:
-        pass
-    return ""
+    from mental_models.utils import read_model_markdown
+    return read_model_markdown(m)
 
 
 def _extract_sections(md: str) -> dict[str, str]:
-    """Mirrors mental_models.cli._extract_sections — keep in sync until
-    exposed publicly in a future version."""
-    if not md:
-        return {}
-    canonical = [
-        ("description", re.compile(r"\*\*Description:\*\*", re.IGNORECASE)),
-        ("keywords", re.compile(r"\*\*Keywords[^*]*:\*\*", re.IGNORECASE)),
-        ("thinking steps", re.compile(r"\*\*Thinking Steps:\*\*", re.IGNORECASE)),
-        ("coaching questions", re.compile(r"\*\*Coaching Questions:\*\*", re.IGNORECASE)),
-        ("when to avoid", re.compile(r"\*\*When to Avoid[^*]*:\*\*", re.IGNORECASE)),
-    ]
-    hits: list[tuple[str, int, int]] = []
-    for key, pat in canonical:
-        match = pat.search(md)
-        if match:
-            hits.append((key, match.end(), match.start()))
-    hits.sort(key=lambda h: h[2])
-    sections: dict[str, str] = {}
-    for i, (key, body_start, _) in enumerate(hits):
-        body_end = hits[i + 1][2] if i + 1 < len(hits) else len(md)
-        sections[key] = md[body_start:body_end].strip()
-    return sections
+    from mental_models.utils import extract_sections
+    return extract_sections(md)
 
 
 def _safe(fn):
@@ -213,12 +170,33 @@ def mm_doctor() -> dict[str, Any]:
     return report
 
 
+@_safe
+def mm_compare(slugs: list[str]) -> dict[str, Any]:
+    """Compare 2-3 mental models side by side. Returns per-model summaries,
+    shared/unique keywords, and how many categories are spanned."""
+    from mental_models import compare_models
+    return compare_models(slugs)
+
+
+@_safe
+def mm_random(category: str | None = None) -> dict[str, Any]:
+    """Return a random mental model for serendipitous discovery.
+    Optionally filter by category."""
+    from mental_models import random_model
+    m = random_model(category=category)
+    out = _model_to_dict(m)
+    out["markdown"] = _read_model_markdown(m)
+    return out
+
+
 TOOL_HANDLERS = {
     "mm_select": mm_select,
     "mm_get": mm_get,
     "mm_list": mm_list,
     "mm_categories": mm_categories,
     "mm_apply": mm_apply,
+    "mm_compare": mm_compare,
+    "mm_random": mm_random,
     "mm_doctor": mm_doctor,
 }
 
@@ -244,6 +222,8 @@ def _build_server():
     mcp.tool(name="mm_list", description="List all mental models, optionally filtered by category.")(mm_list)
     mcp.tool(name="mm_categories", description="List all mental-model categories.")(mm_categories)
     mcp.tool(name="mm_apply", description="Apply a mental model (by slug) to a problem. Returns structured sections: description, thinking_steps, coaching_questions, when_to_avoid.")(mm_apply)
+    mcp.tool(name="mm_compare", description="Compare 2-3 mental models side by side. Returns per-model summaries, shared/unique keywords, and categories spanned.")(mm_compare)
+    mcp.tool(name="mm_random", description="Return a random mental model for serendipitous discovery. Optionally filter by category.")(mm_random)
     mcp.tool(name="mm_doctor", description="Diagnose the mental-models install: resolves index path, loads models, counts categories.")(mm_doctor)
 
     return mcp
@@ -254,7 +234,7 @@ def main(argv: list[str] | None = None) -> int:
     _require_mental_models()
     sys.stderr.write(
         f"mental-models-mcp v{__version__}: starting stdio server "
-        "(tools: mm_select, mm_get, mm_list, mm_categories, mm_apply, mm_doctor)\n"
+        "(tools: mm_select, mm_get, mm_list, mm_categories, mm_apply, mm_compare, mm_random, mm_doctor)\n"
     )
     sys.stderr.flush()
     try:

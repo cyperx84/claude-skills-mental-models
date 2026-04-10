@@ -219,6 +219,60 @@ class TestCliEdgeCases(unittest.TestCase):
         d = json.loads(out)
         self.assertTrue(d["ok"])
 
+    def test_cli_compare_json(self):
+        rc, out, err = run_cli(["compare", "--json", "inversion", "bottlenecks"])
+        self.assertEqual(rc, 0)
+        data = json.loads(out)
+        self.assertEqual(len(data["models"]), 2)
+        self.assertIn("shared_keywords", data)
+        self.assertIn("unique_keywords", data)
+        self.assertIn("categories_spanned", data)
+
+    def test_cli_compare_text(self):
+        rc, out, err = run_cli(["compare", "inversion", "bottlenecks"])
+        self.assertEqual(rc, 0)
+        self.assertIn("Inversion", out)
+        self.assertIn("Bottleneck", out)
+
+    def test_cli_compare_three_models(self):
+        rc, out, err = run_cli(["compare", "--json", "inversion", "bottlenecks", "leverage"])
+        self.assertEqual(rc, 0)
+        data = json.loads(out)
+        self.assertEqual(len(data["models"]), 3)
+
+    def test_cli_compare_too_few_exit_3(self):
+        rc, out, err = run_cli(["compare", "inversion"])
+        self.assertEqual(rc, 3)
+
+    def test_cli_compare_unknown_slug_exit_2(self):
+        rc, out, err = run_cli(["compare", "inversion", "not_a_slug_xyz"])
+        self.assertEqual(rc, 2)
+
+    def test_cli_random_json(self):
+        rc, out, err = run_cli(["random", "--json"])
+        self.assertEqual(rc, 0)
+        data = json.loads(out)
+        self.assertIn("slug", data)
+        self.assertIn("name", data)
+        self.assertIn("markdown", data)
+
+    def test_cli_random_text(self):
+        rc, out, err = run_cli(["random"])
+        self.assertEqual(rc, 0)
+        self.assertTrue(out.strip())
+
+    def test_cli_random_with_category(self):
+        from mental_models import list_categories
+        cats = list_categories()
+        rc, out, err = run_cli(["random", "--category", cats[0], "--json"])
+        self.assertEqual(rc, 0)
+        data = json.loads(out)
+        self.assertEqual(data["category"].lower(), cats[0].lower())
+
+    def test_cli_random_unknown_category_exit_2(self):
+        rc, out, err = run_cli(["random", "--category", "no-such-category-xyz"])
+        self.assertEqual(rc, 2)
+
     def test_doctor_missing_index_graceful(self):
         """When the index cannot be resolved, doctor reports ok=False, doesn't
         crash, and still emits valid JSON."""

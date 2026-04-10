@@ -4,9 +4,11 @@ import unittest
 from mental_models_mcp.server import (
     mm_apply,
     mm_categories,
+    mm_compare,
     mm_doctor,
     mm_get,
     mm_list,
+    mm_random,
     mm_select,
 )
 
@@ -68,6 +70,39 @@ class TestTools(unittest.TestCase):
 
     def test_mm_apply_not_found(self):
         out = mm_apply("not_a_real_slug_xyz", "problem")
+        self.assertIn("error", out)
+
+    def test_mm_compare_two_models(self):
+        out = mm_compare(["inversion", "bottlenecks"])
+        self.assertNotIn("error", out)
+        self.assertEqual(len(out["models"]), 2)
+        self.assertIn("shared_keywords", out)
+        self.assertIn("unique_keywords", out)
+        self.assertGreater(out["categories_spanned"], 0)
+
+    def test_mm_compare_unknown_slug(self):
+        out = mm_compare(["inversion", "not_a_real_slug_xyz"])
+        self.assertIn("error", out)
+
+    def test_mm_compare_too_few(self):
+        out = mm_compare(["inversion"])
+        self.assertIn("error", out)
+
+    def test_mm_random_returns_model(self):
+        out = mm_random()
+        self.assertNotIn("error", out)
+        self.assertIn("slug", out)
+        self.assertIn("name", out)
+        self.assertIn("markdown", out)
+
+    def test_mm_random_with_category(self):
+        cats = mm_categories()["categories"]
+        out = mm_random(category=cats[0])
+        self.assertNotIn("error", out)
+        self.assertEqual(out["category"].lower(), cats[0].lower())
+
+    def test_mm_random_unknown_category(self):
+        out = mm_random(category="no-such-category-xyz")
         self.assertIn("error", out)
 
     def test_mm_doctor_ok(self):

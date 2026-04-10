@@ -1,14 +1,16 @@
 """mental-models CLI — the canonical interface for skills, MCP, and humans.
 
 Subcommands:
-    select    Select top-k models for a query
-    get       Print a model by slug (markdown or structured)
-    list      List models, optionally filtered by category
+    select      Select top-k models for a query
+    get         Print a model by slug (markdown or structured)
+    list        List models, optionally filtered by category
     categories  List all categories
-    apply     Return a structured application of a model to a problem
-    which     Print the resolved model-index.json path
-    doctor    Diagnose install and data resolution
-    version   Print the package version
+    apply       Return a structured application of a model to a problem
+    compare     Compare 2-3 models side by side
+    random      Print a random model for discovery
+    which       Print the resolved model-index.json path
+    doctor      Diagnose install and data resolution
+    version     Print the package version
 
 All commands support --json for machine consumers.
 Exit codes: 0 ok, 2 not found, 3 bad args, 1 other error.
@@ -18,46 +20,17 @@ from __future__ import annotations
 import argparse
 import json
 import sys
-from dataclasses import asdict
-from pathlib import Path
 from typing import Any
 
 from . import __version__
-from .index import Model, get_model, list_categories, load_index
+from .index import get_model, list_categories, load_index
 from .index import _resolve_index_path  # type: ignore[attr-defined]
 from .selector import select_models
-
-
-# ---------- helpers ----------
-
-
-def _model_to_dict(m: Model) -> dict[str, Any]:
-    """Serialize a ``Model`` to a plain dict suitable for JSON output."""
-    return {
-        "slug": m.slug,
-        "name": m.name,
-        "category": m.category,
-        "keywords": list(m.keywords),
-        "description": m.description,
-        "path": m.path,
-        "id": m.id,
-    }
-
-
-def _read_model_markdown(m: Model) -> str:
-    """Best-effort: read the model's full markdown file from disk."""
-    if not m.path:
-        return ""
-    # path is relative to the skill dir; resolve against the index location
-    try:
-        index_path = _resolve_index_path()
-        skill_dir = index_path.parent.parent  # .../mental-models/
-        candidate = (skill_dir / m.path).resolve()
-        if candidate.is_file():
-            return candidate.read_text(encoding="utf-8")
-    except Exception:
-        pass
-    return ""
+from .utils import model_to_dict as _model_to_dict
+from .utils import read_model_markdown as _read_model_markdown
+from .utils import extract_sections as _extract_sections
+from .compare import compare_models as _compare_models
+from .compare import random_model as _random_model
 
 
 def _print_json(obj: Any) -> None:
@@ -244,35 +217,6 @@ def cmd_apply(args: argparse.Namespace) -> int:
     return 0
 
 
-def _extract_sections(md: str) -> dict[str, str]:
-    """Extract canonical top-level sections from a model file.
-
-    Only the 5 canonical labels act as section boundaries. Sub-headings
-    inside a section (e.g. **Clearly Define Your Goal:**) stay as body.
-    """
-    import re
-    if not md:
-        return {}
-    canonical = [
-        ("description", re.compile(r"\*\*Description:\*\*", re.IGNORECASE)),
-        ("keywords", re.compile(r"\*\*Keywords[^*]*:\*\*", re.IGNORECASE)),
-        ("thinking steps", re.compile(r"\*\*Thinking Steps:\*\*", re.IGNORECASE)),
-        ("coaching questions", re.compile(r"\*\*Coaching Questions:\*\*", re.IGNORECASE)),
-        ("when to avoid", re.compile(r"\*\*When to Avoid[^*]*:\*\*", re.IGNORECASE)),
-    ]
-    hits: list[tuple[str, int, int]] = []  # (key, start_after_label, label_start)
-    for key, pat in canonical:
-        m = pat.search(md)
-        if m:
-            hits.append((key, m.end(), m.start()))
-    hits.sort(key=lambda h: h[2])
-    sections: dict[str, str] = {}
-    for i, (key, body_start, _) in enumerate(hits):
-        body_end = hits[i + 1][2] if i + 1 < len(hits) else len(md)
-        sections[key] = md[body_start:body_end].strip()
-    return sections
-
-
 def cmd_which(args: argparse.Namespace) -> int:
     """Handle ``mental-models which``: print the resolved index file path."""
     try:
@@ -335,6 +279,60 @@ def cmd_version(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_compare(args: argparse.Namespace) -> int:
+    """Handle ``mental-models compare``: compare 2-3 models side by side."""
+    slugs = [s.strip() for s in args.slugs if s.strip()]
+    if len(slugs) < 2 or len(slugs) > 3:
+        print("error: provide 2 or 3 model slugs to compare", file=sys.stderr)
+        return 3
+    try:
+        result = _compare_models(slugs)
+    except KeyError as e:
+        print(f"error: {e}", file=sys.stderr)
+        return 2
+    if args.json:
+        _print_json(result)
+        return 0
+    # Human-readable output
+    print(f"Comparing {len(result['models'])} models ({result['categories_spanned']} categories spanned)\n")
+    for md in result["models"]:
+        desc = (md["description"] or "").strip().replace("\n", " ")
+        if len(desc) > 140:
+            desc = desc[:137] + "..."
+        print(f"  {md['name']} [{md['slug']}]  ({md['category']})")
+        if desc:
+            print(f"    {desc}")
+        print()
+    if result["shared_keywords"]:
+        print(f"Shared keywords: {', '.join(result['shared_keywords'])}")
+    for slug, unique in result["unique_keywords"].items():
+        if unique:
+            print(f"Unique to {slug}: {', '.join(unique)}")
+    return 0
+
+
+def cmd_random(args: argparse.Namespace) -> int:
+    """Handle ``mental-models random``: print a random model for discovery."""
+    try:
+        m = _random_model(category=args.category)
+    except ValueError as e:
+        print(f"error: {e}", file=sys.stderr)
+        return 2
+    if args.json:
+        out = _model_to_dict(m)
+        out["markdown"] = _read_model_markdown(m)
+        _print_json(out)
+        return 0
+    desc = (m.description or "").strip().replace("\n", " ")
+    if len(desc) > 200:
+        desc = desc[:197] + "..."
+    print(f"{m.name} [{m.slug}]  ({m.category})")
+    if desc:
+        print(f"  {desc}")
+    print(f"  path: {m.path}")
+    return 0
+
+
 # ---------- argparse plumbing ----------
 
 
@@ -384,6 +382,14 @@ def _build_parser() -> argparse.ArgumentParser:
 
     p_ver = add("version", help="Print version")
     p_ver.set_defaults(func=cmd_version)
+
+    p_compare = add("compare", help="Compare 2-3 models side by side")
+    p_compare.add_argument("slugs", nargs="+", help="Model slugs to compare (2 or 3)")
+    p_compare.set_defaults(func=cmd_compare)
+
+    p_random = add("random", help="Print a random model for discovery")
+    p_random.add_argument("--category", help="Filter by category")
+    p_random.set_defaults(func=cmd_random)
 
     return parser
 
