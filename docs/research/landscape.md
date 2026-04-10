@@ -39,7 +39,7 @@ The answers shape a small backlog of feature issues (see bottom of this doc) and
 
 ### C. Feature shortlist (ROI-ordered)
 
-Each row names the repo file that would change when the feature ships. Tracked as issues in the backlog (see [issues](https://github.com/cyperx84/mental-models/issues)).
+Each row names the repo file that would change when the feature ships. Full issue-shaped bodies live in [`docs/research/roadmap.md`](./roadmap.md); copy an H2 from there into a new GitHub issue when ready.
 
 | # | Feature | Source of idea | Files touched | Blast radius |
 |---|---|---|---|---|
