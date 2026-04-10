@@ -108,4 +108,4 @@ pip install mental-models
 uv tool install mental-models
 ```
 
-Source: <https://github.com/cyperx84/claude-skills-mental-models>
+Source: <https://github.com/cyperx84/mental-models>

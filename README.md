@@ -1,6 +1,6 @@
 # Mental Models for Claude Code
 
-[![GitHub stars](https://img.shields.io/github/stars/cyperx84/claude-skills-mental-models?style=flat-square)](https://github.com/cyperx84/claude-skills-mental-models/stargazers)
+[![GitHub stars](https://img.shields.io/github/stars/cyperx84/mental-models?style=flat-square)](https://github.com/cyperx84/mental-models/stargazers)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](./LICENSE)
 [![Claude Code Compatible](https://img.shields.io/badge/Claude%20Code-Compatible-8A2BE2?style=flat-square)](https://docs.claude.com/en/docs/claude-code)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](./.github/CONTRIBUTING.md)
@@ -50,8 +50,8 @@ mental-models select "our team keeps missing deadlines" --json
 **Claude Code skill** — symlink (stays in sync) or copy:
 
 ```bash
-git clone https://github.com/cyperx84/claude-skills-mental-models.git
-ln -s "$(pwd)/claude-skills-mental-models/.claude/skills/mental-models" ~/.claude/skills/mental-models
+git clone https://github.com/cyperx84/mental-models.git
+ln -s "$(pwd)/mental-models/.claude/skills/mental-models" ~/.claude/skills/mental-models
 ```
 
 Then in Claude Code: *"Apply inversion to my pricing strategy."* The skill auto-activates on phrases like *help me think*, *apply mental model*, or any model name (inversion, bottlenecks, second-order thinking, margin of safety...).
@@ -60,7 +60,7 @@ Then in Claude Code: *"Apply inversion to my pricing strategy."* The skill auto-
 
 ```bash
 # drop into your harness workspace
-ln -s "$(pwd)/claude-skills-mental-models/skills/mental-models" <workspace>/skills/mental-models
+ln -s "$(pwd)/mental-models/skills/mental-models" <workspace>/skills/mental-models
 ```
 
 Details and per-harness instructions: [`docs/openclaw/README.md`](./docs/openclaw/README.md).
@@ -221,6 +221,14 @@ print(get_model("inversion").description)
 ```
 
 See [`packages/mental_models/README.md`](./packages/mental_models/README.md) for the full API.
+
+## Related Projects
+
+For a landscape review of comparable projects in the mental-models, structured-reasoning, and Claude-skills space — plus a feature shortlist mined from them — see [`docs/research/landscape.md`](./docs/research/landscape.md). A few worth bookmarking:
+
+- [modelcontextprotocol/servers — sequentialthinking](https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking) — stepwise thought protocol that inspired our planned `walk` subcommand.
+- [ckelsoe/claude-skill-prompt-architect](https://github.com/ckelsoe/claude-skill-prompt-architect) — intent-routing across prompt frameworks.
+- [VoltAgent/awesome-agent-skills](https://github.com/VoltAgent/awesome-agent-skills) & [ComposioHQ/awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills) — curated skill indexes.
 
 ## Contributing
 

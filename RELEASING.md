@@ -8,7 +8,7 @@ The Python package in `packages/mental_models/` publishes to PyPI via GitHub Act
 2. Add a **pending publisher** with:
    - PyPI Project Name: `mental-models`
    - Owner: `cyperx84`
-   - Repository: `claude-skills-mental-models`
+   - Repository: `mental-models`
    - Workflow name: `publish.yml`
    - Environment name: `pypi`
 3. Repeat on https://test.pypi.org with environment name `testpypi` (for dry-runs).

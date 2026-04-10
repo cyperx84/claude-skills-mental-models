@@ -31,10 +31,10 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/cyperx84/claude-skills-mental-models"
-Repository = "https://github.com/cyperx84/claude-skills-mental-models"
-Issues = "https://github.com/cyperx84/claude-skills-mental-models/issues"
-Changelog = "https://github.com/cyperx84/claude-skills-mental-models/blob/main/CHANGELOG.md"
+Homepage = "https://github.com/cyperx84/mental-models"
+Repository = "https://github.com/cyperx84/mental-models"
+Issues = "https://github.com/cyperx84/mental-models/issues"
+Changelog = "https://github.com/cyperx84/mental-models/blob/main/CHANGELOG.md"
 
 [project.scripts]
 mental-models-mcp = "mental_models_mcp.server:main"

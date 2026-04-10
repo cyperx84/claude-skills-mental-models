@@ -4,7 +4,7 @@ An [MCP](https://modelcontextprotocol.io) server that exposes Charlie Munger's
 latticework of mental models to any MCP-capable agent harness — Claude Desktop,
 Cursor, Zed, Continue, Cline, OpenCode, and more.
 
-It's a thin wrapper around the [`mental-models`](https://github.com/cyperx84/claude-skills-mental-models)
+It's a thin wrapper around the [`mental-models`](https://github.com/cyperx84/mental-models)
 Python library: same data, same selection logic, exposed as tool calls.
 
 ## Install
@@ -173,4 +173,4 @@ uv build
 
 MIT. See [LICENSE](./LICENSE).
 
-Part of [claude-skills-mental-models](https://github.com/cyperx84/claude-skills-mental-models).
+Part of [mental-models](https://github.com/cyperx84/mental-models).

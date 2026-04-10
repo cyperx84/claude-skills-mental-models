@@ -2,7 +2,7 @@
 
 Charlie Munger's latticework of mental models as a tiny Python library.
 
-Wraps the [`mental-models` Claude Code skill](https://github.com/cyperx84/claude-skills-mental-models)
+Wraps the [`mental-models` Claude Code skill](https://github.com/cyperx84/mental-models)
 so you can select and look up models programmatically, without needing Claude Code.
 
 ## Install

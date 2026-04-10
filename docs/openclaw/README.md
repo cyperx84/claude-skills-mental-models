@@ -37,7 +37,7 @@ Pick whichever fits. The easiest is a symlink from your workspace:
 
 ```bash
 # clone once
-git clone https://github.com/cyperx84/claude-skills-mental-models.git ~/src/mental-models
+git clone https://github.com/cyperx84/mental-models.git ~/src/mental-models
 
 # symlink into your OpenClaw workspace
 ln -s ~/src/mental-models/skills/mental-models <your-workspace>/skills/mental-models

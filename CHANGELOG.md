@@ -37,5 +37,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `resources/quick-reference.md` cheat sheet.
 - MIT `LICENSE`.
 
-[0.2.0]: https://github.com/cyperx84/claude-skills-mental-models/compare/v0.1.0...v0.2.0
-[0.1.0]: https://github.com/cyperx84/claude-skills-mental-models/releases/tag/v0.1.0
+[0.2.0]: https://github.com/cyperx84/mental-models/compare/v0.1.0...v0.2.0
+[0.1.0]: https://github.com/cyperx84/mental-models/releases/tag/v0.1.0

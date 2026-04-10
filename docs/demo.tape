@@ -12,7 +12,7 @@ Set Framerate 24
 Set PlaybackSpeed 1
 
 # Start in repo root
-Type "cd ~/github/claude-skills-mental-models" Enter
+Type "cd ~/github/mental-models" Enter
 Sleep 500ms
 
 # Clear the prompt
