@@ -30,6 +30,17 @@ class TestIndex(unittest.TestCase):
         # Ensure uniqueness
         self.assertEqual(len(cats), len(set(cats)))
 
+    def test_model_has_compiled_sections(self):
+        models = load_index()
+        # Inversion is a core model that should have all sections populated
+        m = next(m for m in models if m.slug == "inversion")
+        self.assertTrue(hasattr(m, "thinking_steps"))
+        self.assertTrue(hasattr(m, "coaching_questions"))
+        self.assertTrue(hasattr(m, "when_to_avoid"))
+        self.assertTrue(len(m.thinking_steps) > 50)
+        self.assertTrue(len(m.coaching_questions) > 50)
+        self.assertTrue(len(m.when_to_avoid) > 50)
+
 
 if __name__ == "__main__":
     unittest.main()

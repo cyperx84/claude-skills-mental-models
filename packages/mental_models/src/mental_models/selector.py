@@ -29,8 +29,45 @@ _STOPWORDS = {
 _TOKEN_RE = re.compile(r"[a-zA-Z][a-zA-Z0-9\-]+")
 
 
+def _stem(w: str) -> str:
+    """Lightweight zero-dependency suffix stemmer to improve matching of plural/singular nouns and verbs."""
+    if len(w) <= 3:
+        return w
+
+    irregulars = {
+        "crises": "crisis",
+        "analyses": "analysis",
+        "hypotheses": "hypothesis",
+        "diagnoses": "diagnosis",
+        "syntheses": "synthesis",
+        "emphases": "emphasis",
+        "theses": "thesis",
+        "biases": "bias",
+    }
+    if w in irregulars:
+        return irregulars[w]
+
+    if w.endswith("ies"):
+        return w[:-3] + "y"
+
+    if w.endswith("sses") or w.endswith("xes"):
+        return w[:-2]
+
+    if w.endswith("ches") or w.endswith("shes"):
+        if w in ("niches",):
+            return w[:-1]
+        return w[:-2]
+
+    if w.endswith("s"):
+        if any(w.endswith(x) for x in ("as", "is", "us", "os", "ss")):
+            return w
+        return w[:-1]
+
+    return w
+
+
 def _tokenize(text: str) -> list[str]:
-    """Tokenize text into lowercase ASCII word tokens, dropping stopwords.
+    """Tokenize text into lowercase ASCII word tokens, dropping stopwords and applying basic stemming.
 
     For hyphenated tokens we also emit the bare subwords, so ``first-principle``
     matches ``first principles`` and vice versa. Non-ASCII characters are
@@ -46,22 +83,33 @@ def _tokenize(text: str) -> list[str]:
     for raw in _TOKEN_RE.findall(text):
         t = raw.lower()
         if len(t) > 1 and t not in _STOPWORDS:
-            out.append(t)
+            out.append(_stem(t))
         if "-" in t:
             for part in t.split("-"):
                 if len(part) > 1 and part not in _STOPWORDS:
-                    out.append(part)
+                    out.append(_stem(part))
     return out
+
+
+# Module-level cache for model tokenization sets to avoid repetitive work
+_MODEL_TOKEN_CACHE: dict[str, tuple[set[str], set[str], set[str]]] = {}
 
 
 def _score(model: Model, query_tokens: list[str], query_lower: str) -> float:
     if not query_tokens:
         return 0.0
-    kw_tokens: set[str] = set()
-    for kw in model.keywords:
-        kw_tokens.update(_tokenize(kw))
-    name_tokens = set(_tokenize(model.name))
-    desc_tokens = set(_tokenize(model.description))
+
+    # Retrieve from cache or compute token sets
+    cache_key = model.slug
+    if cache_key not in _MODEL_TOKEN_CACHE:
+        kw_tokens: set[str] = set()
+        for kw in model.keywords:
+            kw_tokens.update(_tokenize(kw))
+        name_tokens = set(_tokenize(model.name))
+        desc_tokens = set(_tokenize(model.description))
+        _MODEL_TOKEN_CACHE[cache_key] = (kw_tokens, name_tokens, desc_tokens)
+    else:
+        kw_tokens, name_tokens, desc_tokens = _MODEL_TOKEN_CACHE[cache_key]
 
     score = 0.0
     for qt in query_tokens:

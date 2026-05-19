@@ -18,8 +18,6 @@ from __future__ import annotations
 import argparse
 import json
 import sys
-from dataclasses import asdict
-from pathlib import Path
 from typing import Any
 
 from . import __version__
@@ -217,18 +215,30 @@ def cmd_apply(args: argparse.Namespace) -> int:
         print(f"error: no model with slug {slug!r}", file=sys.stderr)
         return 2
     problem = " ".join(args.problem).strip() if args.problem else ""
+
+    thinking_steps = m.thinking_steps
+    coaching_questions = m.coaching_questions
+    when_to_avoid = m.when_to_avoid
+    description = m.description
+
+    # Fallback to dynamic disk parsing if live markdown file is present (dev mode)
     md = _read_model_markdown(m)
-    # Parse the bold-label sections from the markdown
-    sections = _extract_sections(md)
+    if md:
+        sections = _extract_sections(md)
+        description = sections.get("description") or description
+        thinking_steps = sections.get("thinking steps") or thinking_steps
+        coaching_questions = sections.get("coaching questions") or coaching_questions
+        when_to_avoid = sections.get("when to avoid") or when_to_avoid
+
     payload = {
         "slug": m.slug,
         "name": m.name,
         "category": m.category,
         "problem": problem,
-        "description": sections.get("description") or m.description,
-        "thinking_steps": sections.get("thinking steps", ""),
-        "coaching_questions": sections.get("coaching questions", ""),
-        "when_to_avoid": sections.get("when to avoid", ""),
+        "description": description,
+        "thinking_steps": thinking_steps,
+        "coaching_questions": coaching_questions,
+        "when_to_avoid": when_to_avoid,
         "path": m.path,
     }
     if args.json:

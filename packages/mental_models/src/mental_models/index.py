@@ -11,7 +11,7 @@ Index resolution strategy:
 from __future__ import annotations
 
 import json
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from functools import lru_cache
 from pathlib import Path
 from typing import Iterable
@@ -26,6 +26,9 @@ class Model:
     description: str
     path: str
     id: str = ""
+    thinking_steps: str = ""
+    coaching_questions: str = ""
+    when_to_avoid: str = ""
 
     @classmethod
     def from_dict(cls, d: dict) -> "Model":
@@ -37,6 +40,9 @@ class Model:
             description=d.get("summary", "") or d.get("description", ""),
             path=d.get("path", ""),
             id=d.get("id", ""),
+            thinking_steps=d.get("thinking_steps", ""),
+            coaching_questions=d.get("coaching_questions", ""),
+            when_to_avoid=d.get("when_to_avoid", ""),
         )
 
 

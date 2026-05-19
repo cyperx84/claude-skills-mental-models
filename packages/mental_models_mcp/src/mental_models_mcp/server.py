@@ -161,17 +161,30 @@ def mm_apply(slug: str, problem: str) -> dict[str, Any]:
     description, thinking_steps, coaching_questions, when_to_avoid."""
     from mental_models import get_model
     m = get_model(slug)
+
+    thinking_steps = m.thinking_steps
+    coaching_questions = m.coaching_questions
+    when_to_avoid = m.when_to_avoid
+    description = m.description
+
+    # Fallback to dynamic disk parsing if live markdown file is present (dev mode)
     md = _read_model_markdown(m)
-    sections = _extract_sections(md)
+    if md:
+        sections = _extract_sections(md)
+        description = sections.get("description") or description
+        thinking_steps = sections.get("thinking steps") or thinking_steps
+        coaching_questions = sections.get("coaching questions") or coaching_questions
+        when_to_avoid = sections.get("when to avoid") or when_to_avoid
+
     return {
         "slug": m.slug,
         "name": m.name,
         "category": m.category,
         "problem": (problem or "").strip(),
-        "description": sections.get("description") or m.description,
-        "thinking_steps": sections.get("thinking steps", ""),
-        "coaching_questions": sections.get("coaching questions", ""),
-        "when_to_avoid": sections.get("when to avoid", ""),
+        "description": description,
+        "thinking_steps": thinking_steps,
+        "coaching_questions": coaching_questions,
+        "when_to_avoid": when_to_avoid,
         "path": m.path,
     }
 

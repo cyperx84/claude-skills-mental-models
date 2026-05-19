@@ -8,7 +8,6 @@ from __future__ import annotations
 
 import io
 import json
-import sys
 import unittest
 from contextlib import redirect_stderr, redirect_stdout
 from unittest.mock import patch
@@ -163,10 +162,23 @@ class TestCliEdgeCases(unittest.TestCase):
             self.assertIn(key, data)
 
     def test_apply_json_has_all_four_keys_even_when_sections_missing(self):
-        """Simulate a model file with no sections by monkey-patching the
-        markdown reader to return only a description body."""
+        """Simulate a model file with no sections by monkey-patching get_model."""
         from mental_models import cli as cli_mod
-        with patch.object(cli_mod, "_read_model_markdown", return_value=""):
+        from mental_models.index import Model
+        dummy_model = Model(
+            slug="inversion",
+            name="Inversion",
+            category="General",
+            keywords=(),
+            description="desc",
+            path="",
+            id="m07",
+            thinking_steps="",
+            coaching_questions="",
+            when_to_avoid="",
+        )
+        with patch.object(cli_mod, "get_model", return_value=dummy_model), \
+             patch.object(cli_mod, "_read_model_markdown", return_value=""):
             rc, out, _ = run_cli(["apply", "inversion", "--json"])
             self.assertEqual(rc, 0)
             data = json.loads(out)
