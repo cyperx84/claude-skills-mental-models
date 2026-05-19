@@ -1,4 +1,3 @@
-import io
 import sys
 import unittest
 
@@ -81,6 +80,23 @@ class TestSelector(unittest.TestCase):
     def test_cli_get_not_found(self):
         rc, _ = self._capture(["get", "not_a_real_slug"])
         self.assertEqual(rc, 2)
+
+    def test_stemmer_rules(self):
+        from mental_models.selector import _stem
+        # Plural endings
+        self.assertEqual(_stem("deadlines"), "deadline")
+        self.assertEqual(_stem("incentives"), "incentive")
+        self.assertEqual(_stem("biases"), "bias")
+        self.assertEqual(_stem("companies"), "company")
+        # Latin/Greek plurals
+        self.assertEqual(_stem("crises"), "crisis")
+        self.assertEqual(_stem("analyses"), "analysis")
+        self.assertEqual(_stem("hypotheses"), "hypothesis")
+        # Protected singulars
+        self.assertEqual(_stem("bias"), "bias")
+        self.assertEqual(_stem("crisis"), "crisis")
+        self.assertEqual(_stem("status"), "status")
+        self.assertEqual(_stem("consensus"), "consensus")
 
 
 if __name__ == "__main__":

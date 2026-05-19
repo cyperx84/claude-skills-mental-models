@@ -10,7 +10,7 @@ This is the practice of thinking beyond the immediate consequences of a decision
 - **On Trivial Matters:** Applying deep, long-term thinking to insignificant decisions (e.g., what to eat for lunch) is a waste of cognitive resources.
 
 **Keywords for Situations:** 
-Policy making, business strategy, personal finance, environmental planning, long-term decisions.
+Policy making, business strategy, personal finance, environmental planning, long-term decisions, side effects, ripple effects, unintended consequences.
 
 **Thinking Steps:**
 1. **Identify the Decision and First-Order Consequence:** State the action you are considering and its most immediate, obvious result. (e.g., "If we lower our prices, we will sell more units.")
