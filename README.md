@@ -13,39 +13,34 @@ Turn Claude Code into a thinking partner with 98 Munger-style mental models bund
 
 ## What It Does
 
-A CLI, Claude Code skill, MCP server, and Python library — all powered by the same 98 Munger-style mental models. Ask for "inversion," "find the bottleneck," or "help me think through X" from any harness, and the same deterministic selector picks the right models, walks their Thinking Steps, and returns actionable insight.
+98 Munger-style mental models, hand-written with Thinking Steps, Coaching Questions,
+and a **When to Avoid** section each — packaged as a skill. Ask for "inversion,"
+"find the bottleneck," or "help me think through X" and Claude picks the right models,
+walks their Thinking Steps, and returns actionable insight.
 
-## Works Everywhere
+## Install
+
+> **Status note (2026-08):** the skill is the working install path and always has been.
+> The CLI, MCP server, and Python library in `packages/` have **never been published to
+> PyPI** — the `mental-models` name on PyPI belongs to an unrelated 2020 project, so the
+> `pip install mental-models` instructions previously listed here did not install this
+> software. They are removed below rather than left standing. The package ships as
+> `mental-models-kit` in the next release; until then, use the skill.
 
 | Interface | Install | Use |
 |---|---|---|
-| **Claude Code skill** *(primary)* | symlink/copy `.claude/skills/mental-models/` to `~/.claude/skills/` | auto-activates on trigger phrases |
-| **Portable skill** for OpenClaw & AgentSkills harnesses | symlink/copy `skills/mental-models/` into the harness's skills dir | CLI-first, same content |
-| **CLI** | `pip install mental-models` or `uvx mental-models` | `mental-models select "..."` |
-| **MCP server** | `pip install mental-models-mcp` or `uvx mental-models-mcp` | add to Claude Desktop / Cursor / Zed / Continue / OpenCode / OpenClaw config |
-| **Python library** | `pip install mental-models` | `from mental_models import select_models` |
+| **Claude Code skill** *(primary — works today)* | symlink/copy `.claude/skills/mental-models/` to `~/.claude/skills/` | auto-activates on trigger phrases |
+| **Portable skill** for OpenClaw & AgentSkills harnesses | symlink/copy `skills/mental-models/` into the harness's skills dir | same content |
+| **CLI / Python library** | *not yet published* — clone and `uv run` from `packages/mental_models/` | `mental-models select "..."` |
+| **MCP server** | *not yet published* | — |
 
-All five routes share the same latticework logic — the CLI is the single
-source of truth, and every other surface delegates to it.
+The skill reads the 98 model files directly and needs no install beyond the symlink.
 
 ## Why Munger?
 
 Charlie Munger argued that worldly wisdom comes from building a **latticework of mental models** drawn from many disciplines—then hanging experience on that lattice. A single discipline gives you a hammer; a latticework gives you judgment. This skill operationalizes that idea: instead of one framework, Claude reaches across psychology, physics, economics, math, and strategy to analyze your problem. Read more in [Poor Charlie's Almanack](https://www.stripe.press/poor-charlies-almanack) or Farnam Street's [Mental Models hub](https://fs.blog/mental-models/).
 
 ## Quick Start
-
-**CLI (fastest on-ramp — no install):**
-
-```bash
-uvx mental-models select "how do I decide between two jobs" -k 5
-```
-
-Or install it:
-
-```bash
-pip install mental-models
-mental-models select "our team keeps missing deadlines" --json
-```
 
 **Claude Code skill** — symlink (stays in sync) or copy:
 
@@ -65,21 +60,13 @@ ln -s "$(pwd)/claude-skills-mental-models/skills/mental-models" <workspace>/skil
 
 Details and per-harness instructions: [`docs/openclaw/README.md`](./docs/openclaw/README.md).
 
-**MCP server** (new in v0.2.0) — for Claude Desktop, Cursor, Zed, Continue, OpenCode, OpenClaw, or any MCP-capable harness:
+**CLI, Python library, MCP server** — source is in [`packages/`](./packages/) but none of it
+is published yet (see the status note above). Run from a clone if you want to try it:
 
 ```bash
-pip install mental-models-mcp
-# or: uvx mental-models-mcp
-```
-
-Then drop the matching config snippet from [`docs/mcp/`](./docs/mcp/) into your client.
-
-**Python library:**
-
-```python
-from mental_models import select_models, get_model
-for m in select_models("scaling issues", top_k=5):
-    print(m.slug, "-", m.name)
+git clone https://github.com/cyperx84/claude-skills-mental-models.git
+cd claude-skills-mental-models/packages/mental_models
+uv run mental-models select "how do I decide between two jobs" -k 5
 ```
 
 ## Usage Examples
@@ -201,17 +188,14 @@ One problem, many lenses—that's the point.
 
 ## Use Outside Claude Code
 
-Two sibling packages ship the latticework to any harness — no Claude Code required:
+The portable skill at [`skills/mental-models/`](./skills/mental-models/) drops into OpenClaw
+and any AgentSkills-convention harness.
 
-- **[`packages/mental_models/`](./packages/mental_models/)** — the CLI and Python library. This is the single source of truth: `mental-models select | get | list | categories | apply | which | doctor | version`, all with `--json`. The Claude Code skill and MCP server both shell out to it.
-- **[`packages/mental_models_mcp/`](./packages/mental_models_mcp/)** — a Model Context Protocol server (new in v0.2.0) that exposes the same selector to Claude Desktop, Cursor, Zed, Continue, OpenCode, and any other MCP client.
-
-```bash
-pip install mental-models          # CLI + library
-pip install mental-models-mcp      # MCP server
-```
+Two unpublished sibling packages live in [`packages/`](./packages/) — a CLI/Python library
+and an MCP server. Both work from a clone, neither is on PyPI yet:
 
 ```python
+# from a clone, with packages/mental_models on your path
 from mental_models import select_models, get_model
 
 for m in select_models("how do I decide between two jobs", top_k=5):

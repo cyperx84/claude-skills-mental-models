@@ -1,5 +1,11 @@
 # mental-models-mcp
 
+> **⚠️ Not published (2026-08).** The `mental-models` and `mental-models-mcp` names on
+> PyPI do **not** belong to this project — `mental-models` is an unrelated 2020 package
+> and `mental-models-mcp` does not exist. Any `pip install` / `uvx` instruction below is
+> **not yet valid**; it installs the wrong software or fails. Run from a clone instead.
+> The package ships as `mental-models-kit` in the next release. See `DEMAND-REPORT.md`.
+
 An [MCP](https://modelcontextprotocol.io) server that exposes Charlie Munger's
 latticework of mental models to any MCP-capable agent harness — Claude Desktop,
 Cursor, Zed, Continue, Cline, OpenCode, and more.

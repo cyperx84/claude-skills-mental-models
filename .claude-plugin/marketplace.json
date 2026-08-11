@@ -1,0 +1,11 @@
+{
+  "name": "mental-models",
+  "description": "Charlie Munger's latticework of 98 mental models for Claude Code",
+  "owner": { "name": "cyperx84", "url": "https://github.com/cyperx84" },
+  "plugins": [
+    { "name": "mental-models", "source": "./",
+      "description": "Charlie Munger's latticework of 98 mental models",
+      "category": "productivity",
+      "keywords": ["mental-models", "decision-making", "reasoning"] }
+  ]
+}

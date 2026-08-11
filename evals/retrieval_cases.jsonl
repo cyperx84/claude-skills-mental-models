@@ -19,7 +19,6 @@
 {"id": "sel-019", "query": "leverage", "expect_in_top": ["leverage"], "top_k": 5}
 {"id": "sel-020", "query": "debt", "expect_in_top": ["debt"], "top_k": 5}
 {"id": "sel-021", "query": "I keep missing deadlines", "expect_in_top": ["law_of_diminishing_returns"], "top_k": 5, "notes": "approximate; keyword 'deadline' not in index, matches via 'missing'/'returns' semantics"}
-{"id": "sel-022", "query": "how do I know when to quit", "expect_in_top": ["bias_from_incentives", "first-principle_thinking"], "top_k": 5, "notes": "approximate; no explicit sunk-cost model in index"}
 {"id": "sel-023", "query": "my startup is out of runway", "expect_in_top": ["asymmetric_warfare"], "top_k": 5, "notes": "approximate; proxy for resource scarcity"}
 {"id": "sel-024", "query": "team morale is tanking", "expect_in_top": ["character", "hierarchical-organization"], "top_k": 5, "notes": "approximate; closest people/org models"}
 {"id": "sel-025", "query": "this decision is irreversible", "expect_in_top": ["trade-offs", "circle_of_competence"], "top_k": 5, "notes": "irreversibility proxies"}

@@ -568,7 +568,7 @@
       "id": "m71",
       "slug": "seeing_the_front",
       "name": "Seeing the Front",
-      "category": "Warfare & Management",
+      "category": "Warfare & Strategy",
       "color": "#f87171",
       "degree": 8
     },
@@ -576,7 +576,7 @@
       "id": "m72",
       "slug": "asymmetric_warfare",
       "name": "Asymmetric Warfare",
-      "category": "Warfare & Business Strategy",
+      "category": "Warfare & Strategy",
       "color": "#f87171",
       "degree": 2
     },
@@ -592,7 +592,7 @@
       "id": "m74",
       "slug": "counterinsurgency",
       "name": "Counterinsurgency",
-      "category": "Warfare & Social Influence",
+      "category": "Warfare & Strategy",
       "color": "#f87171",
       "degree": 0
     },
@@ -600,7 +600,7 @@
       "id": "m75",
       "slug": "mutually_assured_destruction",
       "name": "Mutually Assured Destruction",
-      "category": "Warfare & Game Theory",
+      "category": "Warfare & Strategy",
       "color": "#f87171",
       "degree": 0
     },

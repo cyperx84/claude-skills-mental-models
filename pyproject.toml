@@ -1,0 +1,98 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "mental-models-kit"
+version = "0.3.0"
+description = "Charlie Munger's latticework of 98 mental models: a skill, a library, and an MCP server"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [{ name = "cyperx84" }]
+keywords = ["mental-models", "decision-making", "munger", "thinking", "latticework", "mcp", "claude", "skills"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Scientific/Engineering",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+# Base package has ZERO runtime dependencies. The corpus is bundled markdown;
+# retrieval/search/CLI are stdlib only.
+dependencies = []
+
+[project.optional-dependencies]
+# MCP server support, protocol revision 2026-07-28. Both pins are direct and
+# upper-bounded per project policy (never a bare >=X.Y.Z).
+mcp = [
+  "mcp>=2.0,<3",
+  "pydantic>=2.12,<3",
+]
+
+[project.urls]
+Homepage = "https://github.com/cyperx84/claude-skills-mental-models"
+Repository = "https://github.com/cyperx84/claude-skills-mental-models"
+Issues = "https://github.com/cyperx84/claude-skills-mental-models/issues"
+Changelog = "https://github.com/cyperx84/claude-skills-mental-models/blob/main/CHANGELOG.md"
+
+[project.scripts]
+mental-models = "mental_models_kit.cli:main"
+# So `uvx mental-models-kit` resolves (uvx only runs a script matching the
+# package name).
+mental-models-kit = "mental_models_kit.cli:main"
+# Shim: imports the `mcp` package inside main(), not at module import time, so
+# a bare `pip install mental-models-kit` (no [mcp] extra) never traceback-dies
+# just from this entry point existing.
+mental-models-mcp = "mental_models_kit.mcp:main"
+
+[dependency-groups]
+dev = [
+  "pytest>=8,<9",
+  "ruff>=0.6,<1",
+  "build>=1.2,<2",
+  "twine>=5,<7",
+]
+
+[tool.uv]
+package = true
+
+# --- Packaging mechanism (BUILD-SPEC.md §1.1) ---------------------------
+# One committed copy of content lives at skills/mental-models/models/.
+# force-include copies it (and the skill docs) into the wheel under
+# mental_models_kit/data/. force-include and sdist.include are SEPARATE
+# lists -- both are mandatory, or pip's sdist-fallback build path ships a
+# content-free package for some users while wheel-only installs look fine.
+[tool.hatch.build.targets.wheel]
+packages = ["src/mental_models_kit"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"skills/mental-models/models" = "mental_models_kit/data/models"
+"skills/mental-models/SKILL.md" = "mental_models_kit/data/skill/SKILL.md"
+"skills/mental-models/CATALOG.md" = "mental_models_kit/data/skill/CATALOG.md"
+"skills/mental-models/REFERENCE.md" = "mental_models_kit/data/skill/REFERENCE.md"
+"skills/mental-models/PATTERNS.md" = "mental_models_kit/data/skill/PATTERNS.md"
+"skills/mental-models/examples" = "mental_models_kit/data/skill/examples"
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "src/mental_models_kit",
+  "skills/mental-models",
+  "tests",
+  "evals",
+  "scripts",
+  "README.md",
+  "LICENSE",
+  "CHANGELOG.md",
+  "pyproject.toml",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,258 +1,139 @@
 #!/usr/bin/env python3
-"""Regression eval harness for the mental-models skill.
+"""Deterministic evals for the keyword fallback. No LLM, no API key, no network.
 
-Pipeline: generator -> judge -> aggregator
+Two suites, measuring two different things:
 
-- Generator: invokes Claude (via Anthropic SDK, or `claude` CLI fallback) on
-  each prompt in cases.jsonl.
-- Judge: an LLM-judge (see `judge.py`) grades each response against a rubric
-  (model_selection, reasoning_quality, actionability; 0-2 each, total 0-6,
-  pass >= 4). Substring mode is retained as a legacy fallback.
-- Aggregator: prints a per-case table, overall pass rate, mean score, and
-  pass rate by category; optionally writes full results to a JSONL file.
+``retrieval_cases.jsonl``
+    Exact-name retrieval — query "inversion" expects slug ``inversion``. This is
+    the CLI's real job. **100% is required**; anything less fails CI.
 
-Exit code: 0 if pass rate >= 0.7, else 1.
+``selection_cases.jsonl``
+    Natural-language problem statements, graded hit@3. This is the honest
+    ledger of where the keyword scorer is wrong. Cases carry a measured
+    ``status`` and the runner fails if a ``pass`` regresses **or** if a
+    ``known_fail`` starts passing — an improvement is supposed to force a
+    ledger update.
 
-Usage
------
-    python3 evals/run_evals.py --dry-run
-    python3 evals/run_evals.py                       # judge mode, default
-    python3 evals/run_evals.py --mode substring      # legacy substring match
-    python3 evals/run_evals.py --out evals/baselines/$(date +%Y-%m-%d).jsonl
-
-Requires `pip install anthropic` and `ANTHROPIC_API_KEY` for judge mode (and
-for SDK-based generation). Substring mode can still use the `claude` CLI.
+Neither suite measures the primary selection path (a harness LLM reading
+CATALOG.md), because measuring that needs an API key. See README.md.
 """
 
 from __future__ import annotations
 
 import argparse
 import json
-import os
-import shutil
-import statistics
-import subprocess
 import sys
-from collections import defaultdict
 from pathlib import Path
 
-CASES_PATH = Path(__file__).parent / "cases.jsonl"
-REQUIRED_FIELDS = {"id", "prompt", "expected_models", "category"}
-DEFAULT_MODEL = "claude-opus-4-6"
-PASS_RATE_THRESHOLD = 0.7
+REPO = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(REPO / "src"))
+
+from mental_models_kit import search_models  # noqa: E402
+
+EVALS = REPO / "evals"
+RETRIEVAL = EVALS / "retrieval_cases.jsonl"
+SELECTION = EVALS / "selection_cases.jsonl"
+
+SELECTION_TOP_K = 3
 
 
 def load_cases(path: Path) -> list[dict]:
     cases: list[dict] = []
-    with path.open("r", encoding="utf-8") as f:
-        for lineno, line in enumerate(f, 1):
-            line = line.strip()
-            if not line:
-                continue
-            try:
-                obj = json.loads(line)
-            except json.JSONDecodeError as e:
-                raise SystemExit(f"{path}:{lineno}: invalid JSON - {e}")
-            missing = REQUIRED_FIELDS - obj.keys()
-            if missing:
-                raise SystemExit(
-                    f"{path}:{lineno}: missing fields {sorted(missing)}"
-                )
-            if not isinstance(obj["expected_models"], list) or not obj["expected_models"]:
-                raise SystemExit(
-                    f"{path}:{lineno}: expected_models must be a non-empty list"
-                )
-            cases.append(obj)
+    for i, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+        line = line.strip()
+        if not line or line.startswith("#"):
+            continue
+        try:
+            cases.append(json.loads(line))
+        except json.JSONDecodeError as e:
+            print(f"error: {path.name}:{i}: {e}", file=sys.stderr)
+            raise SystemExit(3)
     return cases
 
 
-def normalize(text: str) -> str:
-    return text.lower().replace("_", " ").replace("-", " ")
+def slugs(query: str, k: int) -> list[str]:
+    return [m.slug for m in search_models(query, k)]
 
 
-# ---------- generation ----------
-
-def generate_sdk(prompt: str, model: str) -> str:
-    try:
-        import anthropic  # type: ignore
-    except ImportError:
-        print(
-            "error: `anthropic` package not installed. Run `pip install anthropic`.",
-            file=sys.stderr,
-        )
-        sys.exit(2)
-    if not os.environ.get("ANTHROPIC_API_KEY"):
-        print("error: ANTHROPIC_API_KEY not set.", file=sys.stderr)
-        sys.exit(2)
-    client = anthropic.Anthropic()
-    msg = client.messages.create(
-        model=model,
-        max_tokens=2048,
-        messages=[{"role": "user", "content": prompt}],
-    )
-    parts = []
-    for block in msg.content:
-        if getattr(block, "type", None) == "text":
-            parts.append(block.text)
-    return "\n".join(parts)
+def run_retrieval(verbose: bool) -> tuple[int, int, list[str]]:
+    cases = load_cases(RETRIEVAL)
+    failures: list[str] = []
+    passed = 0
+    print("retrieval — exact-name lookup (must be 100%)")
+    for case in cases:
+        k = int(case.get("top_k", 5))
+        got = slugs(case["query"], k)
+        want = list(case["expect_in_top"])
+        ok = all(w in got for w in want)
+        passed += ok
+        mark = "PASS" if ok else "FAIL"
+        if not ok:
+            failures.append(f"{case['id']}: {case['query']!r} -> {got} (wanted {want})")
+        if verbose or not ok:
+            print(f"  {mark}  {case['id']:<8} {case['query']!r} -> {got}")
+    print(f"  {passed}/{len(cases)}")
+    return passed, len(cases), failures
 
 
-def generate_cli(prompt: str, timeout: int = 180) -> str:
-    try:
-        result = subprocess.run(
-            ["claude", "-p", prompt],
-            capture_output=True,
-            text=True,
-            timeout=timeout,
-            check=False,
-        )
-    except FileNotFoundError:
-        raise SystemExit("error: `claude` CLI not found.")
-    except subprocess.TimeoutExpired:
-        return ""
-    return (result.stdout or "") + "\n" + (result.stderr or "")
-
-
-def generate(prompt: str, model: str) -> str:
-    # Prefer SDK path when available; fall back to CLI.
-    try:
-        import anthropic  # noqa: F401
-        if os.environ.get("ANTHROPIC_API_KEY"):
-            return generate_sdk(prompt, model)
-    except ImportError:
-        pass
-    if shutil.which("claude"):
-        return generate_cli(prompt)
-    print(
-        "error: neither `anthropic` SDK (with ANTHROPIC_API_KEY) nor `claude` CLI available.",
-        file=sys.stderr,
-    )
-    sys.exit(2)
-
-
-# ---------- grading ----------
-
-def grade_substring(case: dict, response: str) -> dict:
-    haystack = normalize(response)
-    hits = [s for s in case["expected_models"] if normalize(s) in haystack]
-    passed = len(hits) > 0
-    # Map to rubric-shaped record for unified output.
-    score = 2 * len(hits) // max(1, len(case["expected_models"]))
-    return {
-        "mode": "substring",
-        "hits": hits,
-        "scores": {"substring_hits": len(hits)},
-        "total": len(hits),
-        "pass": passed,
-        "rationale": f"substring hits: {hits}",
-    }
-
-
-def grade_judge(case: dict, response: str, judge_model: str) -> dict:
-    from judge import judge_response  # local import so --dry-run doesn't need it
-
-    r = judge_response(case, response, model=judge_model)
-    return {
-        "mode": "judge",
-        "scores": r.scores,
-        "total": r.total,
-        "pass": r.pass_,
-        "rationale": r.rationale,
-    }
-
-
-# ---------- output ----------
-
-def print_table(rows: list[list[str]]) -> None:
-    widths = [max(len(r[i]) for r in rows) for i in range(len(rows[0]))]
-    sep = "  "
-    for i, row in enumerate(rows):
-        print(sep.join(cell.ljust(widths[j]) for j, cell in enumerate(row)))
-        if i == 0:
-            print(sep.join("-" * w for w in widths))
+def run_selection(verbose: bool) -> tuple[int, int, int, list[str]]:
+    cases = load_cases(SELECTION)
+    failures: list[str] = []
+    hit3 = 0
+    hit1 = 0
+    known_fail = 0
+    print(f"\nselection — natural-language problems, hit@{SELECTION_TOP_K}")
+    for case in cases:
+        want = set(case["expect_any_of"])
+        got = slugs(case["query"], SELECTION_TOP_K)
+        ok3 = bool(want & set(got))
+        ok1 = bool(want & set(got[:1]))
+        hit3 += ok3
+        hit1 += ok1
+        status = case.get("status", "known_fail")
+        known_fail += status == "known_fail"
+        mark = "hit " if ok3 else "miss"
+        if verbose:
+            print(f"  {mark} [{status:<10}] {case['id']:<8} {case['query']!r} -> {got}")
+            stale = case.get("observed_top3")
+            if stale is not None and stale != got:
+                print(f"       ledger note: observed_top3 recorded as {stale}")
+        if status == "pass" and not ok3:
+            failures.append(
+                f"{case['id']} regressed: status \"pass\" but hit@{SELECTION_TOP_K} missed. "
+                f"got {got}, wanted any of {sorted(want)}"
+            )
+        if status == "known_fail" and ok3:
+            failures.append(
+                f"known-fail case {case['id']} now passes — promote it to "
+                'status:"pass" and commit the ledger'
+            )
+    print(f"  hit@1 {hit1}/{len(cases)} · hit@{SELECTION_TOP_K} {hit3}/{len(cases)}")
+    return hit3, len(cases), known_fail, failures
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--dry-run", action="store_true",
-                        help="validate cases.jsonl without invoking any model")
-    parser.add_argument("--mode", choices=["substring", "judge"], default="judge")
-    parser.add_argument("--model", default=DEFAULT_MODEL,
-                        help="generator model id")
-    parser.add_argument("--judge-model", default=DEFAULT_MODEL,
-                        help="judge model id (same-model grading is v1 default)")
-    parser.add_argument("--cases", type=Path, default=CASES_PATH)
-    parser.add_argument("--out", type=Path, default=None,
-                        help="write full results as JSONL")
-    args = parser.parse_args()
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("-v", "--verbose", action="store_true", help="Print every case")
+    args = ap.parse_args()
 
-    cases = load_cases(args.cases)
-    print(f"loaded {len(cases)} cases from {args.cases}")
+    r_pass, r_total, r_fail = run_retrieval(args.verbose)
+    s_pass, s_total, s_known, s_fail = run_selection(args.verbose)
 
-    if args.dry_run:
-        print("dry-run ok")
-        return 0
+    if r_pass != r_total:
+        r_fail.append(f"retrieval must be {r_total}/{r_total}, got {r_pass}")
 
-    print(f"mode={args.mode} generator={args.model} judge={args.judge_model}")
-
-    results: list[dict] = []
-    rows: list[list[str]] = [["id", "category", "result", "score", "notes"]]
-
-    for case in cases:
-        response = generate(case["prompt"], args.model)
-        if args.mode == "judge":
-            graded = grade_judge(case, response, args.judge_model)
-            notes = graded["rationale"][:60].replace("\n", " ")
-            score_str = f"{graded['total']}/6"
-        else:
-            graded = grade_substring(case, response)
-            notes = ",".join(graded["hits"]) or "-"
-            score_str = str(graded["total"])
-
-        record = {
-            "id": case["id"],
-            "category": case["category"],
-            "prompt": case["prompt"],
-            "expected_models": case["expected_models"],
-            "response": response,
-            **graded,
-        }
-        results.append(record)
-        rows.append([
-            case["id"],
-            case["category"],
-            "PASS" if graded["pass"] else "FAIL",
-            score_str,
-            notes,
-        ])
-
-    print()
-    print_table(rows)
-    print()
-
-    passes = sum(1 for r in results if r["pass"])
-    pass_rate = passes / len(results) if results else 0.0
-    mean_score = statistics.mean(r["total"] for r in results) if results else 0.0
-    print(f"pass rate: {passes}/{len(results)} = {pass_rate:.0%}")
-    print(f"mean score: {mean_score:.2f}")
-
-    by_cat: dict[str, list[bool]] = defaultdict(list)
-    for r in results:
-        by_cat[r["category"]].append(r["pass"])
-    print("by category:")
-    for cat, vals in sorted(by_cat.items()):
-        p = sum(vals) / len(vals)
-        print(f"  {cat}: {sum(vals)}/{len(vals)} ({p:.0%})")
-
-    if args.out:
-        args.out.parent.mkdir(parents=True, exist_ok=True)
-        with args.out.open("w", encoding="utf-8") as f:
-            for r in results:
-                f.write(json.dumps(r) + "\n")
-        print(f"wrote {args.out}")
-
-    return 0 if pass_rate >= PASS_RATE_THRESHOLD else 1
+    print(
+        f"\nsummary: retrieval {r_pass}/{r_total} · "
+        f"selection {s_pass}/{s_total} ({s_known} known_fail)"
+    )
+    problems = r_fail + s_fail
+    if problems:
+        print("\nFAIL:", file=sys.stderr)
+        for p in problems:
+            print(f"  - {p}", file=sys.stderr)
+        return 1
+    return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

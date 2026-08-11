@@ -2,7 +2,7 @@
   "mcpServers": {
     "mental-models": {
       "command": "uvx",
-      "args": ["mental-models-mcp"]
+      "args": ["--from", "mental-models-kit[mcp]", "mental-models-mcp"]
     }
   }
 }

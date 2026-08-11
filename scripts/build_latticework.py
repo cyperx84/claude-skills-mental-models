@@ -1,30 +1,35 @@
 #!/usr/bin/env python3
 """Build a latticework graph of mental models from shared keywords.
 
-Reads resources/model-index.json, computes edges between models that share
-keywords (threshold auto-tuned to land in a reasonable edge-count range),
-and writes three artifacts under docs/:
+Reads the markdown corpus through ``mental_models_kit.corpus`` (there is no
+JSON index any more), computes edges between models that share keyword stems
+(threshold auto-tuned to land in a reasonable edge-count range), and writes
+three artifacts under docs/:
 
   - latticework.json       full graph (nodes + edges) for a future web viewer
   - latticework.mmd        full Mermaid rendering
   - latticework_core.mmd   curated subgraph of the 15 highest-degree hubs
 
-Stdlib-only, deterministic output (sorted everywhere) for CI drift checks.
+Deterministic output (sorted everywhere) so CI can drift-check with git diff.
+docs/latticework.svg is rendered separately and is not touched here.
 """
 from __future__ import annotations
 
 import json
 import re
+import sys
 from collections import defaultdict
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
-INDEX = REPO / ".claude" / "skills" / "mental-models" / "resources" / "model-index.json"
+sys.path.insert(0, str(REPO / "src"))
+
+from mental_models_kit.corpus import load_models  # noqa: E402
+
 DOCS = REPO / "docs"
 
 # 8 distinct, print-safe colors keyed by category. Unknown categories fall back
-# to the last entry. Keys are matched by substring so the verbose "Warfare &
-# Game Theory" style categories collapse onto a single strategy color.
+# to the last entry. Keys are matched by substring.
 CATEGORY_COLORS = [
     ("General Thinking", "#60a5fa"),   # blue
     ("Physics",          "#34d399"),   # green
@@ -76,23 +81,23 @@ def norm_keyword(k: str) -> set[str]:
     return tokens
 
 
-def load_models() -> list[dict]:
-    data = json.loads(INDEX.read_text())
-    models = []
-    for m in data["models"]:
+def load_nodes() -> list[dict]:
+    """Corpus models reduced to (id, slug, name, category, keyword stems)."""
+    nodes = []
+    for m in load_models():
         kws: set[str] = set()
-        for k in m.get("keywords", []):
+        for k in m.keywords:
             kws |= norm_keyword(k)
         kws.discard("")
-        models.append({
-            "id": m["id"],
-            "slug": m["slug"],
-            "name": m["name"],
-            "category": m["category"],
+        nodes.append({
+            "id": m.id,
+            "slug": m.slug,
+            "name": m.name,
+            "category": m.category,
             "keywords": kws,
         })
-    models.sort(key=lambda x: x["id"])
-    return models
+    nodes.sort(key=lambda x: x["id"])
+    return nodes
 
 
 def compute_edges(models: list[dict], threshold: int) -> list[tuple[str, str, int]]:
@@ -160,7 +165,7 @@ def mermaid_render(models_by_id: dict[str, dict], edges: list[tuple[str, str, in
 
 def main() -> None:
     DOCS.mkdir(parents=True, exist_ok=True)
-    models = load_models()
+    models = load_nodes()
     models_by_id = {m["id"]: m for m in models}
 
     threshold, edges = auto_tune(models)

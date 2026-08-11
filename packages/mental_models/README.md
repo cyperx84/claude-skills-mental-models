@@ -1,5 +1,11 @@
 # mental-models
 
+> **⚠️ Not published (2026-08).** The `mental-models` and `mental-models-mcp` names on
+> PyPI do **not** belong to this project — `mental-models` is an unrelated 2020 package
+> and `mental-models-mcp` does not exist. Any `pip install` / `uvx` instruction below is
+> **not yet valid**; it installs the wrong software or fails. Run from a clone instead.
+> The package ships as `mental-models-kit` in the next release. See `DEMAND-REPORT.md`.
+
 Charlie Munger's latticework of mental models as a tiny Python library.
 
 Wraps the [`mental-models` Claude Code skill](https://github.com/cyperx84/claude-skills-mental-models)
