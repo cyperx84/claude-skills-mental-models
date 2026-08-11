@@ -3,6 +3,7 @@ their JSON shapes cannot drift apart."""
 
 from __future__ import annotations
 
+import re
 from typing import Any
 
 from .corpus import Model
@@ -10,6 +11,8 @@ from .corpus import Model
 __all__ = [
     "FIELD_NAMES",
     "apply_dict",
+    "split_steps",
+    "walk_dict",
     "field_value",
     "model_detail_dict",
     "model_dict",
@@ -91,3 +94,47 @@ def apply_dict(m: Model, problem: str = "") -> dict[str, Any]:
         "when_to_avoid": m.when_to_avoid or "",
         "path": m.path,
     }
+
+
+# --------------------------------------------------------------------------
+# Thinking-steps splitting (issue #4, `walk`)
+# --------------------------------------------------------------------------
+
+_STEP_SPLIT_RE = re.compile(r"(?m)^(?=\s*\d+[.)]\s+)")
+
+
+def split_steps(thinking_steps: str) -> list[str]:
+    """Split a ``thinking_steps`` block into individual numbered steps.
+
+    Splits on a zero-width lookahead at each leading numbered marker so the
+    marker stays attached to its own step. A block with no numbered markers is
+    returned as a single step rather than raising -- every one of the 98 models
+    must survive this, including any future model that writes prose instead of
+    a numbered list.
+    """
+    text = (thinking_steps or "").strip()
+    if not text:
+        return []
+    return [chunk.strip() for chunk in _STEP_SPLIT_RE.split(text) if chunk.strip()]
+
+
+def walk_dict(m: Model, step: int, problem: str = "") -> dict[str, Any]:
+    """One step of ``m``'s thinking steps, as a stateless record.
+
+    ``step`` is 0-indexed. Past the end returns ``content: None, done: true``
+    so a caller can advance until ``done`` without knowing the count up front.
+    """
+    steps = split_steps(m.thinking_steps)
+    total = len(steps)
+    done = step >= total or step < 0
+    out: dict[str, Any] = {
+        "slug": m.slug,
+        "name": m.name,
+        "step": step,
+        "total": total,
+        "content": None if done else steps[step],
+        "done": done,
+    }
+    if problem:
+        out["problem"] = problem
+    return out

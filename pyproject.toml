@@ -56,6 +56,7 @@ mental-models-mcp = "mental_models_kit.mcp:main"
 [dependency-groups]
 dev = [
   "pytest>=8,<9",
+  "anyio>=4,<6",
   "ruff>=0.6,<1",
   "build>=1.2,<2",
   "twine>=5,<7",
@@ -96,3 +97,6 @@ include = [
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+# anyio (already an `mcp` dependency) drives the async MCP tests; no extra
+# async plugin is added just for them.
+markers = ["anyio: async test driven by the anyio pytest plugin"]

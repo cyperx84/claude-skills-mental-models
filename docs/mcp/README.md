@@ -6,12 +6,20 @@
 > **not yet valid**; it installs the wrong software or fails. Run from a clone instead.
 > The package ships as `mental-models-kit` in the next release. See `DEMAND-REPORT.md`.
 
-Drop-in config snippets for using `mental-models-mcp` in any MCP-capable client.
-All of them assume you have `uv` installed — `uvx` will fetch and run the server
-on demand without a global install.
+Drop-in config snippets for the mental-models MCP server in any MCP-capable client.
+
+**Which file do I use?**
+
+- **`local_clone.json` — the only one that works today.** It runs the server out of a
+  clone via `uv run`, so it needs no published package. Verified 2026-08-12: the server
+  answers `server/discover` with `supportedVersions: ["2026-07-28"]`.
+- **Every other file below is for after the first release**, when `mental-models-kit`
+  exists on PyPI. They use `uvx --from mental-models-kit[mcp] mental-models-mcp`, which
+  fails today because the package is not published yet.
 
 | Client         | File                  | Config location |
 |----------------|-----------------------|-----------------|
+| **Any (works today)** | `local_clone.json` | merge into your client's MCP config |
 | Claude Desktop | `claude_desktop.json` | `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) / `%APPDATA%\Claude\claude_desktop_config.json` (Windows) |
 | Cursor         | `cursor.json`         | `~/.cursor/mcp.json` (or project `.cursor/mcp.json`) |
 | Zed            | `zed.json`            | `~/.config/zed/settings.json` (merge into top-level) |

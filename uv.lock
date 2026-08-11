@@ -623,6 +623,7 @@ mcp = [
 
 [package.dev-dependencies]
 dev = [
+    { name = "anyio" },
     { name = "build" },
     { name = "pytest" },
     { name = "ruff" },
@@ -638,6 +639,7 @@ provides-extras = ["mcp"]
 
 [package.metadata.requires-dev]
 dev = [
+    { name = "anyio", specifier = ">=4,<6" },
     { name = "build", specifier = ">=1.2,<2" },
     { name = "pytest", specifier = ">=8,<9" },
     { name = "ruff", specifier = ">=0.6,<1" },

@@ -45,3 +45,4 @@ build/
 # GitHub specific
 .github/workflows/*.log
 evals/__pycache__
+.herdr-loop/

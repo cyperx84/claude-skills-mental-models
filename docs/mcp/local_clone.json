@@ -1,0 +1,9 @@
+{
+  "_comment": "Works TODAY, before the package is published. Replace /ABSOLUTE/PATH with your clone. Verified 2026-08-12 against MCP spec 2026-07-28.",
+  "mcpServers": {
+    "mental-models": {
+      "command": "uv",
+      "args": ["run", "--directory", "/ABSOLUTE/PATH/claude-skills-mental-models", "mental-models-mcp"]
+    }
+  }
+}

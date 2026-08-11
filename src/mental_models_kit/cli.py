@@ -35,7 +35,14 @@ from .corpus import (
     resolve_category,
     set_content_root,
 )
-from .render import FIELD_NAMES, apply_dict, field_value, model_detail_dict, model_dict
+from .render import (
+    FIELD_NAMES,
+    apply_dict,
+    field_value,
+    model_detail_dict,
+    model_dict,
+    walk_dict,
+)
 from .search import has_searchable_tokens, search_models
 
 EXIT_OK = 0
@@ -173,6 +180,43 @@ def cmd_apply(args: argparse.Namespace) -> int:
         value = payload[key]
         if value:
             print(f"## {key.replace('_', ' ').title()}\n{value}\n")
+    return EXIT_OK
+
+
+def cmd_walk(args: argparse.Namespace) -> int:
+    """One thinking step at a time, statelessly.
+
+    The caller (a harness, a script, an MCP client) holds the cursor and asks
+    for step N. There is deliberately no interactive prompt loop: this CLI is
+    driven by agents far more often than by a human at a TTY, and a loop that
+    blocks on stdin is unusable to every one of them.
+    """
+    json_mode = _flag(args, "json", False)
+    slug = (args.slug or "").strip()
+    if not slug:
+        _err("error: empty slug")
+        return EXIT_BAD_ARGS
+    try:
+        m = get_model(slug)
+    except ModelNotFound as e:
+        _err(f"error: {e}")
+        return EXIT_NOT_FOUND
+    if args.step < 0:
+        _err("error: --step must be >= 0")
+        return EXIT_BAD_ARGS
+    problem = " ".join(args.problem).strip() if args.problem else ""
+    payload = walk_dict(m, args.step, problem)
+    if json_mode:
+        _print_json(payload)
+        return EXIT_OK
+    if payload["done"]:
+        print(f"{m.name}: no step {args.step} (total {payload['total']}). Done.")
+        return EXIT_OK
+    print(f"# {m.name} -- step {args.step + 1}/{payload['total']}")
+    if problem:
+        print(f"_Problem: {problem}_")
+    print()
+    print(payload["content"])
     return EXIT_OK
 
 
@@ -366,6 +410,12 @@ def _build_parser() -> argparse.ArgumentParser:
     p_apply.add_argument("slug", help="Model slug or id")
     p_apply.add_argument("--problem", nargs="*", help="The problem to apply the model to")
     p_apply.set_defaults(func=cmd_apply)
+
+    p_walk = add("walk", help="Emit one thinking step at a time (stateless; caller holds the cursor)")
+    p_walk.add_argument("slug", help="Model slug or id")
+    p_walk.add_argument("--step", type=int, default=0, help="0-indexed step to emit")
+    p_walk.add_argument("--problem", nargs="*", help="The problem being worked")
+    p_walk.set_defaults(func=cmd_walk)
 
     p_search = add(
         "search",
