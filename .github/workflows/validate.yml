@@ -6,7 +6,9 @@ on:
   pull_request:
 
 jobs:
-  validate:
+  corpus:
+    # The 98 model files are the product. This job guards them independently of
+    # the Python package so a corpus problem is never hidden by a code failure.
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
@@ -14,32 +16,49 @@ jobs:
         uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: "3.12"
-      - name: Run model validator
-        run: python scripts/validate_models.py
+      - name: Validate corpus (format, counts, slug uniqueness, checksum)
+        run: python scripts/validate_corpus.py
       - name: Regenerate latticework graph
         run: python scripts/build_latticework.py
-      - name: Check latticework is up to date
+      - name: Check committed latticework artifacts are up to date
         run: git diff --exit-code docs/latticework.json docs/latticework.mmd docs/latticework_core.mmd
-      - name: Check package data in sync
-        run: python scripts/sync_package_data.py --check
-      - name: Run selector evals (deterministic, no API)
-        run: python evals/run_selector_evals.py
 
-  python-package:
+  package:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - uses: astral-sh/setup-uv@caf0cab7a618c569241d31dcd442f54681755d39 # v3
         with:
           enable-cache: true
-      - name: Sync + test package
-        working-directory: packages/mental_models
-        run: |
-          uv sync
-          uv run pytest
-      - name: Build package
-        working-directory: packages/mental_models
+      - name: Sync (with the [mcp] extra, so the MCP tests actually run)
+        run: uv sync --extra mcp
+      - name: Test
+        run: uv run pytest -q
+      - name: Evals (deterministic, no API key)
+        # Exit code is the retrieval gate only. The selection suite is an honest
+        # ledger of natural-language cases the keyword matcher fails; those are
+        # marked known_fail and must not gate CI, or the ledger would get quietly
+        # trimmed to keep the build green.
+        run: uv run python evals/run_evals.py
+      - name: Build wheel
         run: uv build
+      - name: Prove the corpus actually ships inside the wheel
+        # The old repo advertised install paths nobody had executed. This asserts
+        # the wheel contains the models rather than trusting the config.
+        run: |
+          set -euo pipefail
+          wheel=$(find dist -name '*.whl' | head -1)
+          count=$(unzip -l "$wheel" | grep -c 'mental_models_kit/data/models/.*\.md')
+          echo "model files in wheel: $count"
+          test "$count" -ge 98
+      - name: Prove a clean install works from an unrelated directory
+        run: |
+          set -euo pipefail
+          python3 -m venv /tmp/wheeltest
+          /tmp/wheeltest/bin/pip install --quiet "$(find dist -name '*.whl' | head -1)"
+          cd /tmp
+          /tmp/wheeltest/bin/mental-models doctor --json
+          /tmp/wheeltest/bin/mental-models get inversion --field name
 
   markdown-lint:
     runs-on: ubuntu-latest
