@@ -14,8 +14,8 @@
 
 - [ ] Frontmatter (if applicable) is valid
 - [ ] All required H2 sections present: Description, Keywords, Thinking Steps, Coaching Questions, When to Avoid
-- [ ] `resources/model-index.json` updated
-- [ ] `python scripts/validate_models.py` passes locally
+- [ ] `python scripts/validate_corpus.py` passes locally
+- [ ] `uv run pytest -q` passes locally
 - [ ] `CHANGELOG.md` updated under Unreleased
 - [ ] No duplicate of an existing model
 

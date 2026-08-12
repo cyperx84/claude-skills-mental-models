@@ -64,24 +64,29 @@ Entries are sorted by `id`.
 Before opening a PR, run:
 
 ```bash
-python scripts/validate_models.py
+python scripts/validate_corpus.py
+uv run pytest -q
 ```
 
-This checks:
+`validate_corpus.py` checks:
 
-- Filenames follow `mNN_snake_case.md`.
-- All required H2 sections are present.
-- Every model on disk is listed in `model-index.json` (and vice versa).
-- No duplicate IDs or titles.
+- Filenames follow `mNN_snake_case.md` and sit in the right category directory.
+- All five required sections are present and non-empty.
+- Slugs and ids are unique.
+- The corpus checksum, printed so a content change is always visible in a diff.
 
-Fix any reported issues and re-run until the script exits cleanly.
+There is **no index to update**. The old `model-index.json` was deleted: the
+corpus is parsed from the markdown at import time behind an `lru_cache`, so
+adding a model is just adding the file.
 
 ## Pull request checklist
 
 - [ ] New/changed model files follow the naming convention.
 - [ ] All required sections are present and non-empty.
-- [ ] `model-index.json` updated and sorted.
-- [ ] `python scripts/validate_models.py` passes.
+- [ ] `python scripts/validate_corpus.py` passes.
+- [ ] `uv run pytest -q` passes.
+- [ ] The model has a real **When to Avoid** section — a model without one is a
+      slogan, and that section is what distinguishes this corpus.
 - [ ] `CHANGELOG.md` updated with a short entry.
 - [ ] PR description explains why the model belongs in the latticework.
 
