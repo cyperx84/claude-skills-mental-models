@@ -28,12 +28,22 @@ Drop-in config snippets for the mental-models MCP server in any MCP-capable clie
 
 ## Verify
 
+From a clone, ask the server to identify itself over stdio. This is the exact
+probe used to verify `local_clone.json`:
+
 ```bash
-uvx mental-models-mcp   # should print a startup banner on stderr
+printf '%s\n' '{"jsonrpc":"2.0","id":1,"method":"server/discover","params":{"_meta":{"io.modelcontextprotocol/protocolVersion":"2026-07-28","io.modelcontextprotocol/clientCapabilities":{}}}}' \
+  | uv run mental-models-mcp
+# → {"result":{"supportedVersions":["2026-07-28"],"resultType":"complete", ...}}
 ```
 
-Then restart the client. The `mm_select`, `mm_get`, `mm_list`, `mm_categories`,
-`mm_apply`, and `mm_doctor` tools should appear.
+Omitting `protocolVersion` returns `-32601` for this method — that is correct
+dual-era behaviour, not a fault: the server then treats you as a 2025-era client,
+where `server/discover` does not exist.
+
+Then restart the client. Seven tools should appear, in this order: `mm_catalog`,
+`mm_get`, `mm_apply`, `mm_walk`, `mm_list`, `mm_categories`, `mm_search`.
+Start with `mm_catalog` — `mm_search` is a keyword fallback, not model selection.
 
 ## Alternative: local install
 

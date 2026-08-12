@@ -15,19 +15,19 @@ works in any harness that loads `SKILL.md` files.
 
 The portable skill shells out to the `mental-models` CLI, so install that first:
 
-```bash
-# recommended — no global install
-uv tool install mental-models
+The package is not on PyPI yet, so install from a clone:
 
-# or
-pip install mental-models
+```bash
+git clone https://github.com/cyperx84/claude-skills-mental-models.git
+cd claude-skills-mental-models
+uv tool install .           # installs `mental-models` from source
 ```
 
 Verify:
 
 ```bash
 mental-models doctor --json
-# → {"version": "0.2.0", "ok": true, "checks": {...}}
+# → {"ok": true, "models": 98, "source": "bundled", ...}
 ```
 
 ## Install the skill in OpenClaw
