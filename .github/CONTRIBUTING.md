@@ -43,21 +43,21 @@ Every model file must contain these H2 sections, in this order, using the exact 
 
 Keep each model roughly 2 to 3 KB. Be specific, practical, and plainly written.
 
-## Updating the model index
+## There is no index to update
 
-After adding or renaming a model, update `model-index.json` so the skill loader can find it. Each entry should include:
+Older versions of this guide asked you to hand-maintain `model-index.json`. That
+file is gone. The corpus is parsed directly from the markdown at import time and
+cached, so **adding a model is adding one file** — no index entry, no sync step,
+no regeneration.
 
-```json
-{
-  "id": "m99",
-  "title": "Your Title",
-  "category": "General Thinking Tools",
-  "path": ".claude/skills/mental-models/models/Mental_Model_General/m99_your_title.md",
-  "keywords": ["keyword1", "keyword2"]
-}
+Add it at:
+
+```
+skills/mental-models/models/Mental_Model_<Category>/m<NN>_<snake_case_name>.md
 ```
 
-Entries are sorted by `id`.
+The category comes from the directory it sits in, and the slug from the filename.
+`CATALOG.md` is generated, so do not hand-edit it.
 
 ## Validating locally
 
