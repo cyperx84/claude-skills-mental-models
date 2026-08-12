@@ -100,7 +100,13 @@ def apply_dict(m: Model, problem: str = "") -> dict[str, Any]:
 # Thinking-steps splitting (issue #4, `walk`)
 # --------------------------------------------------------------------------
 
-_STEP_SPLIT_RE = re.compile(r"(?m)^(?=\s*\d+[.)]\s+)")
+# `[ \t]*`, deliberately NOT `\s*`. `\s` matches newlines, so `\s*` inside a
+# multiline lookahead can rescan an entire run of blank lines from every
+# position: a 200k-blank-line block took 118 SECONDS to split. Since a model
+# document reaches this function straight from disk and `mm_walk` exposes it
+# over MCP, that is a remotely triggerable hang, not a micro-optimisation.
+# Keep the whitespace class line-local.
+_STEP_SPLIT_RE = re.compile(r"(?m)^(?=[ \t]*\d+[.)][ \t]+)")
 
 
 def split_steps(thinking_steps: str) -> list[str]:
@@ -111,11 +117,24 @@ def split_steps(thinking_steps: str) -> list[str]:
     returned as a single step rather than raising -- every one of the 98 models
     must survive this, including any future model that writes prose instead of
     a numbered list.
+
+    Unnumbered prose *before* the first marker is folded into the first step
+    rather than becoming a step of its own. Emitting it separately would shift
+    every subsequent step by one, so "step 3" in the output would not be the
+    step the document calls 3 -- silently wrong in exactly the place a reader
+    would trust it.
     """
     text = (thinking_steps or "").strip()
     if not text:
         return []
-    return [chunk.strip() for chunk in _STEP_SPLIT_RE.split(text) if chunk.strip()]
+    chunks = [chunk.strip() for chunk in _STEP_SPLIT_RE.split(text) if chunk.strip()]
+    if len(chunks) > 1 and not _STARTS_NUMBERED_RE.match(chunks[0]):
+        preamble = chunks.pop(0)
+        chunks[0] = f"{preamble}\n\n{chunks[0]}"
+    return chunks
+
+
+_STARTS_NUMBERED_RE = re.compile(r"^[ \t]*\d+[.)][ \t]+")
 
 
 def walk_dict(m: Model, step: int, problem: str = "") -> dict[str, Any]:
@@ -123,10 +142,20 @@ def walk_dict(m: Model, step: int, problem: str = "") -> dict[str, Any]:
 
     ``step`` is 0-indexed. Past the end returns ``content: None, done: true``
     so a caller can advance until ``done`` without knowing the count up front.
+
+    A negative or non-int ``step`` raises. Returning ``done=True`` for those
+    looked tolerant but concealed a broken cursor: a caller looping "until
+    done" would exit immediately and report success having read nothing.
     """
+    # `type(step) is int`, not isinstance: bool subclasses int, so `True` would
+    # otherwise sail through and silently mean "step 1".
+    if type(step) is not int:
+        raise TypeError(f"step must be an int, got {type(step).__name__}")
+    if step < 0:
+        raise ValueError(f"step must be >= 0, got {step}")
     steps = split_steps(m.thinking_steps)
     total = len(steps)
-    done = step >= total or step < 0
+    done = step >= total
     out: dict[str, Any] = {
         "slug": m.slug,
         "name": m.name,

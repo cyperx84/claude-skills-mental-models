@@ -8,10 +8,16 @@ does not regress them:
 * Every Python field is snake_case (``is_error``, ``ttl_ms``); the wire stays camelCase.
 * Roots, Sampling and Logging are deprecated protocol features. None are used.
   Diagnostics go to stderr, which is the migration the spec itself recommends.
-* Raising ``MCPError`` is a *protocol* error the model never sees. Every other
-  exception becomes ``is_error=True`` content the model reads and reacts to --
-  so "no such model" is a plain ``ValueError`` on purpose, and a malformed
-  argument is an ``MCPError`` with ``-32602``.
+* Raising ``MCPError`` is a *protocol* error the model never sees; every other
+  exception becomes ``is_error=True`` content the model reads and reacts to.
+  **Every argument to every tool here is supplied by the calling model, and a
+  bad one is something that model can correct on the next call** -- so all
+  argument validation is model-readable, and nothing in this server raises
+  ``MCPError``. An earlier revision raised ``-32602`` for a blank slug; that
+  was wrong. It hid the one piece of information that would have let the model
+  fix its own call, which is the opposite of what the SDK guidance asks for.
+  ``MCPError`` is reserved for genuine protocol faults, and this server has
+  none of its own.
 * ``tools/list`` is deterministically ordered (registration order below is the
   wire order): the spec asks for it, and a stable order lets clients cache and
   raises prompt-cache hit rates.
@@ -27,13 +33,19 @@ from __future__ import annotations
 import sys
 from typing import Any
 
-from mcp import MCPError
 from mcp.server import MCPServer
 from mcp.server.mcpserver.server import CacheHint
 
 from .. import __version__
-from ..catalog import catalog_document
-from ..corpus import ModelNotFound, UnknownCategory, get_model, list_categories, list_models
+from ..catalog import FORMATS, catalog_document
+from ..corpus import (
+    CATEGORIES,
+    ModelNotFound,
+    UnknownCategory,
+    get_model,
+    list_categories,
+    list_models,
+)
 from ..render import apply_dict, model_detail_dict, model_dict, walk_dict
 from ..search import has_searchable_tokens, search_models
 
@@ -64,14 +76,15 @@ Selection is a reasoning task. Do it yourself; do not delegate it to mm_search,
 which is a keyword matcher and is wrong on natural-language problems.
 """
 
-_INVALID_PARAMS = -32602
+# Directory per category key, for callers that want to read the file directly
+# rather than go through a tool. Sourced from the one canonical tuple.
+_CATEGORY_DIRS = {key: directory for key, _display, directory, _count in CATEGORIES}
 
 
 def _require_slug(slug: str) -> str:
-    """A missing/blank slug is a caller bug, not something the model can fix."""
     cleaned = (slug or "").strip()
     if not cleaned:
-        raise MCPError(_INVALID_PARAMS, "slug must be a non-empty string")
+        raise ValueError("slug must be a non-empty string. Call mm_catalog for valid slugs.")
     return cleaned
 
 
@@ -113,6 +126,8 @@ def build_server() -> MCPServer:
     )
     def mm_catalog(fmt: str = "compact", category: str | None = None) -> str:
         """The compact catalog to select from. fmt is 'compact' or 'slim'."""
+        if fmt not in FORMATS:
+            raise ValueError(f"unknown format {fmt!r}. Valid formats: {', '.join(FORMATS)}")
         try:
             return catalog_document(fmt=fmt, category=category)
         except UnknownCategory as e:
@@ -148,9 +163,12 @@ def build_server() -> MCPServer:
         ),
     )
     def mm_walk(slug: str, step: int = 0, problem: str = "") -> dict[str, Any]:
-        if not isinstance(step, int):
-            raise MCPError(_INVALID_PARAMS, "step must be an integer")
-        return walk_dict(_fetch(slug), step, (problem or "").strip())
+        # walk_dict rejects non-int (bool included) and negative cursors. Surface
+        # its message to the model rather than a bare traceback.
+        try:
+            return walk_dict(_fetch(slug), step, (problem or "").strip())
+        except (TypeError, ValueError) as e:
+            raise ValueError(f"invalid step: {e}") from None
 
     @mcp.tool(
         name="mm_list",
@@ -170,7 +188,12 @@ def build_server() -> MCPServer:
     )
     def mm_categories() -> list[dict[str, Any]]:
         return [
-            {"key": c.key, "name": c.name, "directory": c.directory, "count": c.count}
+            {
+                "key": c.key,
+                "display": c.display,
+                "directory": _CATEGORY_DIRS[c.key],
+                "count": c.count,
+            }
             for c in list_categories()
         ]
 
@@ -187,6 +210,8 @@ def build_server() -> MCPServer:
         ),
     )
     def mm_search(query: str, top_k: int = 5) -> list[dict[str, Any]]:
+        if type(top_k) is not int or top_k < 1:
+            raise ValueError(f"top_k must be an integer >= 1, got {top_k!r}")
         if not has_searchable_tokens(query or ""):
             raise ValueError(
                 "query has no searchable terms. Call mm_catalog and select models yourself."

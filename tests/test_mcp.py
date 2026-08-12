@@ -63,27 +63,106 @@ async def test_cacheable_results_advertise_public_ttl(client):
     assert listing.cache_scope == "public"
 
 
+async def test_every_tool_actually_succeeds_on_its_happy_path(client):
+    """Regression: mm_categories shipped raising AttributeError on every call.
+
+    The old test asserted only ``result_type == "complete"``, which is true for
+    an error result too, so a completely broken tool passed CI. Assert the thing
+    that actually matters -- that the call did not fail -- for every tool.
+    """
+    happy_path = {
+        "mm_catalog": {},
+        "mm_get": {"slug": "inversion"},
+        "mm_apply": {"slug": "inversion", "problem": "test"},
+        "mm_walk": {"slug": "inversion", "step": 0},
+        "mm_list": {},
+        "mm_categories": {},
+        "mm_search": {"query": "inversion"},
+    }
+    names = [t.name for t in (await client.list_tools()).tools]
+    assert set(happy_path) == set(names), "a tool was added without a happy-path case here"
+    for name, args in happy_path.items():
+        result = await client.call_tool(name, args)
+        text = result.content[0].text if result.content else ""
+        assert result.is_error is False, f"{name} failed on its happy path: {text}"
+
+
 async def test_every_result_carries_result_type(client):
     """2026-07-28 requires resultType on every result."""
     assert (await client.list_tools()).result_type == "complete"
+    assert (await client.list_resources()).result_type == "complete"
     assert (await client.call_tool("mm_categories", {})).result_type == "complete"
+    assert (await client.read_resource("mental-models://catalog")).result_type == "complete"
 
 
-async def test_catalog_is_the_entry_point_and_lists_all_models(client):
+async def test_categories_report_the_real_corpus_shape(client):
+    """The bug that shipped was wrong attribute names, so assert the values."""
+    from mental_models_kit.corpus import list_categories
+
+    rows = (await client.call_tool("mm_categories", {})).structured_content
+    rows = rows["result"] if isinstance(rows, dict) else rows
+    assert len(rows) == 8
+    assert sum(r["count"] for r in rows) == 98
+    expected = {c.key: c.display for c in list_categories()}
+    assert {r["key"]: r["display"] for r in rows} == expected
+    for row in rows:  # directory must be usable to read the file directly
+        assert row["directory"].startswith("Mental_Model_")
+
+
+async def test_catalog_lists_every_model_exactly_once(client):
+    """Counting newlines passed with 99 blank lines and one real slug. Compare
+    the actual slug set against the corpus instead."""
+    from mental_models_kit.corpus import load_models
+
     text = (await client.call_tool("mm_catalog", {})).content[0].text
-    assert "inversion" in text
-    assert text.count("\n") > 98  # every model gets at least a line
+    expected = {m.slug for m in load_models()}
+    assert len(expected) == 98
+    missing = sorted(s for s in expected if s not in text)
+    assert missing == [], f"{len(missing)} models absent from the catalog: {missing[:5]}"
 
 
-async def test_walk_is_stateless_and_terminates(client):
+async def _walk(client, step: int):
+    return (
+        await client.call_tool("mm_walk", {"slug": "inversion", "step": step})
+    ).structured_content
+
+
+async def test_walk_terminates(client):
     seen = 0
     while True:
-        out = (await client.call_tool("mm_walk", {"slug": "inversion", "step": seen})).structured_content
+        out = await _walk(client, seen)
         if out["done"]:
             break
         seen += 1
         assert seen < 100
     assert seen == out["total"]
+
+
+async def test_walk_honours_the_supplied_cursor(client):
+    """A stateful server that ignored `step` and just advanced would pass a
+    sequential walk. Ask out of order and repeat, and it cannot."""
+    first, third = await _walk(client, 0), await _walk(client, 2)
+    assert (await _walk(client, 2))["content"] == third["content"]  # repeatable
+    assert (await _walk(client, 0))["content"] == first["content"]  # order-independent
+    assert first["content"] != third["content"]
+
+
+async def test_walk_content_matches_the_library(client):
+    """Guards against truncation or reformatting between library and wire."""
+    from mental_models_kit.corpus import get_model
+    from mental_models_kit.render import split_steps
+
+    expected = split_steps(get_model("inversion").thinking_steps)
+    for i, want in enumerate(expected):
+        assert (await _walk(client, i))["content"] == want
+
+
+async def test_walk_rejects_a_negative_cursor_readably(client):
+    """Returning done=True would make a caller looping 'until done' exit at once
+    and report success having read nothing."""
+    result = await client.call_tool("mm_walk", {"slug": "inversion", "step": -1})
+    assert result.is_error is True
+    assert "step" in result.content[0].text.lower()
 
 
 async def test_unknown_slug_is_model_readable_not_a_protocol_error(client):
@@ -93,11 +172,14 @@ async def test_unknown_slug_is_model_readable_not_a_protocol_error(client):
     assert "does-not-exist" in result.content[0].text
 
 
-async def test_blank_slug_is_a_wire_error(client):
-    """A blank slug is a caller bug: MCPError, not model-readable content."""
-    with pytest.raises(Exception) as excinfo:
-        await client.call_tool("mm_get", {"slug": "   "})
-    assert "-32602" in str(excinfo.value) or "non-empty" in str(excinfo.value)
+async def test_blank_slug_is_model_readable_not_hidden(client):
+    """Reversed deliberately. This used to raise MCPError -32602, which the
+    calling model never sees -- so the one hint that would let it fix its own
+    call was thrown away. Every argument here comes from the model, so every
+    argument error is content the model can read and act on."""
+    result = await client.call_tool("mm_get", {"slug": "   "})
+    assert result.is_error is True
+    assert "mm_catalog" in result.content[0].text
 
 
 async def test_search_describes_itself_as_not_selection(client):
@@ -115,27 +197,52 @@ async def test_catalog_tool_points_the_model_at_selecting_itself(client):
 
 
 async def test_models_are_exposed_as_resources(client):
-    """Resources-shaped so SEP-2640 skills-over-MCP is a short hop."""
+    """Resources-shaped so SEP-2640 skills-over-MCP is a short hop.
+
+    Checks the per-model template too: asserting only the catalog resource
+    passed even if the template were deleted entirely.
+    """
     uris = [str(r.uri) for r in (await client.list_resources()).resources]
     assert "mental-models://catalog" in uris
+    templates = await client.list_resource_templates()
+    patterns = [str(t.uri_template) for t in templates.resource_templates]
+    assert "mental-models://model/{slug}" in patterns
 
 
-async def test_model_resource_returns_the_markdown_source(client):
+async def test_model_resource_returns_the_whole_markdown_source(client):
+    """Truncated content still contains the title, so compare the full document."""
+    from mental_models_kit.corpus import get_model
+
     result = await client.read_resource("mental-models://model/inversion")
-    assert "Mental Model = Inversion" in result.contents[0].text
+    assert result.contents[0].text == get_model("inversion").markdown
     assert result.ttl_ms and result.ttl_ms > 0
+    assert result.cache_scope == "public"
 
 
-async def test_search_still_works_but_is_only_a_keyword_match(client):
-    """Documents the known weakness rather than pretending it is fixed."""
-    out = (await client.call_tool("mm_search", {"query": "inversion"})).structured_content
-    slugs = [m["slug"] for m in (out if isinstance(out, list) else out["result"])]
-    assert "inversion" in slugs
+async def _search(client, query: str, **kw):
+    out = (await client.call_tool("mm_search", {"query": query, **kw})).structured_content
+    return [m["slug"] for m in (out if isinstance(out, list) else out["result"])]
+
+
+async def test_search_discriminates_between_queries(client):
+    """A stub that always returned `inversion` passed the old single-query test."""
+    assert "inversion" in await _search(client, "inversion")
+    assert "bottlenecks" in await _search(client, "bottleneck")
+    assert await _search(client, "inversion") != await _search(client, "bottleneck")
+
+
+async def test_search_rejects_a_useless_top_k(client):
+    result = await client.call_tool("mm_search", {"query": "inversion", "top_k": 0})
+    assert result.is_error is True
+    assert "top_k" in result.content[0].text
 
 
 async def test_empty_search_query_is_model_readable(client):
+    """An unrelated error message passed the old assertion. Require the message
+    to actually redirect the model to the catalog."""
     result = await client.call_tool("mm_search", {"query": "   "})
     assert result.is_error is True
+    assert "mm_catalog" in result.content[0].text
 
 
 # --------------------------------------------------------------------------
