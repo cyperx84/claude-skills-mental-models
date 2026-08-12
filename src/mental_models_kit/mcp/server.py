@@ -33,8 +33,7 @@ from __future__ import annotations
 import sys
 from typing import Any
 
-from mcp.server import MCPServer
-from mcp.server.mcpserver.server import CacheHint
+from mcp.server import CacheHint, MCPServer
 
 from .. import __version__
 from ..catalog import FORMATS, catalog_document
