@@ -1,5 +1,15 @@
 name: publish
 
+# PREREQUISITE, and it is not optional: the name `mental-models-kit` must be
+# reserved on PyPI before the first tagged release. It is verified free but
+# UNREGISTERED as of 2026-08-12.
+#
+# This matters more here than in most repos. `mental-models` on PyPI belongs to
+# an unrelated 2020 project by another author, and this repo shipped install
+# instructions pointing at it for months. Publishing under a name we do not own
+# is exactly the failure being corrected -- do not tag a release until the name
+# is claimed and `url:` below resolves to a project this account controls.
+
 on:
   release:
     types: [published]
@@ -20,18 +30,25 @@ jobs:
       - uses: astral-sh/setup-uv@caf0cab7a618c569241d31dcd442f54681755d39 # v3
         with:
           enable-cache: true
-      - name: Sync bundled package data
-        run: python scripts/sync_package_data.py --check
+      - name: Validate corpus before shipping it
+        run: uv run python scripts/validate_corpus.py
       - name: Build distributions
-        working-directory: packages/mental_models
         run: uv build
+      - name: Assert the corpus is inside the wheel
+        # The content is force-included, not a package directory, so a packaging
+        # change can silently ship an empty library. Fail the release instead.
+        run: |
+          set -euo pipefail
+          wheel=$(find dist -name '*.whl' | head -1)
+          count=$(unzip -l "$wheel" | grep -c 'mental_models_kit/data/models/.*\.md')
+          echo "model files in wheel: $count"
+          test "$count" -ge 98
       - name: Twine check
-        working-directory: packages/mental_models
         run: uv tool run twine check dist/*
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: dist
-          path: packages/mental_models/dist/*
+          path: dist/*
 
   publish-pypi:
     if: github.event_name == 'release' || (github.event_name == 'workflow_dispatch' && inputs.target == 'pypi')
@@ -39,7 +56,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: pypi
-      url: https://pypi.org/p/mental-models
+      url: https://pypi.org/p/mental-models-kit
     permissions:
       id-token: write
     steps:
@@ -55,7 +72,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: testpypi
-      url: https://test.pypi.org/p/mental-models
+      url: https://test.pypi.org/p/mental-models-kit
     permissions:
       id-token: write
     steps:
