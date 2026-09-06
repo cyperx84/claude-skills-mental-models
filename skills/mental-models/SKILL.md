@@ -21,9 +21,26 @@ tooling — you read markdown.
 
 ## Step 1 — Load the catalog
 
-Read [`CATALOG.md`](./CATALOG.md) (path relative to this file). It lists all 98 models by
-slug, name, and keywords, grouped into 8 categories — about 4k tokens, cheap to load in
-full.
+Read [`CATALOG.md`](./CATALOG.md) (path relative to this file). It lists all 98 bundled
+models by slug, name, and keywords, grouped into 8 categories — about 4k tokens, cheap to
+load in full.
+
+Then check for the user's own models. The 98 are a starting set, not a fixed list:
+
+| Path | Holds |
+|---|---|
+| `.mental-models/*.md` (relative to the working directory) | this project's or team's models, committed with the code |
+| `~/.claude/mental-models/*.md` | the user's personal models, available everywhere |
+
+Glob both. If neither exists, skip on — that is the normal case and costs nothing. If either
+has files, read their headings to learn what is there; they follow the same section format
+as the bundled models, so they slot into selection exactly the same way.
+
+**A user model always wins a slug collision with a bundled one.** If someone wrote their own
+`inversion.md`, they meant it — use theirs and don't mention the built-in unless they ask.
+
+Treat user models as first-class, not as an appendix. A model a team wrote about their own
+domain usually beats a general one at that domain.
 
 ## Step 2 — YOU select the models
 
@@ -47,7 +64,7 @@ Per-category deep walkthroughs: [`REFERENCE.md`](./REFERENCE.md). Worked example
 
 ## Step 3 — Retrieve each pick exactly
 
-Read the file directly:
+Read the file directly. Bundled models:
 
 ```
 models/<Category_Dir>/<mNN>_<slug>.md
@@ -56,6 +73,9 @@ models/<Category_Dir>/<mNN>_<slug>.md
 e.g. `models/Mental_Model_General/m07_inversion.md`. Category directories:
 `Mental_Model_{General,Science,SysThinking,Math,Economics,Art,War,HumanNature}`
 (see the Category Map below, and `CATALOG.md`'s headings, for the exact mapping).
+
+User models are flat files at the path you found them — `.mental-models/<name>.md` or
+`~/.claude/mental-models/<name>.md`. No category directories, no numbering.
 
 ## Step 4 — Apply
 
@@ -102,6 +122,12 @@ e.g. `models/Mental_Model_General/m07_inversion.md`. Category directories:
 - `REFERENCE.md` — deep per-category walkthrough, signature models, latticework combos
 - `examples/` — 5 worked scenarios (architecture review, career decision, debugging,
   negotiation, product launch)
-- `models/` — the 98 source model files, the one thing every consumer of this skill reads
+- `models/` — the 98 bundled model files, the one thing every consumer of this skill reads
+- `models/_TEMPLATE.md` — the section format; a user model is any file that follows it
+
+Outside this skill, and never overwritten by an update:
+
+- `.mental-models/*.md` — the working directory's own models
+- `~/.claude/mental-models/*.md` — the user's personal models
 
 Source: <https://github.com/cyperx84/claude-skills-mental-models>

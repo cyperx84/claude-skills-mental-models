@@ -64,6 +64,26 @@ What mental models help with scaling systems?
 Help me think through whether to take this job offer
 ```
 
+## Bring Your Own Models
+
+The bundled 98 are a starting set, not a fixed list. Drop a markdown file in either place
+and it joins the latticework:
+
+```
+.mental-models/<name>.md            this project's or team's models, committed with the code
+~/.claude/mental-models/<name>.md   your personal models, available everywhere
+```
+
+Copy [`_TEMPLATE.md`](./skills/mental-models/models/_TEMPLATE.md) and fill in the sections.
+No registration, no config, no rebuild — the skill globs those paths every time it runs, and
+a model you wrote wins any name collision with a bundled one.
+
+This is the interesting half. A general model about incidents is fine; *your* model about
+how your team handles incidents, sitting in your repo where every agent working there picks
+it up, is better. Institutional judgment, version-controlled, applied automatically.
+
+Plugin updates never touch either path.
+
 ## Why Munger?
 
 Charlie Munger argued that worldly wisdom comes from building a **latticework of mental
@@ -100,9 +120,13 @@ skills/mental-models/
 ├── SKILL.md      entry point: when to activate, how to select, how to apply
 ├── CATALOG.md    all 98 by slug + keywords (the agent reads this first)
 ├── REFERENCE.md  per-category walkthrough, signature models
-├── models/       the 98 model files, grouped by category
+├── models/       the 98 bundled model files, grouped by category
+│   └── _TEMPLATE.md   the format — copy this to write your own
 └── examples/     5 worked scenarios
 ```
+
+Your own models live outside the skill, at `.mental-models/` or `~/.claude/mental-models/`,
+so an update can never overwrite them.
 
 ## Contributing
 
