@@ -1,6 +1,6 @@
 # Mental Models Reference
 
-Deep walkthrough of the 8 categories with signature models and when to reach for each. Use this file when the user wants to learn a category, browse what's available, or when you need to pick models beyond the common patterns in PATTERNS.md.
+Deep walkthrough of the 8 categories with signature models and when to reach for each. Use this file when the user wants to learn a category, browse what's available, or when you need to pick models beyond the discovery heuristics in SKILL.md.
 
 Model files live at `models/Mental_Model_<Category>/m<NN>_<name>.md`.
 
@@ -163,4 +163,4 @@ Good analyses pull from 2-3 different categories so blind spots in one are cover
 - **Bias Detector**: m82 availability + m96 survivorship + m98 confirmation
 - **Strategic Planner**: m51 trade-offs + m33 scale + m57 creative destruction
 
-For problem-shape → model selection, see **PATTERNS.md**.
+For problem-shape → model selection, see the discovery heuristics in **SKILL.md**.

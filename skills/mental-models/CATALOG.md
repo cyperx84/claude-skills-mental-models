@@ -1,8 +1,7 @@
 # Mental Models Catalog
 
-98 models in 8 categories. Pick 2-4 across different categories, then retrieve each by its
-exact slug: `mental-models get <slug>` (or read
-`skills/mental-models/models/<Category_Dir>/<mNN>_<slug>.md`).
+98 models in 8 categories. Pick 2-4 across different categories, then read each one at
+`models/<Category_Dir>/<mNN>_<slug>.md` (relative to this file).
 
 ## General Thinking Tools (9)
 

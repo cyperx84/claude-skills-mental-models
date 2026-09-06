@@ -7,12 +7,6 @@
 ehthumbs.db
 Thumbs.db
 
-# WorkSpace folders (user analysis sessions - may contain sensitive info)
-WorkSpace/*/
-
-# Keep WorkSpace directory structure but ignore contents
-!WorkSpace/.gitkeep
-
 # Editor
 .vscode/
 .idea/
@@ -25,24 +19,4 @@ WorkSpace/*/
 # Logs
 *.log
 
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-env/
-venv/
-ENV/
-.venv
-pip-log.txt
-
-# Distribution / packaging
-dist/
-build/
-*.egg-info/
-
-# GitHub specific
-.github/workflows/*.log
-evals/__pycache__
 .herdr-loop/
