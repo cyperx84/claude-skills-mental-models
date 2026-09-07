@@ -6,7 +6,7 @@ User: "I have an offer from a well-known startup at 30% more comp, but I'd be le
 
 ## Problem shape
 
-High-stakes, low-reversibility, personal decision under uncertainty — and the user is stuck. That matches **Tree 1 (risk/reversibility)** and **Tree 2 (stuck)**. Reach across both.
+High-stakes, low-reversibility, personal decision under uncertainty — and the user is stuck. That hits two discovery heuristics at once — **risk / uncertainty / reversibility** and **stuck / can't see options**. Reach across both.
 
 ## Models picked (3, cross-category)
 

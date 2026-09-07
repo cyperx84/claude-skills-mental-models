@@ -6,7 +6,7 @@ User: "We have a bug that only happens in production, only for about 0.3% of req
 
 ## Problem shape
 
-The user is stuck (**Tree 2**) on a complex system (**Tree 4**) and is also suspicious their team is anchored. That's a classic bias-check situation — so **Human Nature** gets a seat at the table.
+The user is **stuck** on a **complex system** — two discovery heuristics — and is also suspicious their team is anchored. That's a classic bias-check situation — so **Human Nature** gets a seat at the table.
 
 ## Models picked (3, cross-category)
 

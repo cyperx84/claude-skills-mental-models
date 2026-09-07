@@ -9,8 +9,6 @@ Turn Claude Code into a thinking partner with 98 Munger-style mental models bund
 
 > A latticework for better decisions, one prompt away.
 
-![mental-models demo](./docs/demo.gif)
-
 ## What It Does
 
 98 mental models, each with Thinking Steps, Coaching Questions, and a **When to Avoid**
@@ -47,6 +45,17 @@ ln -s "$PWD/claude-skills-mental-models/skills/mental-models" ~/.claude/skills/m
 ```
 
 Nothing else to run. The skill reads its own files.
+
+**Upgrading from an older clone?** Previous versions told you to symlink
+`.claude/skills/mental-models`. That directory is gone. A stale symlink fails silently — the
+skill simply stops activating, with no error. Repoint it:
+
+```bash
+rm ~/.claude/skills/mental-models
+ln -s "$PWD/claude-skills-mental-models/skills/mental-models" ~/.claude/skills/mental-models
+```
+
+Or drop the symlink entirely and install the plugin above.
 
 ## Quick Start
 

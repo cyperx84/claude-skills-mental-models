@@ -50,6 +50,13 @@ about the caveats.
 - Coaching Questions are things a person would actually say out loud.
 - Cite a source when a model comes from a specific book, paper, or speech.
 
+## A note on `docs/latticework.svg`
+
+It is a static snapshot from a keyword analysis of the corpus. Its generator and input data
+were deleted along with the rest of the tooling, so it cannot currently be rebuilt. It is
+accurate for the 98 bundled models as they stand; if you change the corpus substantially,
+either regenerate it by hand or drop it.
+
 ## Checking your work
 
 - The plugin manifests must stay valid JSON:
