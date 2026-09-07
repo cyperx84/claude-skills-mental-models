@@ -6,7 +6,7 @@ User: "We're designing a new service to handle 10x our current write load. The t
 
 ## Problem shape
 
-A high-stakes, low-reversibility technical decision on a complex system that must scale. Matches **Tree 4 (complex system)** and **Tree 5 (performance)** — plus a risk dimension from **Tree 1**.
+A high-stakes, low-reversibility technical decision on a complex system that must scale. Matches the **complex system / unintended effects** and **performance / optimization** heuristics — plus a **risk / reversibility** dimension.
 
 ## Models picked (3, cross-category)
 
