@@ -78,6 +78,15 @@ e.g. `models/*/m??_inversion.md` resolves to `models/Mental_Model_General/m07_in
 Every catalog slug resolves to exactly one file this way. Do not guess `<NN>` from a model's
 position in the catalog — the catalog is not in ID order.
 
+Use the Glob tool, not a shell glob: two slugs contain apostrophes (`hanlon's_razor`,
+`occam's_razor`) and will break an unquoted shell pattern.
+
+**If the glob returns nothing, the slug is wrong, not the model missing.** The heuristics in
+Step 2 use informal names that are not slugs — "first principles" is
+`first-principle_thinking`, "diminishing returns" is `law_of_diminishing_returns`, "social
+proof" is `social_proof_safety_in_numbers`. Go back to `CATALOG.md` and copy the slug
+exactly. Never invent a model that isn't there.
+
 User models are flat files at the path you found them — `.mental-models/<name>.md` or
 `~/.claude/mental-models/<name>.md`. No category directories, no numbering.
 

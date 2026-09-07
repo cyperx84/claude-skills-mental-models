@@ -11,7 +11,7 @@ Adversarial, asymmetric (they're stronger), and the user feels stuck. That's the
 ## Models picked (3, cross-category)
 
 1. **m72 Asymmetric Warfare** (Strategy) — because head-on price negotiation is the strong party's game
-2. **m19 Incentives** (Human Nature) — because "market conditions" is a stated reason, not necessarily the real one
+2. **m77 Bias from Incentives** (Human Nature) — because "market conditions" is a stated reason, and a party's stated reason bends toward what pays them
 3. **m63 Framing** (Art) — because "22% increase vs. 0%" is their frame, and accepting the frame is already losing
 
 ## Reasoning walkthrough
