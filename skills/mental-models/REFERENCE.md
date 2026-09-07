@@ -78,7 +78,7 @@ Extreme results tend to be followed by less extreme ones — independent of any 
 **m41 — Sampling**
 Small/biased samples lie confidently. Reach for it when: user cites "we tried it with 3 customers", or when survivorship is a risk.
 
-Also in this category: local vs global maxima, compounding, power laws.
+Also in this category: m44 multiply by zero, m45 equivalence, m46 surface area, m47 global and local maxima.
 
 ---
 
@@ -141,7 +141,7 @@ Biases, incentives, and predictable irrationality. The largest category — reac
 
 ### Signature models
 
-**m19 / m79 — Incentives**
+**m77 — Bias from Incentives** (see also m19 Incentives, in Science)
 "Show me the incentive and I'll show you the outcome" (Munger). Reach for it when: explaining surprising behavior, designing systems, or debugging a team problem. Usually the first model to try in any people question.
 
 **m84 — Social Proof**

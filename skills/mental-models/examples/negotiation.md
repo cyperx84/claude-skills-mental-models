@@ -6,7 +6,7 @@ User: "I'm negotiating a vendor contract renewal. They're a critical supplier an
 
 ## Problem shape
 
-Adversarial, asymmetric (they're stronger), and the user feels stuck. That's **Tree 3 (conflict)** on the weaker-party branch, crossed with **Tree 2 (stuck)**.
+Adversarial, asymmetric (they're stronger), and the user feels stuck. That's the **conflict / negotiation / competition** heuristic on the weaker-party side, crossed with **stuck / can't see options**.
 
 ## Models picked (3, cross-category)
 

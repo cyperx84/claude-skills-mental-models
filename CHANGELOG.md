@@ -5,6 +5,34 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.1] - 2026-09-07
+
+### Fixed
+- **Retrieval was unresolvable from the catalog.** `SKILL.md` and `CATALOG.md` told the
+  agent to read `models/<Category_Dir>/<mNN>_<slug>.md`, but the catalog supplies only the
+  slug — never the number or the directory — and its sections are not in ID order, so an
+  agent inferring `mNN` from position guessed wrong. Retrieval is now a glob,
+  `models/*/m??_<slug>.md`, verified to resolve uniquely for all 98 slugs.
+- `SKILL.md` claimed `CATALOG.md`'s headings gave the exact category-directory mapping. They
+  do not match the directory names or the Category Map. The glob removes the need for it.
+- The five worked examples cited "Tree 1"–"Tree 6", a scheme defined only in the deleted
+  `PATTERNS.md`. Step 2 now points the agent at `examples/`, so it was reading reasoning
+  that referenced nothing. Rewritten to name the discovery heuristics in `SKILL.md`.
+- `REFERENCE.md` listed Incentives as `m19 / m79`; m79 is envy and jealousy. Corrected to
+  m77 `bias_from_incentives`. Its Mathematics section also named "compounding" and "power
+  laws", neither of which exists — replaced with the real m44–m47.
+- `SKILL.md` told the agent to read user models' *headings*; a template-conformant model has
+  exactly one, so user models were being selected on filename alone. Now says to read the
+  file, or at minimum its **Keywords for Situations** line.
+- Removed `docs/demo.gif` — it demoed `uvx`/`mental-models select`, commands this release
+  deletes, nine lines above "no dependencies, no runtime, no build step". Its `.tape` source
+  was deleted too, so it could not be re-recorded.
+- Removed `.markdownlint.jsonc`; nothing consumes it now that the workflows are gone.
+- Noted in CONTRIBUTING that `docs/latticework.svg` is a static snapshot whose generator and
+  input data no longer exist.
+
+Found by an independent review of #12.
+
 ## [1.1.0] - 2026-09-07
 
 ### Added
@@ -26,7 +54,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Collapsed the repo to what actually worked: a skill and a plugin manifest.
 
 ### Removed
-- The Python package (`src/mental_models_kit/`), its CLI, and its 1,089-line test suite.
+- The Python package (`packages/mental_models/`, restructured to `src/mental_models_kit/`
+  earlier on this branch), its CLI, and its 1,089-line test suite.
   2,115 lines of source wrapped around markdown that the agent reads directly. Never
   published to PyPI, never had a user.
 - The MCP server and its per-client config docs (`docs/mcp/`).
@@ -36,6 +65,11 @@ Collapsed the repo to what actually worked: a skill and a plugin manifest.
   `CATALOG.md` is the index; SKILL.md carries the discovery heuristics.
 - Planning artifacts now spent: `REBUILD-PLAN.md`, `DEMAND-REPORT.md`, `SCAN-REPORT.md`,
   `RELEASING.md`, `docs/openclaw/`.
+
+### Migration
+- **If you symlinked `.claude/skills/mental-models` into `~/.claude/skills/`, repoint it at
+  `skills/mental-models`.** That directory no longer exists, and a dangling symlink fails
+  silently — the skill stops activating with no error. Or install the plugin instead.
 
 ### Changed
 - `SKILL.md` no longer mentions a CLI. Retrieval is reading a file path.
@@ -85,6 +119,7 @@ Collapsed the repo to what actually worked: a skill and a plugin manifest.
 - `resources/quick-reference.md` cheat sheet.
 - MIT `LICENSE`.
 
+[1.1.1]: https://github.com/cyperx84/claude-skills-mental-models/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/cyperx84/claude-skills-mental-models/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/cyperx84/claude-skills-mental-models/compare/v0.2.0...v1.0.0
 [0.2.0]: https://github.com/cyperx84/claude-skills-mental-models/compare/v0.1.0...v0.2.0

@@ -6,7 +6,7 @@ User: "We're launching a new B2B analytics product in 6 weeks. Early beta users 
 
 ## Problem shape
 
-Looks like a marketing/execution question, but the real shape is a **complex system with feedback loops** (Tree 4) plus **people/adoption** (Tree 6) plus a hidden **survivorship bias** in the "beta users love it" signal.
+Looks like a marketing/execution question, but the real shape is a **complex system with feedback loops** plus **people / team / behavior** plus a hidden **survivorship bias** in the "beta users love it" signal.
 
 ## Models picked (3, cross-category)
 

@@ -1,7 +1,8 @@
 # Mental Models Catalog
 
-98 models in 8 categories. Pick 2-4 across different categories, then read each one at
-`models/<Category_Dir>/<mNN>_<slug>.md` (relative to this file).
+98 models in 8 categories. Pick 2-4 across different categories, then read each one by
+globbing `models/*/m??_<slug>.md` (relative to this file) — the slug below is all you need.
+Sections are not in ID order, so never infer a model's number from its position here.
 
 ## General Thinking Tools (9)
 

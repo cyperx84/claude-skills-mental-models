@@ -33,8 +33,10 @@ Then check for the user's own models. The 98 are a starting set, not a fixed lis
 | `~/.claude/mental-models/*.md` | the user's personal models, available everywhere |
 
 Glob both. If neither exists, skip on — that is the normal case and costs nothing. If either
-has files, read their headings to learn what is there; they follow the same section format
-as the bundled models, so they slot into selection exactly the same way.
+has files, read them — at minimum each file's `## Mental Model =` title and its
+**Keywords for Situations** line, since the other sections are bold labels rather than
+headings and a heading-only scan would tell you nothing but the name. They follow the same
+section format as the bundled models, so they slot into selection exactly the same way.
 
 **A user model always wins a slug collision with a bundled one.** If someone wrote their own
 `inversion.md`, they meant it — use theirs and don't mention the built-in unless they ask.
@@ -64,15 +66,17 @@ Per-category deep walkthroughs: [`REFERENCE.md`](./REFERENCE.md). Worked example
 
 ## Step 3 — Retrieve each pick exactly
 
-Read the file directly. Bundled models:
+Bundled model files are named `m<NN>_<slug>.md` and live one level down in a category
+directory. **`CATALOG.md` gives you the slug, not the number or the directory — so glob for
+it rather than trying to construct the path:**
 
 ```
-models/<Category_Dir>/<mNN>_<slug>.md
+models/*/m??_<slug>.md
 ```
 
-e.g. `models/Mental_Model_General/m07_inversion.md`. Category directories:
-`Mental_Model_{General,Science,SysThinking,Math,Economics,Art,War,HumanNature}`
-(see the Category Map below, and `CATALOG.md`'s headings, for the exact mapping).
+e.g. `models/*/m??_inversion.md` resolves to `models/Mental_Model_General/m07_inversion.md`.
+Every catalog slug resolves to exactly one file this way. Do not guess `<NN>` from a model's
+position in the catalog — the catalog is not in ID order.
 
 User models are flat files at the path you found them — `.mental-models/<name>.md` or
 `~/.claude/mental-models/<name>.md`. No category directories, no numbering.
