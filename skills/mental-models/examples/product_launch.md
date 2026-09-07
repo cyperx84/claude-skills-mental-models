@@ -36,4 +36,4 @@ Recommendation:
 4. Stage the launch: invite-gated first, open later, so you don't burn the audience if threshold dynamics bite
 5. Explicitly warn leadership about the survivorship bias in the beta feedback
 
-Residual uncertainty: whether leadership can be moved off the vanity metric — that's an incentives/politics question (m19), potentially the next conversation.
+Residual uncertainty: whether leadership can be moved off the vanity metric — that's an incentives/politics question (m77 bias from incentives), potentially the next conversation.

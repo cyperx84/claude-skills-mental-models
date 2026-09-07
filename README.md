@@ -51,9 +51,14 @@ Nothing else to run. The skill reads its own files.
 skill simply stops activating, with no error. Repoint it:
 
 ```bash
-rm ~/.claude/skills/mental-models
-ln -s "$PWD/claude-skills-mental-models/skills/mental-models" ~/.claude/skills/mental-models
+cd /path/to/your/claude-skills-mental-models   # your existing clone
+git pull                                        # skills/ does not exist until you do
+rm -f ~/.claude/skills/mental-models            # -f: the old symlink may already be gone
+ln -s "$PWD/skills/mental-models" ~/.claude/skills/mental-models
 ```
+
+`ln -s` never checks that its target exists, so pull first or you will replace one dangling
+symlink with another.
 
 Or drop the symlink entirely and install the plugin above.
 

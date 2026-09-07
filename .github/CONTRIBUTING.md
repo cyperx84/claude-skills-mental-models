@@ -36,6 +36,12 @@ Category folders:
 3. Add a matching line to [`CATALOG.md`](../skills/mental-models/CATALOG.md) under the right
    heading, in the existing `` `slug` — Name: keywords `` format. The catalog is what the
    agent reads to choose models, so a model missing from it is invisible.
+
+   **The catalog slug must byte-match the filename after the `mNN_` prefix.** Retrieval is a
+   glob on `models/*/m??_<slug>.md`, and nothing validates this any more — a mismatch
+   produces a model the agent can see in the catalog and can never open, with no error.
+   Note also that `m??` matches exactly two digits, so the numbering has a ceiling at m99;
+   going past it means changing the glob in `SKILL.md`, `CATALOG.md` and `REFERENCE.md`.
 4. If the model belongs in a category's signature set, mention it in
    [`REFERENCE.md`](../skills/mental-models/REFERENCE.md).
 

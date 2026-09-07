@@ -5,6 +5,34 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.2] - 2026-09-07
+
+### Fixed
+- `REFERENCE.md` still taught path construction — `models/Mental_Model_<Category>/m<NN>_<name>.md`
+  — the exact instruction 1.1.1 removed from `SKILL.md` and `CATALOG.md`. Its own category
+  headings do not match the directory names and `<name>` is a display name, not a slug, so an
+  agent following it built `models/Mental_Model_Mathematics/m43_Regression to the Mean.md`.
+  Now points at the glob like the other two.
+- Two worked examples cited **m19 Incentives** and labelled it Human Nature. m19 is in
+  Science; the Human Nature model is m77 `bias_from_incentives`, which is also the better fit
+  (a stated reason bending toward what pays the speaker). Same m19/m77 confusion 1.1.1 fixed
+  in `REFERENCE.md`, left behind in the examples.
+- The upgrade snippet in README pointed at `$PWD/claude-skills-mental-models/skills/...`,
+  which does not resolve for someone standing inside their own clone, and omitted the `git
+  pull` without which `skills/` does not exist yet. `ln -s` validates nothing, so it replaced
+  one dangling symlink with another — the precise failure the paragraph above it warns about.
+- `SKILL.md` now says what to do when the glob returns nothing. A wrong constructed path used
+  to error loudly; an empty glob is silent. The Step 2 heuristics use informal names that are
+  not slugs ("first principles" is `first-principle_thinking`), which is the likely trigger.
+  Also notes that two slugs contain apostrophes and need the Glob tool, not a shell pattern.
+- CONTRIBUTING now states the invariant retrieval depends on: the catalog slug must byte-match
+  the filename after `mNN_`. Nothing validates this since the workflows were deleted, and a
+  mismatch yields a model visible in the catalog that can never be opened. Also notes `m??`
+  caps the numbering at m99.
+- Dropped the `[1.1.0]` and `[1.1.1]` compare links; neither tag was ever cut, so both 404.
+
+Found by an independent review of #14, after it merged.
+
 ## [1.1.1] - 2026-09-07
 
 ### Fixed
@@ -119,8 +147,6 @@ Collapsed the repo to what actually worked: a skill and a plugin manifest.
 - `resources/quick-reference.md` cheat sheet.
 - MIT `LICENSE`.
 
-[1.1.1]: https://github.com/cyperx84/claude-skills-mental-models/compare/v1.1.0...v1.1.1
-[1.1.0]: https://github.com/cyperx84/claude-skills-mental-models/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/cyperx84/claude-skills-mental-models/compare/v0.2.0...v1.0.0
 [0.2.0]: https://github.com/cyperx84/claude-skills-mental-models/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/cyperx84/claude-skills-mental-models/releases/tag/v0.1.0
