@@ -1,7 +1,13 @@
 # References
 
 Curated sources behind the mental-models skill. If you want to go deeper than the
-summaries in `resources/`, start here.
+summaries in `skills/mental-models/models/`, start here.
+
+**Attribution note.** The individual model write-ups in this repo are original text, but
+the model list and category structure follow Farnam Street's *Great Mental Models* series
+closely, and the Human Nature category follows Munger's *Psychology of Human Misjudgment*.
+The write-ups do not currently carry per-model citations. Treat them as summaries pointing
+at the sources below, not as scholarship.
 
 ## Primary Sources
 
@@ -19,7 +25,7 @@ summaries in `resources/`, start here.
 
 - **The Great Mental Models (Volumes 1-4)** - Shane Parrish & Rhiannon Beaubien,
   Farnam Street. The most complete written treatment of the individual models; the
-  category structure and many model names in `model-index.json` mirror this series.
+  category structure and many model names in this repo mirror this series.
 - **Farnam Street - Mental Models guide** - https://fs.blog/mental-models/. Free web
   companion to the Great Mental Models books; good entry point per model.
 - **Seeking Wisdom: From Darwin to Munger** - Peter Bevelin. A structured tour of
@@ -27,10 +33,8 @@ summaries in `resources/`, start here.
 
 ## Claude Code Docs
 
-- **Claude Code Skills** - https://docs.claude.com/en/docs/claude-code/skills.
+- **Claude Code Skills** - https://code.claude.com/docs/en/skills.
   Official documentation for the Skills format (`SKILL.md`, frontmatter, progressive
   disclosure, resources folder) this repository targets.
-- **Claude Code Overview** - https://docs.claude.com/en/docs/claude-code/overview.
+- **Claude Code Plugins** - https://code.claude.com/docs/en/plugins-reference.
   Context on how model-invoked skills fit into the broader Claude Code harness.
-- **Model Context Protocol** - https://modelcontextprotocol.io. The MCP spec the
-  `mental-models-mcp` server implements, enabling the latticework in any MCP client.

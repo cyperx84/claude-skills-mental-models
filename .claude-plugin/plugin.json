@@ -1,0 +1,11 @@
+{
+  "name": "mental-models",
+  "displayName": "Mental Models",
+  "version": "1.1.0",
+  "description": "Apply Charlie Munger's latticework of 98 mental models to any problem",
+  "author": { "name": "cyperx84", "url": "https://github.com/cyperx84" },
+  "homepage": "https://github.com/cyperx84/claude-skills-mental-models",
+  "repository": "https://github.com/cyperx84/claude-skills-mental-models",
+  "license": "MIT",
+  "keywords": ["mental-models", "decision-making", "munger", "reasoning", "claude", "skills"]
+}

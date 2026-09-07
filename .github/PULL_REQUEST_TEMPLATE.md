@@ -6,17 +6,17 @@
 
 - [ ] New mental model
 - [ ] Edit to existing model
-- [ ] Skill infrastructure / tooling
+- [ ] Skill instructions (SKILL.md / CATALOG.md / REFERENCE.md)
 - [ ] Docs
-- [ ] Bug fix
+- [ ] Plugin manifests
 
 ## Checklist
 
-- [ ] Frontmatter (if applicable) is valid
-- [ ] All required H2 sections present: Description, Keywords, Thinking Steps, Coaching Questions, When to Avoid
-- [ ] `resources/model-index.json` updated
-- [ ] `python scripts/validate_models.py` passes locally
-- [ ] `CHANGELOG.md` updated under Unreleased
+- [ ] All required sections present: Description, When to Avoid, Keywords, Thinking Steps, Coaching Questions
+- [ ] `CATALOG.md` updated to match — a model missing from it is invisible to the agent
+- [ ] Manifests still parse: `python3 -c "import json;json.load(open('.claude-plugin/plugin.json'))"`
+- [ ] Tried locally: `claude plugin marketplace add .` then `claude plugin install mental-models@mental-models`
+- [ ] `CHANGELOG.md` updated
 - [ ] No duplicate of an existing model
 
 ## Notes for reviewers

@@ -1,90 +1,59 @@
 # Contributing
 
-Thanks for helping grow the Mental Models skill. This guide covers how to add a new model, how to keep the index in sync, and how to validate your work before opening a PR.
+Thanks for helping grow the Mental Models skill. This repo is markdown only — there is no
+build step, no test suite, and no code to run. Edit files, open a PR.
 
 ## Repository layout
 
-Models live under:
-
 ```
-.claude/skills/mental-models/models/<Category_Folder>/mNN_snake_case_title.md
-```
-
-Category folders currently in use:
-
-- `Mental_Model_General`      - General Thinking Tools
-- `Mental_Model_Science`      - Science
-- `Mental_Model_SysThinking`  - Systems Thinking
-- `Mental_Model_Math`         - Mathematics
-- `Mental_Model_Economics`    - Economics
-- `Mental_Model_Art`          - Art
-- `Mental_Model_War`          - Strategy (military/competition)
-- `Mental_Model_HumanNature`  - Human Nature and Judgment
-
-## Naming convention
-
-- File name: `mNN_snake_case_title.md`
-  - `NN` is the next available two-digit number (zero-padded, e.g. `m99`).
-  - Title is lowercase, snake_case, words separated by underscores.
-  - Example: `m42_regression_to_the_mean.md`
-- If your title contains an apostrophe, keep it (e.g. `m08_hanlon's_razor.md`), matching existing convention.
-
-## Required sections
-
-Every model file must contain these H2 sections, in this order, using the exact labels below. Start from `.claude/skills/mental-models/models/_TEMPLATE.md` to avoid mistakes.
-
-1. `## Mental Model = <Title>`
-2. `**Category = <Category Name>**`
-3. `**Description:**`
-4. `**When to Avoid (or Use with Caution):**`
-5. `**Keywords for Situations:**`
-6. `**Thinking Steps:**`
-7. `**Coaching Questions:**`
-
-Keep each model roughly 2 to 3 KB. Be specific, practical, and plainly written.
-
-## Updating the model index
-
-After adding or renaming a model, update `model-index.json` so the skill loader can find it. Each entry should include:
-
-```json
-{
-  "id": "m99",
-  "title": "Your Title",
-  "category": "General Thinking Tools",
-  "path": ".claude/skills/mental-models/models/Mental_Model_General/m99_your_title.md",
-  "keywords": ["keyword1", "keyword2"]
-}
+skills/mental-models/
+├── SKILL.md      entry point
+├── CATALOG.md    index of all 98 models
+├── REFERENCE.md  per-category walkthrough
+├── models/<Category_Folder>/mNN_snake_case_title.md
+└── examples/
 ```
 
-Entries are sorted by `id`.
+Category folders:
 
-## Validating locally
+| Folder | Category | IDs |
+|---|---|---|
+| `Mental_Model_General` | General Thinking Tools | m01–m09 |
+| `Mental_Model_Science` | Physics, Chemistry, and Biology | m10–m29 |
+| `Mental_Model_SysThinking` | Systems Thinking | m30–m40 |
+| `Mental_Model_Math` | Mathematics | m41–m47 |
+| `Mental_Model_Economics` | Economics | m48–m59 |
+| `Mental_Model_Art` | Art | m60–m70 |
+| `Mental_Model_War` | Strategy (military/competition) | m71–m75 |
+| `Mental_Model_HumanNature` | Human Nature and Judgment | m76–m98 |
 
-Before opening a PR, run:
+## Adding or editing a model
 
-```bash
-python scripts/validate_models.py
-```
+1. Copy [`skills/mental-models/models/_TEMPLATE.md`](../skills/mental-models/models/_TEMPLATE.md)
+   into the right category folder. Name it `mNN_snake_case_title.md`, continuing the numbering.
+2. Fill in every section: **Description**, **When to Avoid (or Use with Caution)**,
+   **Keywords for Situations**, **Thinking Steps**, **Coaching Questions**.
+3. Add a matching line to [`CATALOG.md`](../skills/mental-models/CATALOG.md) under the right
+   heading, in the existing `` `slug` — Name: keywords `` format. The catalog is what the
+   agent reads to choose models, so a model missing from it is invisible.
+4. If the model belongs in a category's signature set, mention it in
+   [`REFERENCE.md`](../skills/mental-models/REFERENCE.md).
 
-This checks:
+**When to Avoid** is the section that matters most. Anyone can restate a framework; the
+value here is knowing when it misleads you. Be specific about the conditions, not generic
+about the caveats.
 
-- Filenames follow `mNN_snake_case.md`.
-- All required H2 sections are present.
-- Every model on disk is listed in `model-index.json` (and vice versa).
-- No duplicate IDs or titles.
+## Style
 
-Fix any reported issues and re-run until the script exits cleanly.
+- Plain, concrete prose. No hype.
+- Thinking Steps are actions the reader takes, not descriptions of the concept.
+- Coaching Questions are things a person would actually say out loud.
+- Cite a source when a model comes from a specific book, paper, or speech.
 
-## Pull request checklist
+## Checking your work
 
-- [ ] New/changed model files follow the naming convention.
-- [ ] All required sections are present and non-empty.
-- [ ] `model-index.json` updated and sorted.
-- [ ] `python scripts/validate_models.py` passes.
-- [ ] `CHANGELOG.md` updated with a short entry.
-- [ ] PR description explains why the model belongs in the latticework.
-
-## Code of Conduct
-
-By participating, you agree to uphold our [Code of Conduct](./CODE_OF_CONDUCT.md).
+- The plugin manifests must stay valid JSON:
+  `python3 -c "import json;json.load(open('.claude-plugin/plugin.json'))"`
+- To try the skill locally before opening a PR:
+  `claude plugin marketplace add .` then `claude plugin install mental-models@mental-models`
+- `claude plugin details mental-models` shows the component inventory and token cost.

@@ -5,6 +5,54 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-09-07
+
+### Added
+- **Bring your own mental models.** The skill now globs `.mental-models/*.md` (working
+  directory) and `~/.claude/mental-models/*.md` (personal) alongside the bundled 98. A user
+  model wins any slug collision with a built-in. Neither path is touched by a plugin
+  update, so user models survive upgrades. No config, no registration, no code — the
+  bundled corpus is a starting set, not a fixed list.
+- `models/_TEMPLATE.md` rewritten as a user-facing format spec rather than a contributor
+  note: where to put the file, and why **When to Avoid** is the section that matters.
+
+### Notes
+- Verified end-to-end: a project-local `blast_radius_first.md` was selected, led the
+  analysis, had its Thinking Steps walked in order and its When to Avoid applied, and was
+  combined with three bundled models from other categories.
+
+## [1.0.0] - 2026-09-07
+
+Collapsed the repo to what actually worked: a skill and a plugin manifest.
+
+### Removed
+- The Python package (`src/mental_models_kit/`), its CLI, and its 1,089-line test suite.
+  2,115 lines of source wrapped around markdown that the agent reads directly. Never
+  published to PyPI, never had a user.
+- The MCP server and its per-client config docs (`docs/mcp/`).
+- The eval harness (`evals/`), corpus validator and latticework generator (`scripts/`),
+  and the CI workflows that ran them.
+- `PATTERNS.md` and `docs/categories.md` — a third and fourth index of the same 98 models.
+  `CATALOG.md` is the index; SKILL.md carries the discovery heuristics.
+- Planning artifacts now spent: `REBUILD-PLAN.md`, `DEMAND-REPORT.md`, `SCAN-REPORT.md`,
+  `RELEASING.md`, `docs/openclaw/`.
+
+### Changed
+- `SKILL.md` no longer mentions a CLI. Retrieval is reading a file path.
+- Install is `/plugin marketplace add cyperx84/claude-skills-mental-models` plus
+  `/plugin install mental-models@mental-models`. Other harnesses symlink
+  `skills/mental-models/`.
+- `plugin.json` and `marketplace.json` filled out against the documented schemas
+  (version, license, author on both).
+- README and CONTRIBUTING rewritten; both described packages that no longer exist.
+
+### Notes
+- The skill `description` frontmatter is unchanged and hardcodes "98 mental models". It is
+  the activation trigger, so it moves only as a deliberate, measured change.
+- The 98 model files are untouched. They all landed in the initial commit (2025-10-31) and
+  have had exactly one content edit since; rewriting them with real citations and real
+  failure cases is the next piece of work, tracked separately.
+
 ## [0.2.0] - 2026-04-09
 
 ### Added
@@ -37,5 +85,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `resources/quick-reference.md` cheat sheet.
 - MIT `LICENSE`.
 
+[1.1.0]: https://github.com/cyperx84/claude-skills-mental-models/compare/v1.0.0...v1.1.0
+[1.0.0]: https://github.com/cyperx84/claude-skills-mental-models/compare/v0.2.0...v1.0.0
 [0.2.0]: https://github.com/cyperx84/claude-skills-mental-models/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/cyperx84/claude-skills-mental-models/releases/tag/v0.1.0
