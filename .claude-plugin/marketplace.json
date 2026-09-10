@@ -1,14 +1,14 @@
 {
   "name": "mental-models",
-  "description": "Charlie Munger's latticework of 98 mental models for Claude Code",
+  "description": "Mental models as files an agent reads, in Open Knowledge Format",
   "owner": { "name": "cyperx84", "url": "https://github.com/cyperx84" },
   "plugins": [
     {
       "name": "mental-models",
       "source": "./",
       "displayName": "Mental Models",
-      "version": "1.1.2",
-      "description": "Charlie Munger's latticework of 98 mental models",
+      "version": "2.0.0",
+      "description": "Mental models as files an agent reads — bring your own, or start with the 21 that ship",
       "author": { "name": "cyperx84", "url": "https://github.com/cyperx84" },
       "homepage": "https://github.com/cyperx84/claude-skills-mental-models",
       "repository": "https://github.com/cyperx84/claude-skills-mental-models",

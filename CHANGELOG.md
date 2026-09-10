@@ -5,6 +5,45 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2026-09-10
+
+Breaking. The bundled model set changed entirely, and the file layout with it.
+
+### Changed
+- **The 98 are gone; 21 sourced models replace them.** The originals were a single
+  generation run from October 2025, never revised, mirroring Farnam Street's structure with
+  no citations. The replacements each carry an OKF `sources` block with resolvable
+  references and inline `[^footnotes]` tying claims to them. All 42 unique source URLs were
+  checked; zero are dead. Two return 403 to bots on verified DOIs (Anderson 1972 "More Is
+  Different", Mack 1975 "Why Big Nations Lose Small Wars"), both confirmed via Crossref.
+- **`models/` is an Open Knowledge Format bundle.** Flat markdown files with YAML
+  frontmatter, `type` on every concept, `index.md` carrying `okf_version`, validated against
+  the three conformance rules in the OKF SPEC section 11. Any OKF bundle is now a valid
+  drop-in at `.mental-models/`, and this bundle is readable by any OKF-aware agent.
+- **Retrieval is `models/<slug>.md`.** No category directories, no `mNN` numbers. This
+  removes the class of bug that required 1.1.1 and 1.1.2 — there is no longer a path to
+  construct incorrectly.
+- **Skill description leads with bring-your-own** rather than the catalog. Trigger phrases
+  are unchanged. skilleval was not run against the new description.
+- `TEMPLATE.md` moved out of `models/` (it has no `type`, so it cannot live inside a
+  conformant bundle) and rewritten in OKF form.
+
+### Removed
+- `CATALOG.md` — `index.md` is the catalog, and it is OKF's reserved filename.
+- `REFERENCE.md` — a per-category tour of a corpus that no longer exists.
+- `examples/` — five worked scenarios citing models that are gone. Rewriting them honestly
+  means capturing a real transcript, which is separate work.
+- `docs/latticework.svg` — a keyword-overlap graph of the 98, now depicting models that do
+  not exist, with its generator already deleted.
+
+### Notes
+- 21 rather than 20: margin of safety earned a place because nothing else covered risk
+  buffers and Graham is a real source.
+- No accuracy claim is made for any of this. The nearest published evidence, from
+  cc-thinking-skills' own audit, reports no automatic-retain verdict and a result below its
+  utility margin. The claim here is about workflow — your models, in your repo, applied
+  automatically — not measured output quality.
+
 ## [1.1.2] - 2026-09-07
 
 ### Fixed

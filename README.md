@@ -5,18 +5,19 @@
 [![Claude Code Compatible](https://img.shields.io/badge/Claude%20Code-Compatible-8A2BE2?style=flat-square)](https://code.claude.com/docs)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](./.github/CONTRIBUTING.md)
 
-Turn Claude Code into a thinking partner with 98 Munger-style mental models bundled as a single skill.
+Mental models as files an agent reads — bring your own, or start with the 21 that ship.
 
 > A latticework for better decisions, one prompt away.
 
 ## What It Does
 
-98 mental models, each with Thinking Steps, Coaching Questions, and a **When to Avoid**
-section. Ask for "inversion," "find the bottleneck," or "help me think through X" and Claude
-picks 2–4 models from different disciplines, walks their Thinking Steps against your actual
-problem, and tells you where the models disagree.
+Ask for "inversion," "find the bottleneck," or "help me think through X" and Claude picks
+2–4 models from different areas, walks their Thinking Steps against your actual problem,
+surfaces the conditions under which each one misleads you, and tells you where they disagree.
 
-No dependencies, no runtime, no build step. It is markdown that Claude reads.
+The models are files. Twenty-one ship with it — each with a `sources` block whose claims
+trace to something real — and you can add your own, which take precedence. No dependencies,
+no runtime, no build step.
 
 ## Install
 
@@ -80,7 +81,7 @@ Help me think through whether to take this job offer
 
 ## Bring Your Own Models
 
-The bundled 98 are a starting set, not a fixed list. Drop a markdown file in either place
+The bundled models are a starting set, not a fixed list. Drop a markdown file in either place
 and it joins the latticework:
 
 ```
@@ -88,7 +89,7 @@ and it joins the latticework:
 ~/.claude/mental-models/<name>.md   your personal models, available everywhere
 ```
 
-Copy [`_TEMPLATE.md`](./skills/mental-models/models/_TEMPLATE.md) and fill in the sections.
+Copy [`TEMPLATE.md`](./skills/mental-models/TEMPLATE.md) and fill in the sections.
 No registration, no config, no rebuild — the skill globs those paths every time it runs, and
 a model you wrote wins any name collision with a bundled one.
 
@@ -97,6 +98,16 @@ how your team handles incidents, sitting in your repo where every agent working 
 it up, is better. Institutional judgment, version-controlled, applied automatically.
 
 Plugin updates never touch either path.
+
+### It's an OKF bundle
+
+`models/` conforms to Google's [Open Knowledge Format](https://github.com/GoogleCloudPlatform/open-knowledge-format) —
+a directory of markdown files with YAML frontmatter, one `type` per concept, an `index.md` at
+the root. That is not a detail: it means any OKF bundle is already a valid drop-in here, and
+this bundle is readable by any OKF-aware agent. Obsidian vaults work too — `[[wikilinks]]`
+are treated as links.
+
+Nothing to convert. If you have a knowledge bundle, it's already in the right shape.
 
 ## Why Munger?
 
@@ -108,35 +119,33 @@ math, and strategy to analyze your problem. Read more in
 [Poor Charlie's Almanack](https://www.stripe.press/poor-charlies-almanack) or Farnam Street's
 [Mental Models hub](https://fs.blog/mental-models/).
 
-## The 98 Models
+## The Models
 
-Full catalog with keywords: [`skills/mental-models/CATALOG.md`](./skills/mental-models/CATALOG.md).
+Twenty-one, listed in [`models/index.md`](./skills/mental-models/models/index.md):
 
-| Category | Range | Sample |
-|---|---|---|
-| General Thinking | m01–m09 | First principles, inversion, second-order thinking |
-| Science | m10–m29 | Leverage, inertia, activation energy |
-| Systems Thinking | m30–m40 | Bottlenecks, scale, margin of safety |
-| Mathematics | m41–m47 | Randomness, regression to the mean |
-| Economics | m48–m59 | Trade-offs, scarcity, creative destruction |
-| Art | m60–m70 | Framing, audience, contrast |
-| Strategy | m71–m75 | Asymmetric warfare, seeing the front |
-| Human Nature | m76–m98 | Cognitive biases, incentives, social proof |
+| Area | Models |
+|---|---|
+| Thinking tools | first-principles thinking, second-order thinking, inversion |
+| Systems | bottlenecks, feedback loops, emergence, leverage, margin of safety |
+| Physical | activation energy, inertia |
+| Evidence | sampling, randomness, regression to the mean |
+| Economics | trade-offs, scarcity, creative destruction |
+| People | bias from incentives, social proof, confirmation bias, framing |
+| Strategy | asymmetric warfare |
 
-![Latticework of 98 mental models](./docs/latticework.svg)
+There were 98. They were one generation run that mirrored someone else's list with no
+citations, so they were replaced with a smaller set that carries sources. The count is not
+the point — see below.
 
-One problem, many lenses—that's the point.
+One problem, many lenses — that's the point.
 
 ## What's In Here
 
 ```
 skills/mental-models/
 ├── SKILL.md      entry point: when to activate, how to select, how to apply
-├── CATALOG.md    all 98 by slug + keywords (the agent reads this first)
-├── REFERENCE.md  per-category walkthrough, signature models
-├── models/       the 98 bundled model files, grouped by category
-│   └── _TEMPLATE.md   the format — copy this to write your own
-└── examples/     5 worked scenarios
+├── TEMPLATE.md   the format — copy this to write your own
+└── models/       an OKF bundle: index.md plus one file per model
 ```
 
 Your own models live outside the skill, at `.mental-models/` or `~/.claude/mental-models/`,
