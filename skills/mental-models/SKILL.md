@@ -30,9 +30,15 @@ Then check for the user's own models. The bundled set is a starting point, not a
 | `.mental-models/` (relative to the working directory) | this project's or team's models, committed with the code |
 | `~/.claude/mental-models/` | the user's personal models, available everywhere |
 
-Glob both for `*.md`. If neither exists, skip on — that is the normal case and costs nothing.
+**Always run both globs before selecting. Do not assume they are empty** — one tool call
+settles it, and a model the user wrote for exactly this situation is the most valuable thing
+you can find. This matters most when the problem is urgent: urgency is precisely when a
+team's own hard-won model is worth more than a general one, and precisely when you are
+tempted to skip the check.
+
 If either has files, read each one's YAML frontmatter (`title`, `description`, `tags`) to
 learn what is there. A directory may have its own `index.md`; read that instead if present.
+If both are empty, carry on with the bundled models.
 
 **A user model always wins a name collision with a bundled one.** If someone wrote their own
 `inversion.md`, they meant it — use theirs, and don't mention the built-in unless asked.

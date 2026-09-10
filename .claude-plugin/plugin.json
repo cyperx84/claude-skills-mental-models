@@ -1,7 +1,7 @@
 {
   "name": "mental-models",
   "displayName": "Mental Models",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Mental models as files an agent reads — bring your own, or start with the 21 that ship",
   "author": { "name": "cyperx84", "url": "https://github.com/cyperx84" },
   "homepage": "https://github.com/cyperx84/claude-skills-mental-models",

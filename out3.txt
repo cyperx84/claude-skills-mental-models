@@ -1,0 +1,90 @@
+Four models, different areas:
+
+- **Bias from Incentives** (organisations) — behavior irrational vs stated goal usually rational vs actual reward
+- **Feedback Loops** (systems) — output nobody uses means loop never closed
+- **Sampling** (statistics) — how features got picked, and how "nobody uses" got measured
+- **Scarcity** (economics/attention) — burnout not just cost, it's cause
+
+Working blind on your specifics. Assumptions stated, questions at end.
+
+## The finding first
+
+Your two symptoms are one loop, not two problems:
+
+shipping gets rewarded (not adoption) → roadmap fed by whoever shouts → usage data never re-enters as roadmap input → team ships more to hit shipping metric → burnout → tunnelling degrades next feature pick → more unused features → ship harder.
+
+Reinforcing loop. Push on burnout alone (more people, offsites, "sustainable pace") and loop re-fills it. Meadows: leverage lives in one rule, not in pushing harder against loop.
+
+## Bias from Incentives
+
+Steps 1–4: who decides what ships, what do they gain. Predict position from reward alone before hearing argument.
+
+- Engineers rewarded on delivery → conclude scope was right
+- PM rewarded on roadmap completion → conclude launch = success
+- Sales rewarded on close → conclude that one deal's feature is strategic
+
+Nobody lying. Munger's incentive-caused bias is sincere; Sinclair's line — hard to understand thing your salary depends on not understanding.
+
+Discriminating question: **what gets celebrated in your team channel — shipped, or adopted?** If shipped, you found it.
+
+Step 5, on you: your own position points toward "team executes fine, demand signal is broken." Check whether that's just where your incentives sit.
+
+Step 6: fix incentive, not people. Person shipping unused feature is responding correctly to what you measure.
+
+*When to avoid applies:* I don't know your reward structure. This is hypothesis, not accusation. Also — weak incentives don't bend judgement, so verify magnitude before acting.
+
+## Feedback Loops
+
+Stock = shipped features. Inflow = roadmap. Outflow = deprecation (probably zero — that's a finding by itself).
+
+Step 3: does usage feed back into inflow? Test question: **has usage data ever removed or changed a roadmap item?** If never, loop is open. Open loop means quality of output can't improve, no matter effort. That's your whole problem in one sentence.
+
+Step 4, delay: how long from ship to knowing adoption? If months, feedback arrives after next three features already committed. Long delay + strong correction = oscillation, and your "pivot everything" quarters are that, not bad decisions.
+
+*When to avoid:* "it's a systems problem" is also a way for nobody to change anything Monday. Someone owns the roadmap. Loop framing explains, doesn't excuse.
+
+## Sampling
+
+Two applications.
+
+**One — "nobody uses it" is itself a sample claim.** How measured? Telemetry across all accounts, or three loud customers not mentioning it? Small self-selected sample produces striking findings from pure noise. Calibrate: "feature X at 4% of active accounts after 90 days" is a claim. "Nobody uses our stuff" is a mood.
+
+**Two — how features got chosen.** Step 1, mechanism before size: who ended up in the requests data? Users who file tickets, customers on QBRs, sales escalations. Step 2, who's missing: churned users, silent majority, prospects who bounced. Absence is the information, and survivorship means your dataset holds only the people who stayed.
+
+Step 5: go find dead cases. Nobody schedules this work — that's why it never happens.
+
+*When to avoid:* if you're B2B with ~10 customers, six requests is most of the population, not a small sample. Critique weakens a lot. Say which you are.
+
+## Scarcity
+
+Mullainathan/Shafir: shortage captures attention, produces focus dividend and tunnelling.
+
+Step 1, what's actually scarce — probably engineering attention, not headcount. Step 2, is constraint real: **are your ship dates external commitments, or self-imposed?** Manufactured urgency gives you all tunnelling cost, zero benefit.
+
+Step 3, what's neglected outside tunnel: exactly the discovery work that would fix feature selection. Burnout isn't only a cost of shipping wrong things — it's a cause of shipping the next wrong thing, because judgement inside crunch is measurably worse.
+
+Step 4, the trap: ship by borrowing (debt, skipped research, skipped deprecation) → less capacity next quarter → borrow more.
+
+Step 6: decide consequential things outside tunnel. Whatever you cut, cut it in a calm week, not during a crunch.
+
+*When to avoid:* if every shortcut in your org is explained by scarcity, scarcity became culture, not condition.
+
+## Where models disagree
+
+**Scarcity says do less. Sampling says do more.** Slack must be built (Scarcity step 5) but finding churned users is unscheduled work (Sampling step 5). Under burnout these fight. Resolution: discovery **replaces** a build slot, doesn't sit on top of it. Any other framing loses to triage within two weeks.
+
+**Feedback Loops vs Incentives on who's at fault.** Systems view says structure produces outcome, nobody to blame. Incentives view says someone chose the metric and can change it. Systems framing is more accurate and more likely to end with nothing changing. Take the loop diagnosis, assign the fix to a person.
+
+## Next steps
+
+1. Pick one shipped-and-unused feature. Trace its full path onto roadmap: who asked, what evidence existed, who approved, what would have stopped it. One case, concretely, beats a policy discussion.
+2. Answer: has usage data ever killed or changed a roadmap item? Yes/no. If no, that's the leverage point — install a rule (adoption review at 30/90 days, with authority to deprecate).
+3. Change what's celebrated from shipped to adopted. Loop-closing only sticks if the reward moves with it.
+4. Carve slack now, in a calm week: kill or pause N roadmap items. Not "we'll go slower" — a named list.
+5. Go find dead cases. Talk to churned accounts and silent-majority users, funded by the slot freed in step 4.
+
+## Sharpen this
+
+- What gets celebrated — shipped or adopted?
+- How many customers total? (Decides whether sampling critique bites or not.)
+- Are ship dates external commitments or self-imposed?
