@@ -5,12 +5,11 @@ description: Apply Charlie Munger's latticework of 98 mental models to any probl
 
 # Mental Models
 
-Apply 98 cognitive frameworks from multiple disciplines — physics, economics, systems
-thinking, math, art, strategy, and human judgment — to analyze problems, make decisions,
-and think more clearly.
+Apply cognitive frameworks from several disciplines — systems, economics, psychology,
+mathematics, strategy — to analyse problems, make decisions, and think more clearly.
 
-Everything this skill needs is a file in this directory. No install, no dependencies, no
-tooling — you read markdown.
+Everything this skill needs is a file. No install, no dependencies, no tooling — you read
+markdown.
 
 ## When to Activate
 
@@ -19,85 +18,69 @@ tooling — you read markdown.
 - User requests decision analysis, trade-off evaluation, or structured reasoning
 - User describes a complex/ambiguous problem and wants a framework
 
-## Step 1 — Load the catalog
+## Step 1 — Load the index
 
-Read [`CATALOG.md`](./CATALOG.md) (path relative to this file). It lists all 98 bundled
-models by slug, name, and keywords, grouped into 8 categories — about 4k tokens, cheap to
-load in full.
+Read [`models/index.md`](./models/index.md). It lists every bundled model with a one-line
+description. It is short; load it in full.
 
-Then check for the user's own models. The 98 are a starting set, not a fixed list:
+Then check for the user's own models. The bundled set is a starting point, not a fixed list:
 
 | Path | Holds |
 |---|---|
-| `.mental-models/*.md` (relative to the working directory) | this project's or team's models, committed with the code |
-| `~/.claude/mental-models/*.md` | the user's personal models, available everywhere |
+| `.mental-models/` (relative to the working directory) | this project's or team's models, committed with the code |
+| `~/.claude/mental-models/` | the user's personal models, available everywhere |
 
-Glob both. If neither exists, skip on — that is the normal case and costs nothing. If either
-has files, read them — at minimum each file's `## Mental Model =` title and its
-**Keywords for Situations** line, since the other sections are bold labels rather than
-headings and a heading-only scan would tell you nothing but the name. They follow the same
-section format as the bundled models, so they slot into selection exactly the same way.
+Glob both for `*.md`. If neither exists, skip on — that is the normal case and costs nothing.
+If either has files, read each one's YAML frontmatter (`title`, `description`, `tags`) to
+learn what is there. A directory may have its own `index.md`; read that instead if present.
 
-**A user model always wins a slug collision with a bundled one.** If someone wrote their own
-`inversion.md`, they meant it — use theirs and don't mention the built-in unless they ask.
+**A user model always wins a name collision with a bundled one.** If someone wrote their own
+`inversion.md`, they meant it — use theirs, and don't mention the built-in unless asked.
 
-Treat user models as first-class, not as an appendix. A model a team wrote about their own
-domain usually beats a general one at that domain.
+Treat user models as first-class. A model a team wrote about their own domain usually beats
+a general one at that domain.
 
 ## Step 2 — YOU select the models
 
-Read the user's problem and pick **2–4 models from different categories**. Selection is a
-reasoning task and you are better at it than any keyword matcher: cross-category coverage is
-the entire point of a *latticework* — a single-category pick means blind spots go
-unchecked.
+Read the user's problem and pick **2–4 models from different areas**. Selection is a
+reasoning task and you are better at it than any keyword matcher: cross-area coverage is the
+entire point of a *latticework* — a single-area pick means blind spots go unchecked.
 
-**Discovery heuristics** to bias your reading of the catalog:
+**Discovery heuristics** to bias your reading of the index:
 
-- **Risk / uncertainty / reversibility** → inversion, probabilistic thinking, margin of safety
-- **Stuck / can't see options** → first principles, second-order thinking, framing
-- **Conflict / negotiation / competition** → incentives, asymmetric warfare, trade-offs
+- **Risk / uncertainty / reversibility** → inversion, margin of safety, randomness
+- **Stuck / can't see options** → first-principles thinking, second-order thinking, framing
+- **Conflict / negotiation / competition** → bias from incentives, asymmetric warfare, trade-offs
 - **Complex system / unintended effects** → feedback loops, emergence, bottlenecks, leverage
-- **Performance / optimization** → bottlenecks, diminishing returns, efficiency
-- **People / team / behavior** → incentives, social proof, biases
-- **Communication / persuasion** → framing, audience, contrast
+- **Performance / optimization** → bottlenecks, leverage, activation energy
+- **People / team / behaviour** → bias from incentives, social proof, confirmation bias
+- **Evaluating evidence or results** → sampling, regression to the mean, randomness
+- **Change that won't start, or won't stop** → activation energy, inertia
 
-Per-category deep walkthroughs: [`REFERENCE.md`](./REFERENCE.md). Worked examples:
-[`examples/`](./examples/).
+## Step 3 — Retrieve each pick
 
-## Step 3 — Retrieve each pick exactly
-
-Bundled model files are named `m<NN>_<slug>.md` and live one level down in a category
-directory. **`CATALOG.md` gives you the slug, not the number or the directory — so glob for
-it rather than trying to construct the path:**
+Read the file directly. Bundled models are flat files named by slug:
 
 ```
-models/*/m??_<slug>.md
+models/<slug>.md
 ```
 
-e.g. `models/*/m??_inversion.md` resolves to `models/Mental_Model_General/m07_inversion.md`.
-Every catalog slug resolves to exactly one file this way. Do not guess `<NN>` from a model's
-position in the catalog — the catalog is not in ID order.
-
-Use the Glob tool, not a shell glob: two slugs contain apostrophes (`hanlon's_razor`,
-`occam's_razor`) and will break an unquoted shell pattern.
-
-**If the glob returns nothing, the slug is wrong, not the model missing.** The heuristics in
-Step 2 use informal names that are not slugs — "first principles" is
-`first-principle_thinking`, "diminishing returns" is `law_of_diminishing_returns`, "social
-proof" is `social_proof_safety_in_numbers`. Go back to `CATALOG.md` and copy the slug
-exactly. Never invent a model that isn't there.
-
-User models are flat files at the path you found them — `.mental-models/<name>.md` or
-`~/.claude/mental-models/<name>.md`. No category directories, no numbering.
+e.g. `models/inversion.md`. The index gives you the exact filename — use it rather than
+guessing. User models are at the path you found them.
 
 ## Step 4 — Apply
 
-- Walk each model's **Thinking Steps** against the user's facts — follow them, don't
-  paraphrase the framework away
-- Read **When to Avoid** *before* concluding, and surface it if it applies — this section
-  is what separates a mental model from a slogan
-- Ask the **Coaching Questions** to deepen the analysis where useful
-- Show where the chosen models agree, and where they disagree
+Each model file has YAML frontmatter and four parts:
+
+- the **description prose** — what the idea is and where it comes from, with `[^footnotes]`
+  pointing at entries in the frontmatter's `sources`
+- **When to Avoid** — read this *before* concluding, and surface it if it applies. It is what
+  separates a mental model from a slogan.
+- **Thinking Steps** — walk these against the user's actual facts. Follow them; don't
+  paraphrase the framework away.
+- **Coaching Questions** — ask these to deepen the analysis where useful.
+
+Show where the chosen models agree, and where they disagree.
 
 ## Step 5 — Report
 
@@ -105,38 +88,33 @@ User models are flat files at the path you found them — `.mental-models/<name>
 - Where models disagreed, say so explicitly rather than silently picking a winner
 - End with 3–5 concrete, actionable next steps
 - Name any "when to avoid" conditions that apply to this case
+- If a source matters to the point you are making, cite it — the `sources` block has the link
 
 ## Core Guidelines
 
-1. **2–4 models per analysis, cross-category** — quality and coverage over quantity
+1. **2–4 models per analysis, from different areas** — coverage over quantity
 2. **Follow the Thinking Steps verbatim** — don't paraphrase the framework away
 3. **Always check When to Avoid** — warn the user if the model misfits
 4. **Latticework**: show how chosen models connect and where they disagree
 5. **Be actionable**: end with concrete next steps, not theory
 6. **Name biases honestly**: if the user seems caught in one, surface it
 
-## Category Map
+## The format
 
-| Category | Directory | IDs | Focus |
-|---|---|---|---|
-| General Thinking | `Mental_Model_General` | m01–m09 | Foundations: inversion, first principles, second-order |
-| Science | `Mental_Model_Science` | m10–m29 | Natural laws: leverage, inertia, activation energy |
-| Systems Thinking | `Mental_Model_SysThinking` | m30–m40 | Constraints, feedback, emergence, scale |
-| Mathematics | `Mental_Model_Math` | m41–m47 | Randomness, regression to mean, sampling |
-| Economics | `Mental_Model_Economics` | m48–m59 | Scarcity, trade-offs, supply/demand |
-| Art | `Mental_Model_Art` | m60–m70 | Framing, audience, contrast |
-| Strategy / Warfare | `Mental_Model_War` | m71–m75 | Asymmetric advantage, seeing the front |
-| Human Nature | `Mental_Model_HumanNature` | m76–m98 | Biases, incentives, social proof |
+`models/` is an [Open Knowledge Format](https://github.com/GoogleCloudPlatform/open-knowledge-format)
+bundle: a directory of markdown files, each with YAML frontmatter carrying at minimum a
+`type`. That means any OKF bundle can be dropped into `.mental-models/` and read the same way,
+and this bundle can be consumed by any OKF-aware agent.
+
+Obsidian vaults work too — treat `[[wikilink]]` as a link to `wikilink.md`.
+
+To write your own, copy [`TEMPLATE.md`](./TEMPLATE.md).
 
 ## Files in This Skill
 
 - `SKILL.md` — this entry point
-- `CATALOG.md` — all 98 models by slug + keywords, grouped by category (**read this first**)
-- `REFERENCE.md` — deep per-category walkthrough, signature models, latticework combos
-- `examples/` — 5 worked scenarios (architecture review, career decision, debugging,
-  negotiation, product launch)
-- `models/` — the 98 bundled model files, the one thing every consumer of this skill reads
-- `models/_TEMPLATE.md` — the section format; a user model is any file that follows it
+- `TEMPLATE.md` — the format; copy it to write your own model
+- `models/` — the bundled OKF bundle: `index.md` plus one file per model
 
 Outside this skill, and never overwritten by an update:
 
