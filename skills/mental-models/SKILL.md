@@ -1,6 +1,6 @@
 ---
 name: mental-models
-description: Apply Charlie Munger's latticework of 98 mental models to any problem. Use when user requests decision analysis, says "help me think", "apply mental model", mentions model names (inversion, bottlenecks, second-order thinking), or needs structured thinking frameworks.
+description: Apply mental models — your own, or 21 sourced ones — to any problem. Use when user requests decision analysis, says "help me think", "apply mental model", mentions model names (inversion, bottlenecks, second-order thinking), or needs structured thinking frameworks.
 ---
 
 # Mental Models
