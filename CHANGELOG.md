@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.1] - 2026-09-10
+
+### Changed
+- `SKILL.md` Step 1 no longer says the user-model directories are "the normal case" to skip;
+  it instructs the agent to run both globs and not assume. See the note below on what this
+  did and did not fix.
+- Documentation brought in line with 2.0.0: `REFERENCES.md` rewritten (it still claimed the
+  write-ups carry no per-model citations, which stopped being true), `CONTRIBUTING.md`,
+  the PR template and the new-model issue template all rewrote away the category
+  directories, `mNN` numbering, `CATALOG.md` and `REFERENCE.md` that no longer exist. The
+  issue template now requires sources.
+- GitHub repo description and topics updated for the OKF bundle.
+
+### Removed
+- `out3.txt` — agent test output committed by accident via `git add -A` at the repo root in
+  bdc3ffc. Added to `.gitignore`.
+
+### Known limitation
+- A live-incident prompt ("money is leaving customer accounts right now") makes the model
+  answer as an incident commander and skip the skill procedure entirely, so a team's own
+  incident model in `.mental-models/` goes unused on exactly the incident it was written
+  for. The drop-in path itself is fine — asked directly, the skill globs the directory,
+  reads frontmatter and tags, and offers the user's model first. The Step 1 wording change
+  above did not alter this behaviour. The same prompt succeeded at 1.1.0, so this is
+  run-to-run variance in whether the procedure survives urgency, not a regression.
+
 ## [2.0.0] - 2026-09-10
 
 Breaking. The bundled model set changed entirely, and the file layout with it.

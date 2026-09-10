@@ -1,72 +1,69 @@
 # Contributing
 
-Thanks for helping grow the Mental Models skill. This repo is markdown only — there is no
-build step, no test suite, and no code to run. Edit files, open a PR.
+This repo is markdown only. No build step, no test suite, no code. Edit files, open a PR.
 
-## Repository layout
+## Layout
 
 ```
 skills/mental-models/
-├── SKILL.md      entry point
-├── CATALOG.md    index of all 98 models
-├── REFERENCE.md  per-category walkthrough
-├── models/<Category_Folder>/mNN_snake_case_title.md
-└── examples/
+├── SKILL.md      entry point — when to activate, how to select, how to apply
+├── TEMPLATE.md   the format; copy it to write a model
+└── models/       an Open Knowledge Format bundle
+    ├── index.md  the catalog (OKF reserved name)
+    └── <slug>.md one file per model
 ```
 
-Category folders:
+Files are flat and named by slug: `models/inversion.md`. There are no category directories
+and no numbering — both existed once and were the source of two retrieval bugs. Category
+lives in frontmatter `tags`.
 
-| Folder | Category | IDs |
-|---|---|---|
-| `Mental_Model_General` | General Thinking Tools | m01–m09 |
-| `Mental_Model_Science` | Physics, Chemistry, and Biology | m10–m29 |
-| `Mental_Model_SysThinking` | Systems Thinking | m30–m40 |
-| `Mental_Model_Math` | Mathematics | m41–m47 |
-| `Mental_Model_Economics` | Economics | m48–m59 |
-| `Mental_Model_Art` | Art | m60–m70 |
-| `Mental_Model_War` | Strategy (military/competition) | m71–m75 |
-| `Mental_Model_HumanNature` | Human Nature and Judgment | m76–m98 |
+## Adding or changing a model
 
-## Adding or editing a model
+1. Copy [`TEMPLATE.md`](../skills/mental-models/TEMPLATE.md) to `models/<slug>.md`.
+2. Fill in the frontmatter. `type` is the only field OKF requires, but **`sources` is the one
+   that matters here** — a model whose claims trace somewhere is worth more than three that
+   don't. Cite inline with `[^id]` matching a `sources[].id`.
+3. Write the four parts: description prose, `## When to Avoid`, `## Thinking Steps`,
+   `## Coaching Questions`.
+4. Add a line to [`models/index.md`](../skills/mental-models/models/index.md). A model missing
+   from the index is invisible to the agent.
 
-1. Copy [`skills/mental-models/models/_TEMPLATE.md`](../skills/mental-models/models/_TEMPLATE.md)
-   into the right category folder. Name it `mNN_snake_case_title.md`, continuing the numbering.
-2. Fill in every section: **Description**, **When to Avoid (or Use with Caution)**,
-   **Keywords for Situations**, **Thinking Steps**, **Coaching Questions**.
-3. Add a matching line to [`CATALOG.md`](../skills/mental-models/CATALOG.md) under the right
-   heading, in the existing `` `slug` — Name: keywords `` format. The catalog is what the
-   agent reads to choose models, so a model missing from it is invisible.
+**When to Avoid is the section that earns the model's place.** Anyone can restate a
+framework; the value is knowing when it misleads you. Be specific about conditions, not
+generic about caveats.
 
-   **The catalog slug must byte-match the filename after the `mNN_` prefix.** Retrieval is a
-   glob on `models/*/m??_<slug>.md`, and nothing validates this any more — a mismatch
-   produces a model the agent can see in the catalog and can never open, with no error.
-   Note also that `m??` matches exactly two digits, so the numbering has a ceiling at m99;
-   going past it means changing the glob in `SKILL.md`, `CATALOG.md` and `REFERENCE.md`.
-4. If the model belongs in a category's signature set, mention it in
-   [`REFERENCE.md`](../skills/mental-models/REFERENCE.md).
+Bad: "Don't apply it rigidly."
+Good: "Not for chronic degradation — there's no expanding radius, so it manufactures urgency
+and burns the team on something that needed a project, not a page."
 
-**When to Avoid** is the section that matters most. Anyone can restate a framework; the
-value here is knowing when it misleads you. Be specific about the conditions, not generic
-about the caveats.
+## Bar for a new model
+
+- It has at least one real, resolvable source. Not "as popularised by" — something a reader
+  can go and check.
+- It is not a rephrasing of a model already in the set.
+- Its *When to Avoid* names conditions you could actually hit.
+
+The set is deliberately small. A model that only just clears the bar makes the set worse, not
+bigger.
 
 ## Style
 
 - Plain, concrete prose. No hype.
 - Thinking Steps are actions the reader takes, not descriptions of the concept.
-- Coaching Questions are things a person would actually say out loud.
-- Cite a source when a model comes from a specific book, paper, or speech.
-
-## A note on `docs/latticework.svg`
-
-It is a static snapshot from a keyword analysis of the corpus. Its generator and input data
-were deleted along with the rest of the tooling, so it cannot currently be rebuilt. It is
-accurate for the 98 bundled models as they stand; if you change the corpus substantially,
-either regenerate it by hand or drop it.
+- Coaching Questions are things a person would say out loud.
 
 ## Checking your work
 
-- The plugin manifests must stay valid JSON:
+OKF conformance is three rules: every non-reserved `.md` has parseable YAML frontmatter,
+every frontmatter has a non-empty `type`, and reserved names (`index.md`, `log.md`) follow
+their structures — only the root `index.md` carries frontmatter, with `okf_version`. See the
+[OKF spec](https://github.com/GoogleCloudPlatform/open-knowledge-format).
+
+- Manifests must stay valid JSON:
   `python3 -c "import json;json.load(open('.claude-plugin/plugin.json'))"`
-- To try the skill locally before opening a PR:
-  `claude plugin marketplace add .` then `claude plugin install mental-models@mental-models`
+- Every `[^id]` in a body must match a `sources[].id`.
+- Source links must resolve. Check them; a dead citation is worse than none.
+- Try it locally: `claude plugin marketplace add .` then
+  `claude plugin install mental-models@mental-models`. A version bump alone does **not**
+  refresh the plugin cache — `marketplace remove`, `add`, reinstall.
 - `claude plugin details mental-models` shows the component inventory and token cost.

@@ -134,8 +134,8 @@ Twenty-one, listed in [`models/index.md`](./skills/mental-models/models/index.md
 | Strategy | asymmetric warfare |
 
 There were 98. They were one generation run that mirrored someone else's list with no
-citations, so they were replaced with a smaller set that carries sources. The count is not
-the point — see below.
+citations, so 2.0 replaced them with a smaller set that carries sources. The count was never
+the point — [your own models](#bring-your-own-models) are.
 
 One problem, many lenses — that's the point.
 

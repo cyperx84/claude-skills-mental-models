@@ -20,3 +20,6 @@ Thumbs.db
 *.log
 
 .herdr-loop/
+
+# stray agent test output
+out*.txt

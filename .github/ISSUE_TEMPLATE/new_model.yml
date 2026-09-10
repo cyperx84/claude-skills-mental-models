@@ -11,19 +11,21 @@ body:
       placeholder: e.g. Second-Order Thinking
     validations:
       required: true
-  - type: dropdown
-    id: category
+  - type: input
+    id: tags
     attributes:
-      label: Category
-      options:
-        - General Thinking
-        - Science
-        - Systems
-        - Math
-        - Economics
-        - Art
-        - Strategy
-        - Human Nature
+      label: Tags
+      description: Comma-separated areas and situations. These become OKF `tags` — use the words someone would actually type when they have this problem.
+      placeholder: e.g. systems-thinking, performance, operations
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources
+      description: At least one real, resolvable reference — a paper, book, or primary source a reader can go and check. Models without sources are not accepted.
+      placeholder: |
+        - https://doi.org/... — Author, "Title" (Journal, Year)
     validations:
       required: true
   - type: textarea

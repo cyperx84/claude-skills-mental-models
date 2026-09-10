@@ -9,9 +9,9 @@ server, the selector and the repo rename is gone, because those are gone.
 | Project | What it is | What's worth taking |
 |---|---|---|
 | [ModelThinkers](https://modelthinkers.com/mental-model/mungers-latticework) | Web app, ~200 models, user-built latticeworks, spaced repetition | The user-built-latticework idea landed here as drop-in `.mental-models/` files. Spaced repetition is a different product; not ours. |
-| [WiseCharlie/mental-models](https://github.com/WiseCharlie/mental-models) | Static content collection | Cross-check our 98 for gaps; compare phrasings where ours are thin. |
+| [WiseCharlie/mental-models](https://github.com/WiseCharlie/mental-models) | Static content collection | Cross-check the bundled set for gaps; compare phrasings where ours are thin. |
 | [AdrienLemaire/awesome-mental-models](https://github.com/AdrienLemaire/awesome-mental-models) | Awesome-list of heuristics and tools-for-thought | Mine for models we're missing. |
-| [sourcesofinsight — 129 list](https://sourcesofinsight.com/charlie-munger-mental-models/) | Curated 129-model list | We ship 98. Gap-audit target for anything that passes the curation bar. |
+| [sourcesofinsight — 129 list](https://sourcesofinsight.com/charlie-munger-mental-models/) | Curated 129-model list | We ship 21, chosen for having real primary sources. Gap-audit target for anything that clears that bar. |
 | [mahavak.github.io/models](https://mahavak.github.io/models/) | Static site rendering Munger's framework | Proof that a Pages site is a thin wrap over content we already have. |
 
 ## Structural analogues
@@ -24,16 +24,22 @@ server, the selector and the repo rename is gone, because those are gone.
 
 ## Open levers
 
+**BundleDex** (https://bundledex.net) is a registry of 700+ OKF bundles with a submission
+form. As of September 2026 none of the listed bundles are about reasoning, decision-making,
+or thinking frameworks — they are overwhelmingly memory and knowledge-persistence tools.
+Since `models/` is now a conformant OKF bundle, that shelf is open and directly reachable.
+
+
 Ordered by cost. None of these need code.
 
 1. **Awesome-list submissions** — [VoltAgent/awesome-agent-skills](https://github.com/VoltAgent/awesome-agent-skills),
    [ComposioHQ/awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills).
    Upstream PRs, zero local change, free distribution. Cheapest thing on the list.
-2. **A catalog site.** Today one page ranks. 98 model pages plus `llms.txt` is 98 entry
-   points. Note the provenance bar rises when the write-ups are published as pages rather
+2. **A catalog site.** Today one page ranks. One page per model plus `llms.txt` is a page
+   per entry point. Note the provenance bar rises when the write-ups are published as pages rather
    than shipped as skill files — see the attribution note in [`REFERENCES.md`](../REFERENCES.md).
 3. **Gap audit vs the 129-list.** Content work, not distribution, and only worth it for
-   models that clear the bar the existing 98 set.
+   models that clear the sourcing bar the 21 set.
 
 ## Deferred, with reasons
 
